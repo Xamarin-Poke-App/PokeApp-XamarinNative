@@ -3,8 +3,13 @@ namespace SharedCode.Model
 {
 	public class User
 	{
-		public User()
+		string Email;
+		string Password;
+
+		public User(string UserEmail, string UserPassword)
 		{
+			Email = UserEmail;
+			Password = UserPassword;
 		}
 	}
 }
