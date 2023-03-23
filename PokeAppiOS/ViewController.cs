@@ -1,6 +1,8 @@
 ﻿using CoreGraphics;
 using Foundation;
 using SharedCode;
+using SharedCode.Controller;
+using SharedCode.Model;
 using System;
 using UIKit;
 
@@ -8,7 +10,7 @@ namespace PokeAppiOS
 {
     public partial class ViewController : UIViewController
     {
-        private UILabel resultLabel;
+
         public ViewController (IntPtr handle) : base (handle)
         {
         }
@@ -16,16 +18,24 @@ namespace PokeAppiOS
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();
-            resultLabel = new UILabel()
-            {
-                Frame = new CGRect(20, 124, View.Bounds.Width - 40, 40),
-                TextColor = UIColor.Blue,
-                TextAlignment = UITextAlignment.Center,
-                Font = UIFont.SystemFontOfSize(24),
-                Text = Class1.test,
-            };
+            Title = "Login View";
 
-            View.AddSubviews(resultLabel);
+            LoginButton.TouchUpInside += LoginButton_TouchUpInside;
+        }
+
+        private void LoginButton_TouchUpInside(object sender, EventArgs e)
+        {
+            string email = "test@test.com";
+            string password = "tester";
+
+            User user = new User(email, password);
+            var resultLogin = LoginController.DoLogin(user);
+
+            if (resultLogin.Success)
+            {
+                SceneDelegate.Current.SegueToHome();
+
+            }
         }
 
         public override void DidReceiveMemoryWarning ()

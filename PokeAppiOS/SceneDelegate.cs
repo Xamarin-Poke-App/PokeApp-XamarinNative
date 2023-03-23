@@ -1,20 +1,26 @@
 ﻿using System;
 using Foundation;
+using PokeAppiOS;
 using UIKit;
 
-namespace NewSingleViewTemplate {
+namespace PokeAppiOS {
 	[Register ("SceneDelegate")]
 	public class SceneDelegate : UIResponder, IUIWindowSceneDelegate {
 
 		[Export ("window")]
 		public UIWindow Window { get; set; }
 
-		[Export ("scene:willConnectToSession:options:")]
+        public static SceneDelegate Current { get; private set; }
+
+
+        [Export ("scene:willConnectToSession:options:")]
 		public void WillConnect (UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
 		{
-			// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-			// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-			// This delegate does not imply the connecting scene or session are new (see UIApplicationDelegate `GetConfiguration` instead).
+			Current = this;
+
+            UIWindowScene myScene = scene as UIWindowScene;
+            Window = new UIWindow(myScene);
+            LoadInitialViewController();
 		}
 
 		[Export ("sceneDidDisconnect:")]
@@ -53,6 +59,42 @@ namespace NewSingleViewTemplate {
 			// Called as the scene transitions from the foreground to the background.
 			// Use this method to save data, release shared resources, and store enough scene-specific state information
 			// to restore the scene back to its current state.
+		}
+
+		private void LoadInitialViewController()
+		{
+            bool isLoggedIn = false;
+            if (isLoggedIn)
+            {
+				SegueToHome();   
+            }
+			else
+			{
+				SegueToLogin();
+			}
+        }
+
+		public void SegueToHome()
+		{
+			// For demo purposes initializes 'SecondViewController' as UIViewControler
+			// but could be replaced by storyboard
+            UIViewController viewController = new SecondViewController();
+            UINavigationController navigationMain = new UINavigationController(viewController);
+            Window.RootViewController = navigationMain;
+            Window.MakeKeyAndVisible();
+        }
+
+		private void SegueToLogin()
+		{
+			var mainStoryboard = UIStoryboard.FromName("Main", null).InstantiateInitialViewController() as UIViewController;
+            Window.RootViewController = mainStoryboard;
+            Window.MakeKeyAndVisible();
+        }
+
+		public void Logout()
+		{
+			// clean storage
+			SegueToLogin();
 		}
 	}
 }
