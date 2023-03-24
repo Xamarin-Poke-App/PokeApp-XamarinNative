@@ -1,5 +1,6 @@
 ﻿<resources>
     <string name="app_name">PokeAppAndroid</string>
     <string name="action_settings">Settings</string>
+    <string name="login_title">Login</string>
 </resources>
 
