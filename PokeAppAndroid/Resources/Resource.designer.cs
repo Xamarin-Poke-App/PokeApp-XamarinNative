@@ -5832,25 +5832,43 @@ namespace PokeAppAndroid
 			public const int mtrl_chip_close_icon_content_description = 2131558441;
 			
 			// aapt resource value: 0x7F0D002A
-			public const int password_toggle_content_description = 2131558442;
+			public const int passwordPlaceholder = 2131558442;
 			
 			// aapt resource value: 0x7F0D002B
-			public const int path_password_eye = 2131558443;
+			public const int passwordText = 2131558443;
 			
 			// aapt resource value: 0x7F0D002C
-			public const int path_password_eye_mask_strike_through = 2131558444;
+			public const int password_toggle_content_description = 2131558444;
 			
 			// aapt resource value: 0x7F0D002D
-			public const int path_password_eye_mask_visible = 2131558445;
+			public const int path_password_eye = 2131558445;
 			
 			// aapt resource value: 0x7F0D002E
-			public const int path_password_strike_through = 2131558446;
+			public const int path_password_eye_mask_strike_through = 2131558446;
 			
 			// aapt resource value: 0x7F0D002F
-			public const int search_menu_title = 2131558447;
+			public const int path_password_eye_mask_visible = 2131558447;
 			
 			// aapt resource value: 0x7F0D0030
-			public const int status_bar_notification_info_overflow = 2131558448;
+			public const int path_password_strike_through = 2131558448;
+			
+			// aapt resource value: 0x7F0D0031
+			public const int pikachuImage = 2131558449;
+			
+			// aapt resource value: 0x7F0D0032
+			public const int pikachuTitle = 2131558450;
+			
+			// aapt resource value: 0x7F0D0033
+			public const int search_menu_title = 2131558451;
+			
+			// aapt resource value: 0x7F0D0034
+			public const int status_bar_notification_info_overflow = 2131558452;
+			
+			// aapt resource value: 0x7F0D0035
+			public const int usernamePlaceholder = 2131558453;
+			
+			// aapt resource value: 0x7F0D0036
+			public const int usernameText = 2131558454;
 			
 			static String()
 			{
