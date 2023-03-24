@@ -1,15 +1,17 @@
 ﻿using CoreGraphics;
 using Foundation;
-using SharedCode;
-using SharedCode.Controller;
+using SharedCode.Services;
 using SharedCode.Model;
 using System;
 using UIKit;
+using SharedCode.Util;
 
 namespace PokeAppiOS
 {
     public partial class ViewController : UIViewController
     {
+        public static LoginService loginService = new LoginService();
+
 
         public ViewController (IntPtr handle) : base (handle)
         {
@@ -25,16 +27,23 @@ namespace PokeAppiOS
 
         private void LoginButton_TouchUpInside(object sender, EventArgs e)
         {
+            loginService.UserLoggedIn += LoginService_UserLoggedIn;
             string email = "test@test.com";
             string password = "tester";
 
             User user = new User(email, password);
-            var resultLogin = LoginController.DoLogin(user);
+            loginService.PerformLogin(user);
+        }
 
-            if (resultLogin.Success)
+        private void LoginService_UserLoggedIn(object sender, Result<string> userLoggedInResult)
+        {
+            if (userLoggedInResult.Success)
             {
                 SceneDelegate.Current.SegueToHome();
-
+            }
+            else
+            {
+                Console.WriteLine(userLoggedInResult.Error);
             }
         }
 
