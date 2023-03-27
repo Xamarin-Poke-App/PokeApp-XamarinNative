@@ -9,11 +9,17 @@
     <None Remove="Controller\" />
     <None Remove="Util\" />
     <None Remove="Helper\" />
+    <None Remove="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Controller\" />
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
+    <Folder Include="Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
   </ItemGroup>
 </Project>

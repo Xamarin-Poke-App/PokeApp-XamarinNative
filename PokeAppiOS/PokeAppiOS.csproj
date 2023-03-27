@@ -118,6 +118,7 @@
         <Folder Include="Resources\" />
         <Folder Include="View\" />
         <Folder Include="CommonView\" />
+        <Folder Include="Utils\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -141,6 +142,7 @@
           <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
         <Compile Include="CommonView\CustomFloatingButton.cs" />
+        <Compile Include="Utils\PathManager.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
