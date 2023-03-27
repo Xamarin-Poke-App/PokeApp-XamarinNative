@@ -6,16 +6,16 @@
 
   <ItemGroup>
     <None Remove="Model\" />
-    <None Remove="Controller\" />
     <None Remove="Util\" />
     <None Remove="Helper\" />
+    <None Remove="Event\" />
     <None Remove="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Controller\" />
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
+    <Folder Include="Event\" />
     <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>

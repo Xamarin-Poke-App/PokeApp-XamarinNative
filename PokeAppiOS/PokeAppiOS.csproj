@@ -124,6 +124,7 @@
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
         <InterfaceDefinition Include="View\LoginViewController.xib" />
+        <InterfaceDefinition Include="SecondViewController.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -142,6 +143,10 @@
           <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
         <Compile Include="CommonView\CustomFloatingButton.cs" />
+        <Compile Include="SecondViewController.cs" />
+        <Compile Include="SecondViewController.designer.cs">
+          <DependentUpon>SecondViewController.cs</DependentUpon>
+        </Compile>
         <Compile Include="Utils\PathManager.cs" />
     </ItemGroup>
     <ItemGroup>
