@@ -6,15 +6,15 @@
 
   <ItemGroup>
     <None Remove="Model\" />
-    <None Remove="Controller\" />
     <None Remove="Util\" />
     <None Remove="Helper\" />
+    <None Remove="Event\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Controller\" />
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
+    <Folder Include="Event\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />

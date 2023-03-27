@@ -4,28 +4,21 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using PokeAppAndroid.View;
 using SharedCode;
 using SharedCode.Controller;
+using SharedCode.Services;
+using SharedCode.Model;
+using SharedCode.Util;
 
 namespace PokeAppAndroid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity, IPokemonController
+    public class MainActivity : AppCompatActivity
     {
-        private TextView tvTest;
-        private PokemonController controller;
-
-        public void updateView(int? data, string errorMsg)
-        {
-            if (errorMsg == null)
-            {
-                tvTest.Text = data.ToString();
-            }
-            else
-            {
-                tvTest.Text = errorMsg.ToString();
-            }
-        }
+        static LoginService loginService = new LoginService();
+        
+        private Button LoginButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,10 +26,41 @@ namespace PokeAppAndroid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-            tvTest = FindViewById<TextView>(Resource.Id.tvTest);
-            tvTest.Text = Class1.test;
-            controller = new PokemonController(this);
-            controller.GetAllPokemonsSpecies();
+            loginService.UserLoggedIn += LoginService_UserLoggedIn;
+            
+
+            LoginButton = FindViewById<Button>(Resource.Id.LoginButton);
+            LoginButton.Click += LoginButton_Click;
+        }
+
+        private void LoginService_UserLoggedIn(object sender, Result<string> resultLogin)
+        {
+            if (resultLogin.Success)
+            {
+                StartActivity(typeof(SecondActivity));
+                Finish();
+            }
+            else
+            {
+                Console.WriteLine(resultLogin.Error);
+            }
+        }
+
+        private void LoginButton_Click(object sender, System.EventArgs e)
+        {
+            string email = "test@test.com";
+            string password = "tester";
+
+            User user = new User(email, password);
+
+            loginService.PerformLogin(user);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

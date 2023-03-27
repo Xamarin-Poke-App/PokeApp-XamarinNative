@@ -8,7 +8,7 @@ namespace SharedCode.Controller
 {
 	public interface IPokemonController
 	{
-		void updateView(int? pokeCount, string errorMsg);
+		void updateView(Result<int> data);
 	}
 
 	public class PokemonController
@@ -25,32 +25,29 @@ namespace SharedCode.Controller
 			try
 			{
                 var pokemons = await NetworkHandler.GetData<PokemonSpeciesResponse>("pokemon-species");
-                Console.WriteLine("Finish");
-                Console.WriteLine(pokemons.count);
-                viewListener.updateView(pokemons.count, null);
-            } catch (NetworkErrorException ex)
+                viewListener.updateView(Result.Ok(pokemons.count));
+            }
+            catch (NetworkErrorException ex)
 			{
-				Console.WriteLine("ERROR");
+				// You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
 				switch (ex.Code)
 				{
-					case (int) HttpStatusCode.BadRequest:
-						viewListener.updateView(null, "Bad request");
-						break;
 					case (int) HttpStatusCode.InternalServerError:
-                        viewListener.updateView(null, "It seems like PokeApi server is down");
+                        viewListener.updateView(Result.Fail<int>("It seems like PokeApi server is down"));
                         break;
 					case (int) HttpStatusCode.NotFound:
-                        viewListener.updateView(null, "The pokemon list seems to be unavailable right now");
+                        viewListener.updateView(Result.Fail<int>("The pokemon list seems to be unavailable right now"));
                         break;
 					default:
-						viewListener.updateView(null, "Check your internet connection");
+						viewListener.updateView(Result.Fail<int>(ex.Message ?? "Something went wrong"));
 						break;
 				}
-			} catch (Exception ex)
-			{
-				Console.WriteLine("Exception error!!!!");
 			}
-		}
+            catch (Exception ex)
+            {
+                viewListener.updateView(Result.Fail<int>($"Check your internet connection {ex.ToString()}"));
+            }
+        }
 	}
 }
 

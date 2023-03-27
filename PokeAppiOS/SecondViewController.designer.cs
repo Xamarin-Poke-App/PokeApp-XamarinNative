@@ -9,17 +9,25 @@ using System.CodeDom.Compiler;
 
 namespace PokeAppiOS
 {
-	[Register ("ViewController")]
-	partial class ViewController
+	[Register ("SecondViewController")]
+	partial class SecondViewController
 	{
 		[Outlet]
-		UIKit.UIButton LoginButton { get; set; }
+		UIKit.UILabel LabelTest { get; set; }
+
+		[Outlet]
+		UIKit.UIButton LogoutButton { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (LoginButton != null) {
-				LoginButton.Dispose ();
-				LoginButton = null;
+			if (LogoutButton != null) {
+				LogoutButton.Dispose ();
+				LogoutButton = null;
+			}
+
+			if (LabelTest != null) {
+				LabelTest.Dispose ();
+				LabelTest = null;
 			}
 		}
 	}

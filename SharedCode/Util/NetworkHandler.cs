@@ -41,33 +41,27 @@ namespace SharedCode.Util
 
 		public static async Task<T> GetData<T>(string endpoint)
 		{
-            httpClient.BaseAddress = baseAddress;
+            if (httpClient.BaseAddress == null)
+                httpClient.BaseAddress = baseAddress;
+            var response = new HttpResponseMessage();
             try
             {
-                var response = await httpClient.GetAsync(endpoint);
-                response.EnsureSuccessStatusCode();
-
-                if (response.StatusCode >= HttpStatusCode.BadRequest)
-                {
-                    switch (response.StatusCode)
-                    {
-                        case HttpStatusCode.BadRequest:
-                            throw NetworkErrors.BadRequest;
-                        case HttpStatusCode.NotFound:
-                            throw NetworkErrors.NotFound;
-                        case HttpStatusCode.InternalServerError:
-                            throw NetworkErrors.InternalServerError;
-                        default:
-                            throw NetworkErrors.UnknownError;
-                    }
-                } else
-                {
-                    return await response.Content.ReadFromJsonAsync<T>();
-                }
+                response = await httpClient.GetAsync(endpoint);
+                return await response.Content.ReadFromJsonAsync<T>();
             }
-            catch (NetworkErrorException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                        throw NetworkErrors.BadRequest;
+                    case HttpStatusCode.NotFound:
+                        throw NetworkErrors.NotFound;
+                    case var expression when response.StatusCode >= HttpStatusCode.InternalServerError:
+                        throw NetworkErrors.InternalServerError;
+                    default:
+                        throw ex;
+                }
             }
         }
 	}
