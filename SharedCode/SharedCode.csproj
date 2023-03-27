@@ -16,4 +16,7 @@
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+  </ItemGroup>
 </Project>
