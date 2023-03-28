@@ -11,17 +11,18 @@ namespace SharedCode.Database
 	public class DatabaseManager : IDatabaseManager
 	{
         private IPathManager path;
+        private SQLiteConnection db;
 
         public DatabaseManager(IPathManager pathManager)
 		{
 			this.path = pathManager;
+            this.db = new SQLiteConnection(pathManager.GetPath());
         }
 
         public bool checkTableExists(string tableName)
 		{
 			try
 			{
-                var db = Util.Singleton.GetDBConnectionInstance(this.path);
                 var tableInfo = db.GetTableInfo(tableName);
                 if (tableInfo.Count > 0)
 				{
@@ -38,7 +39,6 @@ namespace SharedCode.Database
         {
             try
 			{
-                var db = Util.Singleton.GetDBConnectionInstance(this.path);
                 if (checkTableExists(tableName))
 				{
                     db.Insert(newItem);
@@ -55,7 +55,6 @@ namespace SharedCode.Database
         {
             try
             {
-                var db = Util.Singleton.GetDBConnectionInstance(this.path);
                 if (checkTableExists(tableName))
 				{
                     db.Update(updateItem);
@@ -74,7 +73,6 @@ namespace SharedCode.Database
         {
 			try
 			{
-                var db = Util.Singleton.GetDBConnectionInstance(this.path);
                 if (checkTableExists(tableName))
 					db.Delete<T>(id);
 			} catch (Exception e) {
@@ -85,7 +83,6 @@ namespace SharedCode.Database
 
         public Result<List<T>> GetAllData<T>() where T : new()
 		{
-            var db = Util.Singleton.GetDBConnectionInstance(this.path);
             List<T> typeList = new List<T>();
             try
             {
