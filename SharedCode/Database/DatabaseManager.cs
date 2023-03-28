@@ -4,25 +4,27 @@ using System.IO;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
+using SharedCode.Util;
 
 namespace SharedCode.Database
 {
-	public class DatabaseManager
+	public class DatabaseManager : IDatabaseManager
 	{
-        IPathManager path;
+        private IPathManager path;
+        private SQLiteConnection db;
 
         public DatabaseManager(IPathManager pathManager)
 		{
 			this.path = pathManager;
-		}
+            this.db = Util.Singleton.GetDBConnectionInstance(this.path);
+        }
 
-		private bool checkTableExists(string tableName)
+        public bool checkTableExists(string tableName)
 		{
 			try
 			{
-                var db = Util.Singleton.GetDBConnectionInstance(path);
                 var tableInfo = db.GetTableInfo(tableName);
-                if(tableInfo.Count > 0)
+                if (tableInfo.Count > 0)
 				{
 					return true;
 				} else {
@@ -31,55 +33,67 @@ namespace SharedCode.Database
             } catch {
 				return false;
 			}
-            
         }
 
-		public void StoreData<T>(ref T model, string tableName)
+		public void StoreData<T>(T newItem, string tableName) where T : new()
         {
             try
 			{
-                var db = Util.Singleton.GetDBConnectionInstance(path);
                 if (checkTableExists(tableName))
 				{
-                    db.Insert(model);
+                    db.Insert(newItem);
                 } else {
 					db.CreateTable<T>();
-					db.Insert(model);
+					db.Insert(newItem);
 				}
             } catch(Exception e) {
-				Console.WriteLine("Error:" + e);
+				Console.WriteLine("Error: " + e);
 			}
-		}
+        }
 
-		public void UpdateData<T>(ref T model, string tableName)
-		{
+		public void UpdateData<T>(T updateItem, string tableName) where T : new()
+        {
             try
             {
-                var db = Util.Singleton.GetDBConnectionInstance(path);
                 if (checkTableExists(tableName))
 				{
-                    db.Update(model);
+                    db.Update(updateItem);
                 }
                 else {
-                    var a = db.CreateTable<T>();
-                    db.Insert(model);
+                    db.CreateTable<T>();
+                    db.Insert(updateItem);
                 }
-                
             }
             catch (Exception e) {
-                Console.WriteLine("Error:" + e);
+                Console.WriteLine("Error: " + e);
             }
         }
 
-		public void DeleteDataById<T>(ref T model, string tableName, int id)
-		{
+		public void DeleteDataById<T>(T item, string tableName, int id) where T : new()
+        {
 			try
 			{
-                var db = Util.Singleton.GetDBConnectionInstance(path);
 				if (checkTableExists(tableName))
 					db.Delete<T>(id);
 			} catch (Exception e) {
-                Console.WriteLine("Error:" + e);
+                Console.WriteLine("Error: " + e);
+            }
+        }
+
+
+        public Result<List<T>> GetAllData<T>() where T : new()
+		{
+            List<T> typeList = new List<T>();
+            try
+            {
+                var data = db.Table<T>();
+                foreach (var res in data)
+                {
+                    typeList.Add(res);
+                }
+                return Result.Ok<List<T>>(typeList);
+            } catch {
+                return Result.Fail<List<T>>("Could not get all data");
             }
         }
 	}
