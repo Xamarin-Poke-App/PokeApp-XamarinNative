@@ -35,14 +35,13 @@ namespace SharedCode.Util
 
     public static class NetworkHandler
 	{
-        private static HttpClient httpClient = new HttpClient();
-
-        private static Uri baseAddress = new Uri("https://pokeapi.co/api/v2/");
+        private static HttpClient httpClient = new HttpClient()
+        {
+            BaseAddress = new Uri("https://pokeapi.co/api/v2/")
+        };
 
 		public static async Task<T> GetData<T>(string endpoint)
 		{
-            if (httpClient.BaseAddress == null)
-                httpClient.BaseAddress = baseAddress;
             var response = new HttpResponseMessage();
             try
             {
