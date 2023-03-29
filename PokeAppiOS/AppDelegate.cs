@@ -1,4 +1,6 @@
 ﻿using Foundation;
+using SharedCode.DI;
+using SharedCode.Services;
 using UIKit;
 
 namespace PokeAppiOS
@@ -14,6 +16,8 @@ namespace PokeAppiOS
         [Export ("application:didFinishLaunchingWithOptions:")]
         public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
+            IocContainer.CreateContainer();
+            DI.RegisterDIs();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

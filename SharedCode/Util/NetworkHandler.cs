@@ -33,14 +33,24 @@ namespace SharedCode.Util
         public static readonly NetworkErrorException UnknownError = new NetworkErrorException(0, "Unknown Error");
     }
 
-    public static class NetworkHandler
+    public interface INetworkHandler
+    {
+        Task<T> GetData<T>(string endpoint);
+    }
+
+    public class NetworkHandler : INetworkHandler
 	{
-        private static HttpClient httpClient = new HttpClient()
+        private readonly HttpClient httpClient = new HttpClient()
         {
             BaseAddress = new Uri("https://pokeapi.co/api/v2/")
         };
 
-		public static async Task<T> GetData<T>(string endpoint)
+        public NetworkHandler()
+        {
+            Console.WriteLine("Instantiating networkHandler");
+        }
+
+		public async Task<T> GetData<T>(string endpoint)
 		{
             var response = new HttpResponseMessage();
             try

@@ -9,14 +9,19 @@
     <None Remove="Util\" />
     <None Remove="Helper\" />
     <None Remove="Event\" />
+    <None Remove="DI\" />
+    <None Remove="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
     <Folder Include="Event\" />
+    <Folder Include="DI\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 </Project>
