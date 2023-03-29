@@ -13,6 +13,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using SharedCode;
 using SharedCode.Controller;
+using SharedCode.Model;
 using SharedCode.Util;
 
 namespace PokeAppAndroid.View
@@ -42,7 +43,7 @@ namespace PokeAppAndroid.View
             Finish();
         }
 
-        public void updateView(Result<int> data)
+        public void updateView(Result<List<ResultPokemons>> data)
         {
             if (data.Success)
             {

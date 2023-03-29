@@ -37,7 +37,7 @@ namespace PokeAppAndroid
         {
             if (resultLogin.Success)
             {
-                StartActivity(typeof(SecondActivity));
+                StartActivity(typeof(PokemonHomeActivity));
                 Finish();
             }
             else
