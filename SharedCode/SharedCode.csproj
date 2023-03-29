@@ -9,11 +9,16 @@
     <None Remove="Util\" />
     <None Remove="Helper\" />
     <None Remove="Event\" />
+    <None Remove="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
     <Folder Include="Event\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
   </ItemGroup>
 </Project>
