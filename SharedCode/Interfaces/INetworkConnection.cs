@@ -2,7 +2,7 @@
 
 namespace SharedCode.Interfaces
 {
-    public interface INetwork
+    public interface INetworkConnection
     {
         EventHandler<NetworkChangedEventArgs> NetworkHasChanged { set; get; }
         void OnNetworkChanged(NetworkChangedEventArgs args);

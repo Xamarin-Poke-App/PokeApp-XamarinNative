@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondViewController">
             <connections>
+                <outlet property="LabelTest" destination="Gtg-R0-ffG" id="FC1-Ej-dgo"/>
                 <outlet property="LogoutButton" destination="yem-QQ-J9n" id="CIr-nh-2HL"/>
                 <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
             </connections>

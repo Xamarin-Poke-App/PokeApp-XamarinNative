@@ -13,6 +13,9 @@ namespace PokeAppiOS
 	partial class SecondViewController
 	{
 		[Outlet]
+		UIKit.UILabel LabelTest { get; set; }
+
+		[Outlet]
 		UIKit.UIButton LogoutButton { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -20,6 +23,11 @@ namespace PokeAppiOS
 			if (LogoutButton != null) {
 				LogoutButton.Dispose ();
 				LogoutButton = null;
+			}
+
+			if (LabelTest != null) {
+				LabelTest.Dispose ();
+				LabelTest = null;
 			}
 		}
 	}

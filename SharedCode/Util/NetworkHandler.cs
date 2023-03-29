@@ -1,44 +1,68 @@
 ﻿using System;
-using Xamarin.Essentials;
-using SharedCode.Interfaces;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace SharedCode.Util
 {
-    public class NetworkHandler : INetwork
+    public class NetworkErrorException : HttpRequestException
     {
-        public NetworkHandler(EventHandler<NetworkChangedEventArgs> handler)
+        public int Code;
+        public NetworkErrorException(int code)
         {
-            NetworkHasChanged += handler;
-            Connectivity.ConnectivityChanged += OnNetworkChanged;
+            this.Code = code;
         }
-
-        public EventHandler<NetworkChangedEventArgs> NetworkHasChanged { get; set; }
-
-        private void OnNetworkChanged(object sender, ConnectivityChangedEventArgs args)
+        public NetworkErrorException(int code, string message) : base(message)
         {
-            EventHandler<NetworkChangedEventArgs> handler = NetworkHasChanged;
-
-            if (handler == null) return;
-
-            var access = args.NetworkAccess;
-            var profiles = args.ConnectionProfiles;
-            var customArgs = new NetworkChangedEventArgs();
-
-            if (access == NetworkAccess.Internet)
-            {
-                customArgs.IsConnected = true;
-                this.OnNetworkChanged(customArgs);
-                return;
-            }
-
-            customArgs.IsConnected = false;
-            this.OnNetworkChanged(customArgs);
+            this.Code = code;
         }
-
-        public void OnNetworkChanged(NetworkChangedEventArgs args)
+        public NetworkErrorException(int code, string message, Exception inner) : base(message, inner)
         {
-            NetworkHasChanged.Invoke(this, args);
+            this.Code = code;
         }
     }
+
+    public static class NetworkErrors
+    {
+        public static readonly NetworkErrorException BadRequest = new NetworkErrorException(400, "Bad request");
+        public static readonly NetworkErrorException NotFound = new NetworkErrorException(404, "Not Found");
+        public static readonly NetworkErrorException InternalServerError = new NetworkErrorException(500, "Internal Server Error");
+        public static readonly NetworkErrorException UnknownError = new NetworkErrorException(0, "Unknown Error");
+    }
+
+    public static class NetworkHandler
+	{
+        private static HttpClient httpClient = new HttpClient()
+        {
+            BaseAddress = new Uri("https://pokeapi.co/api/v2/")
+        };
+
+		public static async Task<T> GetData<T>(string endpoint)
+		{
+            var response = new HttpResponseMessage();
+            try
+            {
+                response = await httpClient.GetAsync(endpoint);
+                return await response.Content.ReadFromJsonAsync<T>();
+            }
+            catch (Exception ex)
+            {
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                        throw NetworkErrors.BadRequest;
+                    case HttpStatusCode.NotFound:
+                        throw NetworkErrors.NotFound;
+                    case var expression when response.StatusCode >= HttpStatusCode.InternalServerError:
+                        throw NetworkErrors.InternalServerError;
+                    default:
+                        throw ex;
+                }
+            }
+        }
+	}
 }
 

@@ -1,14 +1,15 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using PokeAppAndroid.View;
 using SharedCode;
+using SharedCode.Controller;
 using SharedCode.Services;
 using SharedCode.Model;
 using SharedCode.Util;
-using System;
 
 namespace PokeAppAndroid
 {
@@ -16,8 +17,7 @@ namespace PokeAppAndroid
     public class MainActivity : AppCompatActivity
     {
         static LoginService loginService = new LoginService();
-
-        private TextView tvTest;
+        
         private Button LoginButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -27,8 +27,7 @@ namespace PokeAppAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
             loginService.UserLoggedIn += LoginService_UserLoggedIn;
-            tvTest = FindViewById<TextView>(Resource.Id.tvTest);
-            tvTest.Text = Class1.test;
+            
 
             LoginButton = FindViewById<Button>(Resource.Id.LoginButton);
             LoginButton.Click += LoginButton_Click;
