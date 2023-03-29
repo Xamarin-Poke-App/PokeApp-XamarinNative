@@ -16,4 +16,7 @@
     <Folder Include="Helper\" />
     <Folder Include="Event\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+  </ItemGroup>
 </Project>

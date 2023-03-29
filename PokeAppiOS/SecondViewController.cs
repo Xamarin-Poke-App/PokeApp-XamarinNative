@@ -1,12 +1,14 @@
 ﻿using System;
-
+using SharedCode.Controller;
+using SharedCode.Util;
 using UIKit;
 
 namespace PokeAppiOS
 {
-	public partial class SecondViewController : UIViewController
+	public partial class SecondViewController : UIViewController, IPokemonController
 	{
-		public SecondViewController () : base ("SecondViewController", null)
+        private PokemonController controller;
+        public SecondViewController () : base ("SecondViewController", null)
 		{
 		}
 
@@ -17,6 +19,8 @@ namespace PokeAppiOS
 
 			Title = "Second View";
             LogoutButton.TouchUpInside += LogoutButton_TouchUpInside;
+			controller = new PokemonController(this);
+            controller.GetAllPokemonsSpecies();
 		}
 
         private void LogoutButton_TouchUpInside(object sender, EventArgs e)
@@ -29,7 +33,19 @@ namespace PokeAppiOS
 			base.DidReceiveMemoryWarning ();
 			// Release any cached data, images, etc that aren't in use.
 		}
-	}
+
+        public void updateView(Result<int> data)
+        {
+            if (data.Success)
+            {
+                LabelTest.Text = data.Value.ToString();
+            }
+            else
+            {
+                LabelTest.Text = data.Error;
+            }
+        }
+    }
 }
 
 
