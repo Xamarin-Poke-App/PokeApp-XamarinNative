@@ -1,4 +1,5 @@
 ﻿using System;
+using SharedCode.Controller;
 using SharedCode.Repository;
 using SharedCode.Services;
 using SharedCode.Util;
@@ -11,15 +12,16 @@ namespace SharedCode.DI
 	{
 		public static void RegisterDIs()
 		{
-			var container = IocContainer.GetInstance();
+			var container = IocContainer.Instance;
 
+			// Network Handler
 			// Singleton
 			container.RegisterType<INetworkHandler, NetworkHandler>(new ContainerControlledLifetimeManager());
 
+			// Pokemon List
 			container.RegisterType<IPokemonRepository, PokemonRepository>();
-
-
+			container.RegisterType<IPokemonController, PokemonController>();
 		}
 	}
 }
-
+	

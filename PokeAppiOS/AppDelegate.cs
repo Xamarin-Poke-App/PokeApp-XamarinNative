@@ -17,7 +17,6 @@ namespace PokeAppiOS
         public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
             IocContainer.CreateContainer();
-            DI.RegisterDIs();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

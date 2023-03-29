@@ -7,7 +7,7 @@ using SharedCode.Util;
 
 namespace SharedCode.Repository
 {
-	interface IPokemonRepository
+	public interface IPokemonRepository
 	{
         Task<Result<List<ResultPokemons>>> GetPokemonList();
 	}

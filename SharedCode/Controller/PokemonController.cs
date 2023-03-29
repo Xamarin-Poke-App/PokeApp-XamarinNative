@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using SharedCode.Model;
 using SharedCode.Repository;
 using SharedCode.Services;
@@ -12,48 +13,43 @@ namespace SharedCode.Controller
 {
 	public interface IPokemonController
 	{
+		IPokemonControllerListener listener { get; set; }
+		void GetAllPokemonsSpecies();
+	}
+
+	public interface IPokemonControllerListener
+	{
 		void updateView(Result<List<ResultPokemons>> data);
 	}
 
-	public class PokemonController
-	{
-		private IPokemonController viewListener;
-		private IPokemonRepository Repository = IocContainer.GetInstance().Resolve<IPokemonRepository>();
+	public class PokemonController : IPokemonController
+    {
+		public IPokemonControllerListener viewListener;
 
-		public PokemonController(IPokemonController listener)
+		[Dependency]
+		public IPokemonRepository Repository;
+
+		public IPokemonControllerListener listener
 		{
-			this.viewListener = listener;
+			get
+			{
+				return viewListener;
+			}
+			set
+			{
+				viewListener = value;
+			}
 		}
+
+		//public PokemonController(IPokemonControllerListener listener)
+		//{
+		//	this.viewListener = listener;
+		//}
 
 		public async void GetAllPokemonsSpecies()
 		{
 			var data = await Repository.GetPokemonList();
 			viewListener.updateView(data);
-			//try
-			//{
-   //             var pokemons = await NetworkHandler.GetData<PokemonSpeciesResponse>("pokemon-species");
-   //             viewListener.updateView(Result.Ok(pokemons.count));
-   //         }
-   //         catch (NetworkErrorException ex)
-			//{
-			//	// You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
-			//	switch (ex.Code)
-			//	{
-			//		case (int) HttpStatusCode.InternalServerError:
-   //                     viewListener.updateView(Result.Fail<int>("It seems like PokeApi server is down"));
-   //                     break;
-			//		case (int) HttpStatusCode.NotFound:
-   //                     viewListener.updateView(Result.Fail<int>("The pokemon list seems to be unavailable right now"));
-   //                     break;
-			//		default:
-			//			viewListener.updateView(Result.Fail<int>(ex.Message ?? "Something went wrong"));
-			//			break;
-			//	}
-			//}
-   //         catch (Exception ex)
-   //         {
-   //             viewListener.updateView(Result.Fail<int>($"Check your internet connection {ex.ToString()}"));
-   //         }
         }
 	}
 }

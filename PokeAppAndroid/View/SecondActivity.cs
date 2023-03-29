@@ -14,26 +14,27 @@ using AndroidX.AppCompat.App;
 using SharedCode;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Services;
 using SharedCode.Util;
 
 namespace PokeAppAndroid.View
 {
     [Activity(Label = "SecondActivity")]
-    public class SecondActivity : AppCompatActivity, IPokemonController
+    public class SecondActivity : AppCompatActivity, IPokemonControllerListener
     {
         private Button LogoutButton;
-        private PokemonController controller;
+        private IPokemonController controller;
         private TextView tvTest;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_second);
 
-            // Create your application here
             LogoutButton = FindViewById<Button>(Resource.Id.LogoutButton);
             LogoutButton.Click += LogoutButton_Click;
             tvTest = FindViewById<TextView>(Resource.Id.tvTextView);
-            controller = new PokemonController(this);
+            controller = IocContainer.GetDependency<IPokemonController>();
+            controller.listener = this;
             controller.GetAllPokemonsSpecies();
         }
 

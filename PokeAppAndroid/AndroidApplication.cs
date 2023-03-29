@@ -17,7 +17,6 @@ namespace PokeAppAndroid
         {
             base.OnCreate();
 			IocContainer.CreateContainer();
-            DI.RegisterDIs();
         }
     }
 }

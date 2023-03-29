@@ -10,13 +10,20 @@ namespace SharedCode.Services
         {
             if (container == null)
                 container = new UnityContainer();
-            //DI.DI.RegisterDIs();
+            DI.DI.RegisterDIs();
         }
 
-        public static IUnityContainer GetInstance()
+        public static IUnityContainer Instance
         {
-            return container ?? new UnityContainer();
+            get
+            {
+                return container ?? new UnityContainer();
+            }
+        }
+
+        public static T GetDependency<T>()
+        {
+            return container.Resolve<T>();
         }
     }
 }
-

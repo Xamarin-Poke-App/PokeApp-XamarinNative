@@ -45,11 +45,6 @@ namespace SharedCode.Util
             BaseAddress = new Uri("https://pokeapi.co/api/v2/")
         };
 
-        public NetworkHandler()
-        {
-            Console.WriteLine("Instantiating networkHandler");
-        }
-
 		public async Task<T> GetData<T>(string endpoint)
 		{
             var response = new HttpResponseMessage();
