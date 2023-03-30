@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:text="@string/pokedex_title"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edt_searchPokemon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:hint="@string/search_pokemon"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/rv_pokemonList"  
+		android:scrollbars="vertical"
+		android:layout_width="fill_parent"  
+		android:layout_height="fill_parent"
+		android:layout_marginVertical="10dp"
+		android:layout_marginHorizontal="20dp"/>
+
+</LinearLayout>
+

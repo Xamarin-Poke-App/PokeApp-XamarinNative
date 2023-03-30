@@ -10,6 +10,8 @@ namespace PokeAppAndroid.Adapters
     public class PokemonAdapter : RecyclerView.Adapter
     {
         public List<ResultPokemons> pokemomList;
+        public event EventHandler<int> ItemClick;
+
         public PokemonAdapter(List<ResultPokemons> pokemons)
         {
             pokemomList = pokemons;
@@ -29,7 +31,7 @@ namespace PokeAppAndroid.Adapters
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             Android.Views.View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.pokemon_card, parent, false);
-            PokemonViewHolder viewHolder = new PokemonViewHolder(view);
+            PokemonViewHolder viewHolder = new PokemonViewHolder(view, OnClick);
             return viewHolder;
         }
 
@@ -37,10 +39,17 @@ namespace PokeAppAndroid.Adapters
         {
             public TextView TvPokemonName { get; set; }
 
-            public PokemonViewHolder(Android.Views.View card) : base(card)
+            public PokemonViewHolder(Android.Views.View card, Action<int> listener) : base(card)
             {
                 TvPokemonName = card.FindViewById<TextView>(Resource.Id.tv_pokemonName);
+                card.Click += (sender, e) => listener(base.Position);
             }
+        }
+
+        private void OnClick(int obj)
+        {
+            if (ItemClick != null)
+                ItemClick(this, obj);
         }
     }
 }

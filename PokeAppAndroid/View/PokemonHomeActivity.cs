@@ -1,57 +1,27 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using Android.App;
 using Android.OS;
-using AndroidX.RecyclerView.Widget;
-using PokeAppAndroid.Adapters;
-using SharedCode.Controller;
-using SharedCode.Model;
-using SharedCode.Util;
+using AndroidX.Fragment.App;
+using Android.Content;
+using Xamarin.Essentials;
+using AndroidX.AppCompat.App;
 
 namespace PokeAppAndroid.View
 {
     [Activity(Label = "PokemonHomeActivity")]
-    public class PokemonHomeActivity : Activity, IPokemonController
+    public class PokemonHomeActivity : AppCompatActivity
     {
-        private RecyclerView recyclerView;
-        private RecyclerView.LayoutManager mLayoutManager;
-        private List<ResultPokemons> pokemonList;
-        private PokemonAdapter adapter;
-        private PokemonController controller;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_pokemon_home);
 
-            controller = new PokemonController(this);
-            controller.GetAllPokemonsSpecies();
-        }
+            PokemonListFragment pokemonListFragment = new PokemonListFragment();
 
-        private void SetupRecyclerView()
-        {
-            recyclerView = FindViewById<RecyclerView>(Resource.Id.rv_pokemonList);
-            mLayoutManager = new GridLayoutManager(this, 2);
-            recyclerView.SetLayoutManager(mLayoutManager);
-            adapter = new PokemonAdapter(pokemonList);
-            recyclerView.SetAdapter(adapter);
-        }
-
-        public void updateView(Result<List<ResultPokemons>> data)
-        {
-            if (data.Success)
-            {
-                pokemonList = new List<ResultPokemons>();
-                foreach (var item in data.Value)
-                {
-                    pokemonList.Add(item);
-                }
-                SetupRecyclerView();
-            }
-            else {
-                pokemonList = new List<ResultPokemons>();
-            }
+            var appCompatActivity = Platform.CurrentActivity as AppCompatActivity;
+            var fragmentTransaction = appCompatActivity?.SupportFragmentManager.BeginTransaction();
+            fragmentTransaction.Add(Resource.Id.fragmentContainer, pokemonListFragment, "PokemonListFragment");
+            fragmentTransaction.Commit();
         }
     }
 }

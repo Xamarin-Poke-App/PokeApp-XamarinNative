@@ -67,6 +67,8 @@
     <Compile Include="Utils\PathManager.cs" />
     <Compile Include="View\PokemonHomeActivity.cs" />
     <Compile Include="Adapters\PokemonAdapter.cs" />
+    <Compile Include="View\PokemonListFragment.cs" />
+    <Compile Include="View\PokemonDetailFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -107,6 +109,14 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\pokemon_card.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_pokemon_list.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_pokemon_detail.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

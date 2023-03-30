@@ -3,5 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="pokedex_title">Pokedex</string>
     <string name="search_pokemon">Enter a pokemon name for search</string>
+    <string name="pokemon_detail_title">Pokemon Detail</string>
 </resources>
 
