@@ -41,11 +41,6 @@ namespace SharedCode.Controller
 			}
 		}
 
-		//public PokemonController(IPokemonControllerListener listener)
-		//{
-		//	this.viewListener = listener;
-		//}
-
 		public async void GetAllPokemonsSpecies()
 		{
 			var data = await Repository.GetPokemonList();
