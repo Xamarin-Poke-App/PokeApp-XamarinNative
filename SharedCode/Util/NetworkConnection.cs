@@ -40,5 +40,14 @@ namespace SharedCode.Util
         {
             NetworkHasChanged.Invoke(this, args);
         }
+
+        public bool GetIsConnectedCurrentStatus()
+        {
+            var current = Connectivity.NetworkAccess;
+
+            if (current != NetworkAccess.Internet) return false;
+
+            return true;
+        }
     }
 }

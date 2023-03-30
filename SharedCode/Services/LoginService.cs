@@ -4,6 +4,7 @@ using SharedCode.Util;
 
 namespace SharedCode.Services
 {
+	// Note: If this class get some changes that includes dependencies, register this class and its dependecies in Ioc Container to manage DI
 	public class LoginService
 	{
         public event EventHandler<Result<string>> UserLoggedIn;

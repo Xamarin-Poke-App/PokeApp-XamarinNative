@@ -6,6 +6,7 @@ namespace SharedCode.Interfaces
     {
         EventHandler<NetworkChangedEventArgs> NetworkHasChanged { set; get; }
         void OnNetworkChanged(NetworkChangedEventArgs args);
+        bool GetIsConnectedCurrentStatus();
     }
 
     public class NetworkChangedEventArgs : EventArgs
