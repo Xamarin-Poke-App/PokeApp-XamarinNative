@@ -17,21 +17,23 @@ using Android.Widget;
 using SharedCode.Util;
 using Xamarin.Essentials;
 using AndroidX.AppCompat.App;
+using SharedCode.Services;
 
 namespace PokeAppAndroid.View
 {
-    public class PokemonListFragment : AndroidX.Fragment.App.Fragment, IPokemonController
+    public class PokemonListFragment : AndroidX.Fragment.App.Fragment, IPokemonControllerListener
     {
         private RecyclerView recyclerView;
         private RecyclerView.LayoutManager mLayoutManager;
         private List<ResultPokemons> pokemonList;
         private PokemonAdapter adapter;
-        private PokemonController controller;
+        private IPokemonController controller;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            controller = new PokemonController(this);
+            controller = IocContainer.GetDependency<IPokemonController>();
+            controller.listener = this;
             controller.GetAllPokemonsSpecies();
         }
 
