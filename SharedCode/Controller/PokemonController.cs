@@ -8,7 +8,7 @@ namespace SharedCode.Controller
 {
 	public interface IPokemonController
 	{
-		void updateView(Result<int> data);
+		void updateView(Result<PokemonSpeciesResponse> data);
 	}
 
 	public class PokemonController
@@ -25,7 +25,7 @@ namespace SharedCode.Controller
 			try
 			{
                 var pokemons = await NetworkHandler.GetData<PokemonSpeciesResponse>("pokemon-species");
-                viewListener.updateView(Result.Ok(pokemons.count));
+                viewListener.updateView(Result.Ok(pokemons));
             }
             catch (NetworkErrorException ex)
 			{
@@ -33,19 +33,19 @@ namespace SharedCode.Controller
 				switch (ex.Code)
 				{
 					case (int) HttpStatusCode.InternalServerError:
-                        viewListener.updateView(Result.Fail<int>("It seems like PokeApi server is down"));
+                        viewListener.updateView(Result.Fail<PokemonSpeciesResponse>("It seems like PokeApi server is down"));
                         break;
 					case (int) HttpStatusCode.NotFound:
-                        viewListener.updateView(Result.Fail<int>("The pokemon list seems to be unavailable right now"));
+                        viewListener.updateView(Result.Fail<PokemonSpeciesResponse>("The pokemon list seems to be unavailable right now"));
                         break;
 					default:
-						viewListener.updateView(Result.Fail<int>(ex.Message ?? "Something went wrong"));
+						viewListener.updateView(Result.Fail<PokemonSpeciesResponse>(ex.Message ?? "Something went wrong"));
 						break;
 				}
 			}
             catch (Exception ex)
             {
-                viewListener.updateView(Result.Fail<int>($"Check your internet connection {ex.ToString()}"));
+                viewListener.updateView(Result.Fail<PokemonSpeciesResponse>($"Check your internet connection {ex.ToString()}"));
             }
         }
 	}

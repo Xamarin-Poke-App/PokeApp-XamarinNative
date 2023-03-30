@@ -7,10 +7,10 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace PokeAppiOS
+namespace PokeAppiOS.Controllers
 {
-	[Register ("ViewController")]
-	partial class ViewController
+	[Register ("LoginViewController")]
+	partial class LoginViewController
 	{
 		[Outlet]
 		UIKit.UIButton LoginButton { get; set; }

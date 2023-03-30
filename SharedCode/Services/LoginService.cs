@@ -6,6 +6,8 @@ namespace SharedCode.Services
 {
 	public class LoginService
 	{
+		public static LoginService shared = new LoginService();
+
         public event EventHandler<Result<string>> UserLoggedIn;
 
         public void PerformLogin(User user)

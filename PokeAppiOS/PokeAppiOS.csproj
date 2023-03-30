@@ -115,16 +115,14 @@
         </ImageAsset>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Resources\" />
-        <Folder Include="View\" />
         <Folder Include="CommonView\" />
         <Folder Include="Utils\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
-        <InterfaceDefinition Include="View\LoginViewController.xib" />
-        <InterfaceDefinition Include="SecondViewController.xib" />
+        <InterfaceDefinition Include="Views\Login.storyboard" />
+        <InterfaceDefinition Include="Views\Home.storyboard" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -134,20 +132,16 @@
         <Compile Include="Main.cs" />
         <Compile Include="AppDelegate.cs" />
         <Compile Include="SceneDelegate.cs" />
-        <Compile Include="ViewController.cs" />
-        <Compile Include="ViewController.designer.cs">
-            <DependentUpon>ViewController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="View\LoginViewController.cs" />
-        <Compile Include="View\LoginViewController.designer.cs">
+        <Compile Include="CommonView\CustomFloatingButton.cs" />
+        <Compile Include="Utils\PathManager.cs" />
+        <Compile Include="Controllers\LoginViewController.cs" />
+        <Compile Include="Controllers\LoginViewController.designer.cs">
           <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="CommonView\CustomFloatingButton.cs" />
-        <Compile Include="SecondViewController.cs" />
-        <Compile Include="SecondViewController.designer.cs">
-          <DependentUpon>SecondViewController.cs</DependentUpon>
+        <Compile Include="Controllers\HomeViewController.cs" />
+        <Compile Include="Controllers\HomeViewController.designer.cs">
+          <DependentUpon>HomeViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="Utils\PathManager.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
