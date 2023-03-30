@@ -9,6 +9,8 @@
     <None Remove="Util\" />
     <None Remove="Helper\" />
     <None Remove="Event\" />
+    <None Remove="DI\" />
+    <None Remove="Repository\" />
     <None Remove="Database\" />
   </ItemGroup>
   <ItemGroup>
@@ -16,6 +18,8 @@
     <Folder Include="Util\" />
     <Folder Include="Helper\" />
     <Folder Include="Event\" />
+    <Folder Include="DI\" />
+    <Folder Include="Repository\" />
     <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
@@ -24,5 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 </Project>

@@ -10,8 +10,7 @@ namespace PokeAppiOS
 {
     public partial class ViewController : UIViewController
     {
-        static LoginService loginService = new LoginService();
-
+        static LoginService loginService = IocContainer.GetDependency<LoginService>();
 
         public ViewController (IntPtr handle) : base (handle)
         {
