@@ -7,19 +7,19 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace PokeAppiOS.Controllers
+namespace PokeAppiOS.Views.Cells
 {
-	[Register ("HomeViewController")]
-	partial class HomeViewController
+	[Register ("PokemonViewCell")]
+	partial class PokemonViewCell
 	{
 		[Outlet]
-		UIKit.UICollectionView PokemonCollectionView { get; set; }
+		UIKit.UILabel PokemonNameLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (PokemonCollectionView != null) {
-				PokemonCollectionView.Dispose ();
-				PokemonCollectionView = null;
+			if (PokemonNameLabel != null) {
+				PokemonNameLabel.Dispose ();
+				PokemonNameLabel = null;
 			}
 		}
 	}

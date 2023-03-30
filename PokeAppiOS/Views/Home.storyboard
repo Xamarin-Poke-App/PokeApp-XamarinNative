@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-732" y="-7"/>
         </scene>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="obv-J0-pNr">
             <objects>
-                <viewController storyboardIdentifier="HomeTwoViewController" id="pZQ-Yh-lma" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController id="pZQ-Yh-lma" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LDv-T7-hCj"/>
                         <viewControllerLayoutGuide type="bottom" id="1jv-Co-Cbk"/>
@@ -35,21 +35,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLz-Rb-C8M">
-                                <rect key="frame" x="137" y="438" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ih6-8h-pfO">
+                                <rect key="frame" x="31" y="103" width="331" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VZa-QB-daY">
+                                <rect key="frame" x="0.0" y="142" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SAj-1g-Ufc">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="estimatedItemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VZa-QB-daY" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" id="3o7-HD-7fQ"/>
+                            <constraint firstAttribute="trailing" secondItem="VZa-QB-daY" secondAttribute="trailing" id="3sc-mB-bhZ"/>
+                            <constraint firstItem="Ih6-8h-pfO" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leadingMargin" constant="15" id="7jI-M4-fgA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ih6-8h-pfO" secondAttribute="trailing" constant="15" id="9bj-2w-A8F"/>
+                            <constraint firstAttribute="bottom" secondItem="VZa-QB-daY" secondAttribute="bottom" id="DfN-Aa-ddZ"/>
+                            <constraint firstItem="Ih6-8h-pfO" firstAttribute="top" secondItem="LDv-T7-hCj" secondAttribute="bottom" id="Zld-7T-OHH"/>
+                            <constraint firstItem="VZa-QB-daY" firstAttribute="top" secondItem="Ih6-8h-pfO" secondAttribute="bottom" constant="5" id="ol1-cb-abm"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="UR9-Wp-Lj9"/>
+                    <navigationItem key="navigationItem" id="UR9-Wp-Lj9"/>
+                    <connections>
+                        <outlet property="PokemonCollectionView" destination="VZa-QB-daY" id="g0t-ep-gK8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovy-Ce-9Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144" y="-7"/>
+            <point key="canvasLocation" x="142.74809160305344" y="-7.042253521126761"/>
         </scene>
     </scenes>
     <resources>
