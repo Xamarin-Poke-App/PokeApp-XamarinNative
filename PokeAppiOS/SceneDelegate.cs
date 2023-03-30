@@ -1,6 +1,7 @@
 ﻿using System;
 using Foundation;
 using PokeAppiOS;
+using PokeAppiOS.View;
 using UIKit;
 
 namespace PokeAppiOS {
@@ -78,7 +79,8 @@ namespace PokeAppiOS {
 		{
 			// For demo purposes initializes 'SecondViewController' as UIViewControler
 			// but could be replaced by storyboard
-            UIViewController viewController = new SecondViewController();
+			//UIViewController viewController = new SecondViewController();
+			UIViewController viewController = new PokeDetailViewController();
             UINavigationController navigationMain = new UINavigationController(viewController);
             Window.RootViewController = navigationMain;
             Window.MakeKeyAndVisible();

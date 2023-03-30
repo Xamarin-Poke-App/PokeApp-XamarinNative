@@ -24,7 +24,7 @@ namespace SharedCode.Controller
 		{
 			try
 			{
-                var pokemons = await NetworkHandler.GetData<PokemonSpeciesResponse>("pokemon-species");
+                var pokemons = await NetworkHandler.GetData<PokemonSpeciesResponse>(NetworkHandler.BaseAddress + "pokemon-speciehghs");
                 viewListener.updateView(Result.Ok(pokemons.count));
             }
             catch (NetworkErrorException ex)

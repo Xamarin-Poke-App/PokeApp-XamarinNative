@@ -35,10 +35,8 @@ namespace SharedCode.Util
 
     public static class NetworkHandler
 	{
-        private static HttpClient httpClient = new HttpClient()
-        {
-            BaseAddress = new Uri("https://pokeapi.co/api/v2/")
-        };
+        public static string BaseAddress = "https://pokeapi.co/api/v2/";
+        private static HttpClient httpClient = new HttpClient();
 
 		public static async Task<T> GetData<T>(string endpoint)
 		{
@@ -50,17 +48,35 @@ namespace SharedCode.Util
             }
             catch (Exception ex)
             {
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.BadRequest:
-                        throw NetworkErrors.BadRequest;
-                    case HttpStatusCode.NotFound:
-                        throw NetworkErrors.NotFound;
-                    case var expression when response.StatusCode >= HttpStatusCode.InternalServerError:
-                        throw NetworkErrors.InternalServerError;
-                    default:
-                        throw ex;
-                }
+                CheckNetworkException(response);
+                throw ex;
+            }
+        }
+
+        public static async Task<byte[]> LoadImage(string imageUrl)
+        {
+            try
+            {
+                Task<byte[]> contentsTask = httpClient.GetByteArrayAsync(imageUrl);
+                return await contentsTask;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        private static void CheckNetworkException(HttpResponseMessage response)
+        {
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.BadRequest:
+                    throw NetworkErrors.BadRequest;
+                case HttpStatusCode.NotFound:
+                    throw NetworkErrors.NotFound;
+                case var expression when response.StatusCode >= HttpStatusCode.InternalServerError:
+                    throw NetworkErrors.InternalServerError;
             }
         }
 	}
