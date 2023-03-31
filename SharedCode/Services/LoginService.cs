@@ -7,8 +7,6 @@ namespace SharedCode.Services
 	// Note: If this class get some changes that includes dependencies, register this class and its dependecies in Ioc Container to manage DI
 	public class LoginService
 	{
-		public static LoginService shared = new LoginService();
-
         public event EventHandler<Result<string>> UserLoggedIn;
 
         public void PerformLogin(User user)

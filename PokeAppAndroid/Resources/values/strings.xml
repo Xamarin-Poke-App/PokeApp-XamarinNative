@@ -4,5 +4,12 @@
     <string name="pokedex_title">Pokedex</string>
     <string name="search_pokemon">Enter a pokemon name for search</string>
     <string name="pokemon_detail_title">Pokemon Detail</string>
+    <string name="login_title">Login</string>
+    <string name="pikachuImage">Pikachu</string>
+    <string name="pikachuTitle">Pokémon</string>
+    <string name="usernameText">Username:</string>
+    <string name="passwordText">Password:</string>    
+    <string name="usernamePlaceholder">Insert you email</string>
+    <string name="passwordPlaceholder">Insert your password</string>
 </resources>
 

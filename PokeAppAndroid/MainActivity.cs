@@ -29,7 +29,7 @@ namespace PokeAppAndroid
             loginService.UserLoggedIn += LoginService_UserLoggedIn;
             
 
-            LoginButton = FindViewById<Button>(Resource.Id.LoginButton);
+            LoginButton = FindViewById<Button>(Resource.Id.loginButton);
             LoginButton.Click += LoginButton_Click;
         }
 
