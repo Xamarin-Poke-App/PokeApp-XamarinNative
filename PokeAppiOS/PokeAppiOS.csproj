@@ -118,6 +118,7 @@
         <Folder Include="CommonView\" />
         <Folder Include="Utils\" />
         <Folder Include="Views\Cells\" />
+        <Folder Include="Resources\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -153,11 +154,17 @@
           <DependentUpon>PokemonDetailViewController.cs</DependentUpon>
         </Compile>
         <Compile Include="Utils\PathManager.cs" />
+        <Compile Include="Utils\BottomLine.cs" />
+        <Compile Include="Utils\UIViewExtension.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
         <Name>SharedCode</Name>
       </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="Resources\pikachu.png" />
+      <BundleResource Include="Resources\title.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

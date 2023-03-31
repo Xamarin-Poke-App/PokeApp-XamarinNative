@@ -1,0 +1,26 @@
+﻿<selector
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<item
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<shape
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+			<solid
+				android:color="@android:color/transparent"
+				android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+			<corners
+				android:radius="4dp"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"/>
+			<stroke
+				android:width="2dp"
+				android:color="#747474"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"/>
+		</shape>
+	</item>
+</selector>
