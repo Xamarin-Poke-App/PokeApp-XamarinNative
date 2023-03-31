@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using SharedCode.Controller;
 
 namespace SharedCode.Util
 {
@@ -36,16 +37,14 @@ namespace SharedCode.Util
     public interface INetworkHandler
     {
         Task<T> GetData<T>(string endpoint);
+        Task<byte[]> LoadImage(string imageUrl);
     }
 
     public class NetworkHandler : INetworkHandler
 	{
-        private readonly HttpClient httpClient = new HttpClient()
-        {
-            BaseAddress = new Uri("https://pokeapi.co/api/v2/")
-        };
+        private static HttpClient httpClient = new HttpClient();
 
-		public async Task<T> GetData<T>(string endpoint)
+        public async Task<T> GetData<T>(string endpoint)
 		{
             var response = new HttpResponseMessage();
             try
@@ -55,17 +54,35 @@ namespace SharedCode.Util
             }
             catch (Exception ex)
             {
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.BadRequest:
-                        throw NetworkErrors.BadRequest;
-                    case HttpStatusCode.NotFound:
-                        throw NetworkErrors.NotFound;
-                    case var expression when response.StatusCode >= HttpStatusCode.InternalServerError:
-                        throw NetworkErrors.InternalServerError;
-                    default:
-                        throw ex;
-                }
+                CheckNetworkException(response);
+                throw ex;
+            }
+        }
+
+        public async Task<byte[]> LoadImage(string imageUrl)
+        {
+            try
+            {
+                Task<byte[]> contentsTask = httpClient.GetByteArrayAsync(imageUrl);
+                return await contentsTask;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        private void CheckNetworkException(HttpResponseMessage response)
+        {
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.BadRequest:
+                    throw NetworkErrors.BadRequest;
+                case HttpStatusCode.NotFound:
+                    throw NetworkErrors.NotFound;
+                case var expression when response.StatusCode >= HttpStatusCode.InternalServerError:
+                    throw NetworkErrors.InternalServerError;
             }
         }
 	}
