@@ -1,37 +1,24 @@
-﻿using CoreGraphics;
+﻿using CoreAnimation;
+using CoreGraphics;
 using Foundation;
+using PokeAppiOS.View;
 using SharedCode;
 using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace PokeAppiOS
 {
     public partial class ViewController : UIViewController
     {
-        private UILabel resultLabel;
-        public ViewController (IntPtr handle) : base (handle)
+        public ViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public override void ViewDidLoad ()
+        public override void ViewDidLoad()
         {
-            base.ViewDidLoad ();
-            resultLabel = new UILabel()
-            {
-                Frame = new CGRect(20, 124, View.Bounds.Width - 40, 40),
-                TextColor = UIColor.Blue,
-                TextAlignment = UITextAlignment.Center,
-                Font = UIFont.SystemFontOfSize(24),
-                Text = Class1.test,
-            };
+            base.ViewDidLoad();
 
-            View.AddSubviews(resultLabel);
-        }
-
-        public override void DidReceiveMemoryWarning ()
-        {
-            base.DidReceiveMemoryWarning ();
-            // Release any cached data, images, etc that aren't in use.
         }
     }
 }

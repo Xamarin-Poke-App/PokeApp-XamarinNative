@@ -1,9 +1,12 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using SharedCode;
+using Android.Content.Res;
+using System;
 
 namespace PokeAppAndroid
 {

@@ -6,7 +6,7 @@
     <string name="pikachuTitle">Pokémon</string>
     <string name="usernameText">Username:</string>
     <string name="passwordText">Password:</string>    
-    <string name="usernamePlaceholder">Insert your username</string>
+    <string name="usernamePlaceholder">Insert you email</string>
     <string name="passwordPlaceholder">Insert your password</string>
 </resources>
 

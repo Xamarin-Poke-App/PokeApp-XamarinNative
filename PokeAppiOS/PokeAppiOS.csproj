@@ -141,11 +141,21 @@
           <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
         <Compile Include="CommonView\CustomFloatingButton.cs" />
+        <Compile Include="LoginViewController.cs" />
+        <Compile Include="LoginViewController.designer.cs">
+          <DependentUpon>LoginViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="View\UIViewExtensions.cs" />
+        <Compile Include="View\BottomLine.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
         <Name>SharedCode</Name>
       </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="Resources\title.png" />
+      <BundleResource Include="Resources\pikachu.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
