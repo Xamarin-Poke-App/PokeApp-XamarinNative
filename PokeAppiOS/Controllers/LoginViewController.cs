@@ -5,10 +5,9 @@ using SharedCode.Util;
 using UIKit;
 namespace PokeAppiOS.Controllers
 {
-	public partial class LoginViewController : UIViewController
-	{
-        LoginService loginService = LoginService.shared;
-
+    public partial class ViewController : UIViewController
+    {
+        static LoginService loginService = IocContainer.GetDependency<LoginService>();
 
         public LoginViewController(IntPtr handle) : base(handle)
         {

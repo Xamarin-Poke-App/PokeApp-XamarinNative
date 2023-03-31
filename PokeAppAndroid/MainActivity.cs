@@ -16,8 +16,8 @@ namespace PokeAppAndroid
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        static LoginService loginService = new LoginService();
-        
+        static LoginService loginService = IocContainer.GetDependency<LoginService>();
+
         private Button LoginButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -37,7 +37,7 @@ namespace PokeAppAndroid
         {
             if (resultLogin.Success)
             {
-                StartActivity(typeof(SecondActivity));
+                StartActivity(typeof(PokemonHomeActivity));
                 Finish();
             }
             else
