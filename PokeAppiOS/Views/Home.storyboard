@@ -41,7 +41,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VZa-QB-daY">
-                                <rect key="frame" x="0.0" y="142" width="393" height="710"/>
+                                <rect key="frame" x="20" y="142" width="353" height="710"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SAj-1g-Ufc">
                                     <size key="itemSize" width="128" height="128"/>
@@ -55,8 +55,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="VZa-QB-daY" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" id="3o7-HD-7fQ"/>
-                            <constraint firstAttribute="trailing" secondItem="VZa-QB-daY" secondAttribute="trailing" id="3sc-mB-bhZ"/>
+                            <constraint firstItem="VZa-QB-daY" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" constant="20" id="3o7-HD-7fQ"/>
+                            <constraint firstAttribute="trailing" secondItem="VZa-QB-daY" secondAttribute="trailing" constant="20" id="3sc-mB-bhZ"/>
                             <constraint firstItem="Ih6-8h-pfO" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leadingMargin" constant="15" id="7jI-M4-fgA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ih6-8h-pfO" secondAttribute="trailing" constant="15" id="9bj-2w-A8F"/>
                             <constraint firstAttribute="bottom" secondItem="VZa-QB-daY" secondAttribute="bottom" id="DfN-Aa-ddZ"/>

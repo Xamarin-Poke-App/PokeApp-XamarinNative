@@ -28,5 +28,15 @@ namespace PokeAppiOS.Views.Cells
 
             }
         }
-	}
+
+        public void CellNewImageSize(double height, double width)
+        {
+            var newHeight = height * 0.7;
+            var newWidth = width * 0.6;
+            PokemonBackgroundImageView.Frame = new CGRect(PokemonBackgroundImageView.Frame.X, PokemonBackgroundImageView.Frame.Y, newWidth, newHeight);
+            PokemonImageView.Frame = new CGRect(PokemonImageView.Frame.X, PokemonImageView.Frame.Y, newWidth, newHeight);
+            PokemonBackgroundImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+            PokemonImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+        }
+    }
 }

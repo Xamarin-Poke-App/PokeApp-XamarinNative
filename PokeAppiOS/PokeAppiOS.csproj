@@ -113,6 +113,12 @@
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
             <Visible>false</Visible>
         </ImageAsset>
+        <ImageAsset Include="Assets.xcassets\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\pokeball.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\pokeball.imageset\pokeball.svg" />
+        <ImageAsset Include="Assets.xcassets\GrassColor.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Bulbasaur.svg" />
+        <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Contents.json" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="CommonView\" />

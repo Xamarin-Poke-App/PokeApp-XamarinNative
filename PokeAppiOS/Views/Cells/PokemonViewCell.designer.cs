@@ -13,13 +13,37 @@ namespace PokeAppiOS.Views.Cells
 	partial class PokemonViewCell
 	{
 		[Outlet]
+		UIKit.UIImageView PokemonBackgroundImageView { get; set; }
+
+		[Outlet]
+		UIKit.UIImageView PokemonImageView { get; set; }
+
+		[Outlet]
 		UIKit.UILabel PokemonNameLabel { get; set; }
+
+		[Outlet]
+		UIKit.UILabel PokemonNumberLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (PokemonNameLabel != null) {
 				PokemonNameLabel.Dispose ();
 				PokemonNameLabel = null;
+			}
+
+			if (PokemonNumberLabel != null) {
+				PokemonNumberLabel.Dispose ();
+				PokemonNumberLabel = null;
+			}
+
+			if (PokemonImageView != null) {
+				PokemonImageView.Dispose ();
+				PokemonImageView = null;
+			}
+
+			if (PokemonBackgroundImageView != null) {
+				PokemonBackgroundImageView.Dispose ();
+				PokemonBackgroundImageView = null;
 			}
 		}
 	}
