@@ -9,10 +9,10 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace PokeAppiOS.View
+namespace PokeAppiOS.Controllers
 {
-	[Register ("LoginViewController")]
-	partial class LoginViewController
+	[Register ("PokemonDetailViewController")]
+	partial class PokemonDetailViewController
 	{
 		void ReleaseDesignerOutlets ()
 		{

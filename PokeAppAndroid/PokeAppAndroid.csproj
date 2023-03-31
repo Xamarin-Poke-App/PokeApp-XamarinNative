@@ -66,6 +66,10 @@
     <Compile Include="View\SecondActivity.cs" />
     <Compile Include="AndroidApplication.cs" />
     <Compile Include="Utils\PathManager.cs" />
+    <Compile Include="View\PokemonHomeActivity.cs" />
+    <Compile Include="Adapters\PokemonAdapter.cs" />
+    <Compile Include="View\PokemonListFragment.cs" />
+    <Compile Include="View\PokemonDetailFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -101,11 +105,28 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_pokemon_home.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\pokemon_card.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_pokemon_list.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_pokemon_detail.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
     <Folder Include="View\" />
     <Folder Include="Utils\" />
+    <Folder Include="Adapters\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />

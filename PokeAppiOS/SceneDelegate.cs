@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 using PokeAppiOS;
-using PokeAppiOS.View;
+using PokeAppiOS.Controllers;
 using UIKit;
 
 namespace PokeAppiOS {
@@ -77,18 +77,14 @@ namespace PokeAppiOS {
 
 		public void SegueToHome()
 		{
-			// For demo purposes initializes 'SecondViewController' as UIViewControler
-			// but could be replaced by storyboard
-			//UIViewController viewController = new SecondViewController();
-			UIViewController viewController = new PokeDetailViewController();
-            UINavigationController navigationMain = new UINavigationController(viewController);
-            Window.RootViewController = navigationMain;
-            Window.MakeKeyAndVisible();
+            var mainStoryboard = UIStoryboard.FromName("Home", null).InstantiateInitialViewController() as UIViewController;
+            Window.RootViewController = mainStoryboard;
+			Window.MakeKeyAndVisible();
         }
 
 		private void SegueToLogin()
 		{
-			var mainStoryboard = UIStoryboard.FromName("Main", null).InstantiateInitialViewController() as UIViewController;
+            var mainStoryboard = UIStoryboard.FromName("Login", null).InstantiateInitialViewController() as UIViewController;
             Window.RootViewController = mainStoryboard;
             Window.MakeKeyAndVisible();
         }

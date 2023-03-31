@@ -1,19 +1,23 @@
 ﻿using System;
-
+using SharedCode.Model;
 using UIKit;
 
-namespace PokeAppiOS.View
+namespace PokeAppiOS.Controllers
 {
-	public partial class LoginViewController : UIViewController
+	public partial class PokemonDetailViewController : UIViewController
 	{
-		public LoginViewController () : base ("LoginViewController", null)
-		{
+		public ResultPokemons Pokemon;
+
+		public PokemonDetailViewController(IntPtr handle) : base(handle)
+        {
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
+
+			Title = Pokemon.name;
 		}
 
 		public override void DidReceiveMemoryWarning ()
