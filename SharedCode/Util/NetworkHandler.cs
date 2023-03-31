@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using SharedCode.Controller;
 
 namespace SharedCode.Util
 {
@@ -36,14 +37,14 @@ namespace SharedCode.Util
     public interface INetworkHandler
     {
         Task<T> GetData<T>(string endpoint);
+        Task<byte[]> LoadImage(string imageUrl);
     }
 
     public class NetworkHandler : INetworkHandler
 	{
-        public static string BaseAddress = "https://pokeapi.co/api/v2/";
         private static HttpClient httpClient = new HttpClient();
 
-		public async Task<T> GetData<T>(string endpoint)
+        public async Task<T> GetData<T>(string endpoint)
 		{
             var response = new HttpResponseMessage();
             try
@@ -58,7 +59,7 @@ namespace SharedCode.Util
             }
         }
 
-        public static async Task<byte[]> LoadImage(string imageUrl)
+        public async Task<byte[]> LoadImage(string imageUrl)
         {
             try
             {
@@ -72,7 +73,7 @@ namespace SharedCode.Util
             
         }
 
-        private static void CheckNetworkException(HttpResponseMessage response)
+        private void CheckNetworkException(HttpResponseMessage response)
         {
             switch (response.StatusCode)
             {

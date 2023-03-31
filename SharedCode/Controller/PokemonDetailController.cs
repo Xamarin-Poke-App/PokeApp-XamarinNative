@@ -2,50 +2,43 @@
 using SharedCode.Model;
 using SharedCode.Util;
 using System.Net;
+using SharedCode.Repository;
+using Unity;
 
 namespace SharedCode.Controller
 {
+    public interface IPokemonDetailController
+    {
+        IPokemonDetailControllerListener listener { get; set; }
+        void GetPokemonInfo(int pokeId);
+        void LoadPokemonImage(int pokeId);
+    }
+
     public interface IPokemonDetailControllerListener
     {
         void updatePokemonImage(Result<byte[]> image);
         void updatePokemonInfo(Result<PokemonSpecie> pokemon);
     }
 
-	public class PokemonDetailController
+	public class PokemonDetailController : IPokemonDetailController
 	{
         public IPokemonDetailControllerListener viewListener;
 
-		public PokemonDetailController(IPokemonDetailControllerListener listener)
-		{
-            this.viewListener = listener;
-		}
+        [Dependency]
+        public IPokemonRepository Repository;
+
+        public IPokemonDetailControllerListener listener { get => viewListener; set => viewListener = value; }
 
         public async void GetPokemonInfo(int pokeId)
         {
-            try
-            {
-                var pokemon = await NetworkHandler.GetData<PokemonSpecie>(NetworkHandler.BaseAddress + "pokemon-species/" + pokeId);
-                viewListener.updatePokemonInfo(Result.Ok(pokemon));
-                var data = await NetworkHandler.LoadImage("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemon.id + ".png");
-                viewListener.updatePokemonImage(Result.Ok<byte[]>(data));
-            }
-            catch (NetworkErrorException ex)
-            {
-                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
-                switch (ex.Code)
-                {
-                    case (int)HttpStatusCode.NotFound:
-                        viewListener.updatePokemonInfo(Result.Fail<PokemonSpecie>("Can't retrieve pokemon info at this moment"));
-                        break;
-                    default:
-                        viewListener.updatePokemonInfo(Result.Fail<PokemonSpecie>(ex.Message ?? "Something went wrong"));
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                viewListener.updatePokemonInfo(Result.Fail<PokemonSpecie>($"Check your internet connection {ex.ToString()}"));
-            }
+            var data = await Repository.GetPokemonInfo(pokeId);
+            viewListener.updatePokemonInfo(data);
+        }
+
+        public async void LoadPokemonImage(int pokeId)
+        {
+            var image = await Repository.GetPokemonImage(pokeId);
+            viewListener.updatePokemonImage(image);
         }
     }
 }

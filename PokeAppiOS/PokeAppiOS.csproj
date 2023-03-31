@@ -122,7 +122,6 @@
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
-        <InterfaceDefinition Include="View\PokeDetailViewController.xib" />
         <InterfaceDefinition Include="Views\Login.storyboard" />
         <InterfaceDefinition Include="Views\Home.storyboard" />
         <InterfaceDefinition Include="Views\Cells\PokemonViewCell.xib" />
@@ -154,10 +153,6 @@
           <DependentUpon>PokemonDetailViewController.cs</DependentUpon>
         </Compile>
         <Compile Include="Utils\PathManager.cs" />
-        <Compile Include="View\PokeDetailViewController.cs" />
-        <Compile Include="View\PokeDetailViewController.designer.cs">
-          <DependentUpon>PokeDetailViewController.cs</DependentUpon>
-        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
