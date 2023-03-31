@@ -14,12 +14,28 @@ namespace PokeAppiOS.Controllers
 	{
 		[Outlet]
 		UIKit.UICollectionView PokemonCollectionView { get; set; }
+
+		[Outlet]
+		UIKit.UIButton SearchButton { get; set; }
+
+		[Outlet]
+		UIKit.UITextField SearchTextField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (PokemonCollectionView != null) {
 				PokemonCollectionView.Dispose ();
 				PokemonCollectionView = null;
+			}
+
+			if (SearchTextField != null) {
+				SearchTextField.Dispose ();
+				SearchTextField = null;
+			}
+
+			if (SearchButton != null) {
+				SearchButton.Dispose ();
+				SearchButton = null;
 			}
 		}
 	}

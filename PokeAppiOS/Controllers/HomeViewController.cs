@@ -47,6 +47,10 @@ namespace PokeAppiOS.Controllers
             PokemonCollectionView.RegisterNibForCell(PokemonViewCell.Nib, PokemonViewCell.Key);
             PokemonCollectionView.DataSource = new HomeViewControllerDataSource(this);
             PokemonCollectionView.Delegate = new UICollectionViewFlowDelegate(this);
+
+            SearchButton.TouchUpInside += (sender, e) => {
+                SearchByPokemonName(SearchTextField.Text);
+            };
         }
 
 		public override void DidReceiveMemoryWarning ()
@@ -54,8 +58,6 @@ namespace PokeAppiOS.Controllers
 			base.DidReceiveMemoryWarning ();
 			// Release any cached data, images, etc that aren't in use.
 		}
-
-
 
         public void updateView(Result<List<ResultPokemons>> data)
         {
@@ -66,7 +68,10 @@ namespace PokeAppiOS.Controllers
             }
         }
 
-        
+        private void SearchByPokemonName(string pokemonName)
+        {
+            controller.FilterPokemonListByName(pokemonName);
+        }
 
         class HomeViewControllerDataSource : UICollectionViewDataSource
         {
