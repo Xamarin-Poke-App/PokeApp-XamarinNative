@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using SharedCode.Model;
 using SharedCode.Repository;
-using SharedCode.Services;
 using SharedCode.Util;
 using Unity;
 

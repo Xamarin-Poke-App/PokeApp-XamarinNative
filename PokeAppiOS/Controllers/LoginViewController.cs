@@ -1,24 +1,21 @@
-﻿using CoreGraphics;
-using Foundation;
-using SharedCode.Services;
+﻿using System;
 using SharedCode.Model;
-using System;
-using UIKit;
+using SharedCode.Services;
 using SharedCode.Util;
-
-namespace PokeAppiOS
+using UIKit;
+namespace PokeAppiOS.Controllers
 {
-    public partial class ViewController : UIViewController
+    public partial class LoginViewController : UIViewController
     {
         static LoginService loginService = IocContainer.GetDependency<LoginService>();
 
-        public ViewController (IntPtr handle) : base (handle)
+        public LoginViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public override void ViewDidLoad ()
+        public override void ViewDidLoad()
         {
-            base.ViewDidLoad ();
+            base.ViewDidLoad();
             Title = "Login View";
 
             LoginButton.TouchUpInside += LoginButton_TouchUpInside;
@@ -46,9 +43,9 @@ namespace PokeAppiOS
             }
         }
 
-        public override void DidReceiveMemoryWarning ()
+        public override void DidReceiveMemoryWarning()
         {
-            base.DidReceiveMemoryWarning ();
+            base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
         }
     }
