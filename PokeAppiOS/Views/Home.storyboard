@@ -67,11 +67,31 @@
                     <navigationItem key="navigationItem" id="UR9-Wp-Lj9"/>
                     <connections>
                         <outlet property="PokemonCollectionView" destination="VZa-QB-daY" id="g0t-ep-gK8"/>
+                        <segue destination="bZo-97-d2O" kind="show" identifier="ToDetailSegue" id="CEj-vY-cJE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovy-Ce-9Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="142.74809160305344" y="-7.042253521126761"/>
+        </scene>
+        <!--Pokemon Detail-->
+        <scene sceneID="lvr-D2-VfQ">
+            <objects>
+                <viewController id="bZo-97-d2O" customClass="PokemonDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jTb-fa-Vl4"/>
+                        <viewControllerLayoutGuide type="bottom" id="ogN-wK-xGX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Al5-pi-3pZ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pokemon Detail" id="To5-id-NtX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xfM-tn-nit" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1019" y="-7"/>
         </scene>
     </scenes>
     <resources>

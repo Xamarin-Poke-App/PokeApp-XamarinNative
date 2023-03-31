@@ -148,6 +148,10 @@
         <Compile Include="Views\Cells\PokemonViewCell.designer.cs">
           <DependentUpon>PokemonViewCell.cs</DependentUpon>
         </Compile>
+        <Compile Include="Controllers\PokemonDetailViewController.cs" />
+        <Compile Include="Controllers\PokemonDetailViewController.designer.cs">
+          <DependentUpon>PokemonDetailViewController.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">

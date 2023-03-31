@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CoreAudioKit;
 using CoreGraphics;
 using Foundation;
 using PokeAppiOS.Views.Cells;
@@ -12,6 +13,8 @@ namespace PokeAppiOS.Controllers
 {
     public partial class HomeViewController : UIViewController, IPokemonController
     {
+
+        public static string SegueIdentifier = "ToDetailSegue";
         private PokemonController controller;
         private List<ResultPokemons> Pokemons = new List<ResultPokemons>();
         
@@ -20,15 +23,26 @@ namespace PokeAppiOS.Controllers
         {  
 		}
 
-		public override void ViewDidLoad ()
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            if (segue.Identifier == SegueIdentifier)
+            {
+                var indexPath = (NSIndexPath)sender;
+                PokemonDetailViewController controller = (PokemonDetailViewController)segue.DestinationViewController;
+
+                controller.Pokemon = Pokemons[indexPath.Row];
+
+            }
+        }
+
+        public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
             controller = new PokemonController(this);
             controller.GetAllPokemonsSpecies();
             PokemonCollectionView.RegisterNibForCell(PokemonViewCell.Nib, PokemonViewCell.Key);
             PokemonCollectionView.DataSource = new HomeViewControllerDataSource(this);
-            PokemonCollectionView.Delegate = new FlowDelegate();
-            //PokemonCollectionView.SetC
+            PokemonCollectionView.Delegate = new UICollectionViewFlowDelegate(this);
         }
 
 		public override void DidReceiveMemoryWarning ()
@@ -37,6 +51,9 @@ namespace PokeAppiOS.Controllers
 			// Release any cached data, images, etc that aren't in use.
 		}
 
+
+        
+        
         public void updateView(Result<PokemonSpeciesResponse> data)
         {
             if (data.Success)
@@ -45,6 +62,8 @@ namespace PokeAppiOS.Controllers
                 PokemonCollectionView.ReloadData();
             }
         }
+
+        
 
         class HomeViewControllerDataSource : UICollectionViewDataSource
         {
@@ -71,8 +90,14 @@ namespace PokeAppiOS.Controllers
         }
 
         
-        class FlowDelegate : UICollectionViewDelegateFlowLayout
+        class UICollectionViewFlowDelegate : UICollectionViewDelegateFlowLayout
         {
+            HomeViewController viewController;
+
+            public UICollectionViewFlowDelegate(HomeViewController viewController)
+            {
+                this.viewController = viewController;
+            }
             [Export("collectionView:layout:sizeForItemAtIndexPath:")]
             public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
             {
@@ -85,7 +110,9 @@ namespace PokeAppiOS.Controllers
             [Export("collectionView:didSelectItemAtIndexPath:")]
             public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
             {
-                Console.WriteLine($"{indexPath.Row} selected");
+                var pokemon = viewController.Pokemons[indexPath.Row];
+
+                viewController.PerformSegue(HomeViewController.SegueIdentifier, indexPath);
 
             }
         }
