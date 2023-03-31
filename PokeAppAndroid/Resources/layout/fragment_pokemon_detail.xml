@@ -16,5 +16,24 @@
         android:textSize="20sp"
         android:textColor="@android:color/black"
         android:text="@string/pokemon_detail_title"/>
+    
+	<ImageView
+		android:id="@+id/pikachuImageView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:src="@drawable/pikachu"
+		android:contentDescription="@string/pikachuTitle"
+        android:gravity="center_horizontal"
+        android:layout_margin="15dp"/>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Pikachu"
+        android:textSize="24sp"
+        android:gravity="center_horizontal" />
 
 </LinearLayout>
