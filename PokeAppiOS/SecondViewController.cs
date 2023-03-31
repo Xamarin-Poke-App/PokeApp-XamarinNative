@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using SharedCode.Controller;
+using SharedCode.Model;
+using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
 
 namespace PokeAppiOS
 {
-	public partial class SecondViewController : UIViewController, IPokemonController
+	public partial class SecondViewController : UIViewController, IPokemonControllerListener
 	{
-        private PokemonController controller;
+        private IPokemonController controller;
         public SecondViewController () : base ("SecondViewController", null)
 		{
 		}
@@ -19,7 +22,8 @@ namespace PokeAppiOS
 
 			Title = "Second View";
             LogoutButton.TouchUpInside += LogoutButton_TouchUpInside;
-			controller = new PokemonController(this);
+			controller = IocContainer.GetDependency<IPokemonController>();
+            controller.listener = this;
             controller.GetAllPokemonsSpecies();
 		}
 
@@ -34,11 +38,11 @@ namespace PokeAppiOS
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-        public void updateView(Result<int> data)
+        public void updateView(Result<List<ResultPokemons>> data)
         {
             if (data.Success)
             {
-                LabelTest.Text = data.Value.ToString();
+                LabelTest.Text = data.Value.Count.ToString();
             }
             else
             {
