@@ -153,6 +153,7 @@
         <Compile Include="Controllers\PokemonDetailViewController.designer.cs">
           <DependentUpon>PokemonDetailViewController.cs</DependentUpon>
         </Compile>
+        <Compile Include="Utils\PathManager.cs" />
         <Compile Include="Utils\BottomLine.cs" />
         <Compile Include="Utils\UIViewExtension.cs" />
     </ItemGroup>

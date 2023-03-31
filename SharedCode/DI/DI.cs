@@ -21,6 +21,7 @@ namespace SharedCode.DI
 			// Pokemon List
 			container.RegisterType<IPokemonRepository, PokemonRepository>();
 			container.RegisterType<IPokemonController, PokemonController>();
+			container.RegisterType<IPokemonDetailController, PokemonDetailController>();
 		}
 	}
 }
