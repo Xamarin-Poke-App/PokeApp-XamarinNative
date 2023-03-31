@@ -64,7 +64,7 @@ namespace PokeAppiOS {
 
 		private void LoadInitialViewController()
 		{
-            bool isLoggedIn = true;
+            bool isLoggedIn = false;
             if (isLoggedIn)
             {
 				SegueToHome();   

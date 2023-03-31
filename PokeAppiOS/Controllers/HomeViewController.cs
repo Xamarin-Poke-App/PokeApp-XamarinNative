@@ -6,16 +6,17 @@ using Foundation;
 using PokeAppiOS.Views.Cells;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
 
 namespace PokeAppiOS.Controllers
 {
-    public partial class HomeViewController : UIViewController, IPokemonController
+    public partial class HomeViewController : UIViewController, IPokemonControllerListener
     {
 
         public static string SegueIdentifier = "ToDetailSegue";
-        private PokemonController controller;
+        private IPokemonController controller;
         private List<ResultPokemons> Pokemons = new List<ResultPokemons>();
         
 	
@@ -38,8 +39,11 @@ namespace PokeAppiOS.Controllers
         public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-            controller = new PokemonController(this);
+            controller = IocContainer.GetDependency<IPokemonController>();
+            controller.listener = this;
             controller.GetAllPokemonsSpecies();
+
+
             PokemonCollectionView.RegisterNibForCell(PokemonViewCell.Nib, PokemonViewCell.Key);
             PokemonCollectionView.DataSource = new HomeViewControllerDataSource(this);
             PokemonCollectionView.Delegate = new UICollectionViewFlowDelegate(this);
@@ -52,13 +56,12 @@ namespace PokeAppiOS.Controllers
 		}
 
 
-        
-        
-        public void updateView(Result<PokemonSpeciesResponse> data)
+
+        public void updateView(Result<List<ResultPokemons>> data)
         {
             if (data.Success)
             {
-                Pokemons = data.Value.results;
+                Pokemons = data.Value;
                 PokemonCollectionView.ReloadData();
             }
         }
