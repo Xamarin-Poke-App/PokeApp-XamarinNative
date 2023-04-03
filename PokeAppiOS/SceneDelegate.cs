@@ -2,7 +2,10 @@
 using Foundation;
 using PokeAppiOS;
 using PokeAppiOS.Controllers;
+using SharedCode.Services;
+using SharedCode.Util;
 using UIKit;
+using PokeAppiOS.Utils;
 
 namespace PokeAppiOS {
 	[Register ("SceneDelegate")]
@@ -64,7 +67,9 @@ namespace PokeAppiOS {
 
 		private void LoadInitialViewController()
 		{
-            bool isLoggedIn = false;
+            StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
+
+            bool isLoggedIn = storageUtils.GetIsLoggedIn();
             if (isLoggedIn)
             {
 				SegueToHome();   
