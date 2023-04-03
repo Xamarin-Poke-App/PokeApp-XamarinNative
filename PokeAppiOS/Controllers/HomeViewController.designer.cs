@@ -16,10 +16,7 @@ namespace PokeAppiOS.Controllers
 		UIKit.UICollectionView PokemonCollectionView { get; set; }
 
 		[Outlet]
-		UIKit.UIButton SearchButton { get; set; }
-
-		[Outlet]
-		UIKit.UITextField SearchTextField { get; set; }
+		UIKit.UISearchBar pokemonSearchBar { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -28,14 +25,9 @@ namespace PokeAppiOS.Controllers
 				PokemonCollectionView = null;
 			}
 
-			if (SearchTextField != null) {
-				SearchTextField.Dispose ();
-				SearchTextField = null;
-			}
-
-			if (SearchButton != null) {
-				SearchButton.Dispose ();
-				SearchButton = null;
+			if (pokemonSearchBar != null) {
+				pokemonSearchBar.Dispose ();
+				pokemonSearchBar = null;
 			}
 		}
 	}

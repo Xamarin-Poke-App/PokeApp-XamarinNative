@@ -43,14 +43,10 @@ namespace PokeAppiOS.Controllers
             controller.listener = this;
             controller.GetAllPokemonsSpecies();
 
-
             PokemonCollectionView.RegisterNibForCell(PokemonViewCell.Nib, PokemonViewCell.Key);
             PokemonCollectionView.DataSource = new HomeViewControllerDataSource(this);
             PokemonCollectionView.Delegate = new UICollectionViewFlowDelegate(this);
-
-            SearchButton.TouchUpInside += (sender, e) => {
-                SearchByPokemonName(SearchTextField.Text);
-            };
+            pokemonSearchBar.Delegate = new HomeViewControllerSearchBarDelegate(this);
         }
 
 		public override void DidReceiveMemoryWarning ()
@@ -125,9 +121,21 @@ namespace PokeAppiOS.Controllers
             }
         }
 
-    }
+        class HomeViewControllerSearchBarDelegate : UISearchBarDelegate
+        {
+            HomeViewController viewController;
 
-    
+            public HomeViewControllerSearchBarDelegate(HomeViewController viewController)
+            {
+                this.viewController = viewController;
+            }
+
+            public override void TextChanged(UISearchBar searchBar, string searchText)
+            {
+                viewController.SearchByPokemonName(searchText);
+            }
+        }
+    }
 }
 
 

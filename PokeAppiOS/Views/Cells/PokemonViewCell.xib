@@ -58,7 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="GrassColor"/>
+                        <color key="backgroundColor" name="grass"/>
                         <constraints>
                             <constraint firstItem="Jan-9Z-NBZ" firstAttribute="top" secondItem="b61-2d-y79" secondAttribute="top" constant="20" id="6eD-Sq-j7c"/>
                             <constraint firstItem="lPb-7k-KXF" firstAttribute="top" secondItem="b61-2d-y79" secondAttribute="top" constant="5" id="LEz-0d-qyl"/>
@@ -94,6 +94,9 @@
         <image name="pokeball" width="48" height="48"/>
         <namedColor name="GrassColor">
             <color red="0.45490196078431372" green="0.79607843137254897" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="grass">
+            <color red="0.45500001311302185" green="0.79600000381469727" blue="0.28200000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
