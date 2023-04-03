@@ -42,7 +42,7 @@ namespace PokeAppAndroid.Adapters
             public PokemonViewHolder(Android.Views.View card, Action<int> listener) : base(card)
             {
                 TvPokemonName = card.FindViewById<TextView>(Resource.Id.tv_pokemonName);
-                card.Click += (sender, e) => listener(base.Position);
+                card.Click += (sender, e) => listener(base.AbsoluteAdapterPosition);
             }
         }
 

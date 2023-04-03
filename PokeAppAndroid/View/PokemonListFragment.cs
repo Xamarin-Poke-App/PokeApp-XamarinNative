@@ -18,6 +18,7 @@ using SharedCode.Util;
 using Xamarin.Essentials;
 using AndroidX.AppCompat.App;
 using SharedCode.Services;
+using Google.Android.Material.TextField;
 
 namespace PokeAppAndroid.View
 {
@@ -42,6 +43,12 @@ namespace PokeAppAndroid.View
             Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_pokemon_list, container, false);
             recyclerView = view.FindViewById<RecyclerView>(Resource.Id.rv_pokemonList);
             mLayoutManager = new GridLayoutManager(view.Context, 2);
+
+            TextInputEditText searchInput = view.FindViewById<TextInputEditText>(Resource.Id.edt_searchPokemon);
+            searchInput.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) => {
+                string query = e.Text.ToString();
+                controller.FilterPokemonListByName(query);
+            };
 
             return view;
         }
@@ -73,7 +80,12 @@ namespace PokeAppAndroid.View
 
         private void GoToDetailItemClick(object sender, int e)
         {
+            ResultPokemons selectedPokemon = pokemonList[e];
             PokemonDetailFragment pokemonDetailFragment = new PokemonDetailFragment();
+            Bundle args = new Bundle();
+            args.PutInt("pokemonId", selectedPokemon.GetIdFromUrl());
+            pokemonDetailFragment.Arguments = args;
+
             var appCompatActivity = Platform.CurrentActivity as AppCompatActivity;
             var fragmentTransaction = appCompatActivity?.SupportFragmentManager.BeginTransaction();
             fragmentTransaction.Hide(this);
