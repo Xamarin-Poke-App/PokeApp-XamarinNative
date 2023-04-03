@@ -33,18 +33,8 @@ namespace PokeAppiOS.Views.Cells
                 controller = IocContainer.GetDependency<IPokemonDetailController>();
                 controller.listener = this;
                 controller.LoadPokemonImage(value.GetIdFromUrl());
+                controller.GetPokemonInfo(value.GetIdFromUrl());
             }
-        }
-
-        public void CellNewImageSize(double height, double width)
-        {
-            // change the size of the pokemon image and background image depends of the screen size
-            var newHeight = height * 0.7;
-            var newWidth = width * 0.6;
-            PokemonBackgroundImageView.Frame = new CGRect(PokemonBackgroundImageView.Frame.X, PokemonBackgroundImageView.Frame.Y, newWidth, newHeight);
-            PokemonImageView.Frame = new CGRect(PokemonImageView.Frame.X, PokemonImageView.Frame.Y, newWidth, newHeight);
-            PokemonBackgroundImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-            PokemonImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
         }
 
         public void updatePokemonImage(Result<byte[]> image)
@@ -55,9 +45,29 @@ namespace PokeAppiOS.Views.Cells
             }
         }
 
-        public void updatePokemonInfo(Result<PokemonSpecie> pokemon)
+        public void updatePokemonInfo(Result<PokemonInfo> pokemon)
         {
-           
+            if (pokemon.Success)
+            {
+                //Will only use the first type for background color
+                PokemonViewBackground.BackgroundColor = UIColor.FromName(pokemon.Value.types[0].type.name).ColorWithAlpha(0.8f);
+
+                // This is temporary until be repleaced for another component
+                if (pokemon.Value.types.Count == 1)
+                {
+                    PokemonFirstTypeImageView.Image = UIImage.FromBundle(pokemon.Value.types[0].type.name + "Type");
+                }
+                else if (pokemon.Value.types.Count > 1)
+                {
+                    PokemonFirstTypeImageView.Image = UIImage.FromBundle(pokemon.Value.types[0].type.name + "Type");
+                    PokemonSecondTypeImageView.Image = UIImage.FromBundle(pokemon.Value.types[1].type.name + "Type");
+                }
+            }
+        }
+
+        public void updatePokemonSpecieInfo(Result<PokemonSpecie> pokemon)
+        {
+            // Nothing to implement
         }
     }
 }

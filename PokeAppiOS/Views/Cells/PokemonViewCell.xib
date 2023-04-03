@@ -43,7 +43,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" name="GrassColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ktJ-Xm-yy4" secondAttribute="trailing" id="CBv-j0-nA3"/>
                                     <constraint firstAttribute="bottom" secondItem="lLV-Wd-5W5" secondAttribute="bottom" id="Ldw-8M-NOZ"/>
@@ -57,17 +57,28 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-sK-cxQ">
+                                <rect key="frame" x="10" y="91" width="57" height="31"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="luD-9C-f5Q">
+                                <rect key="frame" x="10" y="58" width="57" height="29"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" name="grass"/>
                         <constraints>
                             <constraint firstItem="Jan-9Z-NBZ" firstAttribute="top" secondItem="b61-2d-y79" secondAttribute="top" constant="20" id="6eD-Sq-j7c"/>
+                            <constraint firstItem="luD-9C-f5Q" firstAttribute="leading" secondItem="b61-2d-y79" secondAttribute="leading" constant="10" id="Hea-Sh-EZ2"/>
                             <constraint firstItem="lPb-7k-KXF" firstAttribute="top" secondItem="b61-2d-y79" secondAttribute="top" constant="5" id="LEz-0d-qyl"/>
                             <constraint firstAttribute="trailing" secondItem="lPb-7k-KXF" secondAttribute="trailing" constant="10" id="LXY-Yf-JcC"/>
                             <constraint firstItem="eDv-L0-kJy" firstAttribute="leading" secondItem="b61-2d-y79" secondAttribute="leading" constant="100" id="Q3z-yP-orB"/>
+                            <constraint firstAttribute="bottom" secondItem="Ntb-sK-cxQ" secondAttribute="bottom" constant="20" id="RDO-S9-6dO"/>
                             <constraint firstAttribute="trailing" secondItem="eDv-L0-kJy" secondAttribute="trailing" id="TnY-Ji-vYS"/>
                             <constraint firstAttribute="bottom" secondItem="eDv-L0-kJy" secondAttribute="bottom" id="cqZ-GF-0cV"/>
                             <constraint firstItem="Jan-9Z-NBZ" firstAttribute="leading" secondItem="b61-2d-y79" secondAttribute="leading" constant="10" id="fzR-Yv-UFz"/>
                             <constraint firstItem="eDv-L0-kJy" firstAttribute="top" secondItem="b61-2d-y79" secondAttribute="top" constant="50" id="kzf-Bi-lf6"/>
+                            <constraint firstItem="luD-9C-f5Q" firstAttribute="top" secondItem="Jan-9Z-NBZ" secondAttribute="bottom" constant="10" id="p8R-qm-vhO"/>
+                            <constraint firstItem="Ntb-sK-cxQ" firstAttribute="leading" secondItem="b61-2d-y79" secondAttribute="leading" constant="10" id="wbb-15-vPJ"/>
+                            <constraint firstItem="Ntb-sK-cxQ" firstAttribute="top" secondItem="luD-9C-f5Q" secondAttribute="bottom" constant="5" id="xnz-Cn-siE"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -82,9 +93,12 @@
             <size key="customSize" width="163" height="128"/>
             <connections>
                 <outlet property="PokemonBackgroundImageView" destination="ktJ-Xm-yy4" id="CFh-GP-bgp"/>
+                <outlet property="PokemonFirstTypeImageView" destination="luD-9C-f5Q" id="Aii-7P-jgq"/>
                 <outlet property="PokemonImageView" destination="ktJ-Xm-yy4" id="Ssc-oC-gNN"/>
                 <outlet property="PokemonNameLabel" destination="Jan-9Z-NBZ" id="2Qe-jG-Mxs"/>
                 <outlet property="PokemonNumberLabel" destination="lPb-7k-KXF" id="jMC-tB-jKj"/>
+                <outlet property="PokemonSecondTypeImageView" destination="Ntb-sK-cxQ" id="LFF-KC-CCq"/>
+                <outlet property="PokemonViewBackground" destination="b61-2d-y79" id="FxM-GT-eum"/>
             </connections>
             <point key="canvasLocation" x="30.534351145038165" y="-26.056338028169016"/>
         </collectionViewCell>
@@ -92,11 +106,8 @@
     <resources>
         <image name="Bulbasaur" width="200" height="200"/>
         <image name="pokeball" width="48" height="48"/>
-        <namedColor name="GrassColor">
-            <color red="0.45490196078431372" green="0.79607843137254897" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="grass">
-            <color red="0.45500001311302185" green="0.79600000381469727" blue="0.28200000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.45490196078431372" green="0.79607843137254897" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

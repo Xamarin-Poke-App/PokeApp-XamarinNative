@@ -22,7 +22,7 @@ namespace PokeAppiOS.Controllers
 			base.ViewDidLoad ();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-            controller.GetPokemonInfo(PokemonID);
+            controller.GetPokemonSpecieInfo(PokemonID);
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -39,7 +39,7 @@ namespace PokeAppiOS.Controllers
 			}
         }
 
-        public void updatePokemonInfo(Result<PokemonSpecie> pokemon)
+        public void updatePokemonSpecieInfo(Result<PokemonSpecie> pokemon)
         {
             if (pokemon.Success)
 			{
@@ -48,6 +48,11 @@ namespace PokeAppiOS.Controllers
                 Title = PokemonInfo.name;
                 controller.LoadPokemonImage(PokemonInfo.id);
 			}
+        }
+
+        public void updatePokemonInfo(Result<PokemonInfo> pokemon)
+        {
+            // Nothing to implement
         }
     }
 }

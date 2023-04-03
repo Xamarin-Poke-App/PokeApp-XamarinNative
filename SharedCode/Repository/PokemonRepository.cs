@@ -10,7 +10,8 @@ namespace SharedCode.Repository
 	public interface IPokemonRepository
 	{
         Task<Result<List<ResultPokemons>>> GetPokemonList();
-        Task<Result<PokemonSpecie>> GetPokemonInfo(int pokeId);
+        Task<Result<PokemonSpecie>> GetPokemonSpecieInfo(int pokeId);
+        Task<Result<PokemonInfo>> GetPokemonInfo(int pokeId);
         Task<Result<byte[]>> GetPokemonImage(int pokeId);
     }
 
@@ -49,7 +50,7 @@ namespace SharedCode.Repository
             }
         }
 
-        public async Task<Result<PokemonSpecie>> GetPokemonInfo(int pokeId)
+        public async Task<Result<PokemonSpecie>> GetPokemonSpecieInfo(int pokeId)
         {
             try
             {
@@ -70,6 +71,30 @@ namespace SharedCode.Repository
             catch (Exception ex)
             {
                 return Result.Fail<PokemonSpecie>($"Check your internet connection {ex.ToString()}");
+            }
+        }
+
+        public async Task<Result<PokemonInfo>> GetPokemonInfo(int pokeId)
+        {
+            try
+            {
+                var pokemon = await NetworkHandler.GetData<PokemonInfo>(Constants.PokemonAPIBaseAddress + "pokemon/" + pokeId);
+                return Result.Ok(pokemon);
+            }
+            catch (NetworkErrorException ex)
+            {
+                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
+                switch (ex.Code)
+                {
+                    case (int)HttpStatusCode.NotFound:
+                        return Result.Fail<PokemonInfo>("Can't retrieve pokemon info at this moment");
+                    default:
+                        return Result.Fail<PokemonInfo>(ex.Message ?? "Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<PokemonInfo>($"Check your internet connection {ex.ToString()}");
             }
         }
 

@@ -137,6 +137,44 @@
         <ImageAsset Include="Assets.xcassets\TypeColors\water.colorset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\TypeColors\rock.colorset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\TypeColors\steel.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\waterType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\waterType.imageset\Type=Water.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\fireType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\fireType.imageset\Type=Fire.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\.DS_Store" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\bugType.imageset\Type=Bug.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\bugType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\fairyType.imageset\Type=Fairy.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\fairyType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\poisonType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\poisonType.imageset\Type=Poison.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\normalType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\normalType.imageset\Type=Normal.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\rockType.imageset\Type=Rock.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\rockType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\flyingType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\flyingType.imageset\Type=Flying.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\psychicType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\electricType.imageset\Type=Electric.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\electricType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\fightingType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\fightingType.imageset\Type=Fighting.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\grassType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\iceType.imageset\Type=Ice.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\iceType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\steelType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\steelType.imageset\Type=Steel.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\groundType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\groundType.imageset\Type=Ground.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\ghostType.imageset\Type=Ghost.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\ghostType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\darkType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\darkType.imageset\Type=Dark.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\dragonType.imageset\Type=Dragon.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\dragonType.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\psychicType.imageset\Type=Psychic.svg" />
+        <ImageAsset Include="Assets.xcassets\TypeImages\grassType.imageset\Type=Grass.svg" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="CommonView\" />
