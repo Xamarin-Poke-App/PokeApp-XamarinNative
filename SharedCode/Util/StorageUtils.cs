@@ -15,12 +15,12 @@ namespace SharedCode.Util
 
         public bool GetIsLoggedIn()
         {
-            return Storage.Read("isLoggedIn", false);
+            return Storage.Read(Constants.IsLoggedInKey, false);
         }
 
         public void SetIsLoggedIn(bool value)
         {
-            Storage.Store("isLoggedIn", value);
+            Storage.Store(Constants.IsLoggedInKey, value);
         }
     }
 }
