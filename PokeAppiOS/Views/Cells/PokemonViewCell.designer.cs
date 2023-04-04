@@ -13,61 +13,77 @@ namespace PokeAppiOS.Views.Cells
 	partial class PokemonViewCell
 	{
 		[Outlet]
-		UIKit.UIImageView PokemonBackgroundImageView { get; set; }
+		UIKit.UIImageView pokemonBackgroundImageView { get; set; }
 
 		[Outlet]
-		UIKit.UIImageView PokemonFirstTypeImageView { get; set; }
+		UIKit.UILabel pokemonFirstTypeLabel { get; set; }
 
 		[Outlet]
-		UIKit.UIImageView PokemonImageView { get; set; }
+		UIKit.UIView pokemonFirstTypeView { get; set; }
 
 		[Outlet]
-		UIKit.UILabel PokemonNameLabel { get; set; }
+		UIKit.UIImageView pokemonImageView { get; set; }
 
 		[Outlet]
-		UIKit.UILabel PokemonNumberLabel { get; set; }
+		UIKit.UILabel pokemonNameLabel { get; set; }
 
 		[Outlet]
-		UIKit.UIImageView PokemonSecondTypeImageView { get; set; }
+		UIKit.UILabel pokemonNumberLabel { get; set; }
 
 		[Outlet]
-		UIKit.UIView PokemonViewBackground { get; set; }
+		UIKit.UILabel pokemonSecondTypeLabel { get; set; }
+
+		[Outlet]
+		UIKit.UIView pokemonSecondTypeView { get; set; }
+
+		[Outlet]
+		UIKit.UIView pokemonViewBackground { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (PokemonViewBackground != null) {
-				PokemonViewBackground.Dispose ();
-				PokemonViewBackground = null;
+			if (pokemonBackgroundImageView != null) {
+				pokemonBackgroundImageView.Dispose ();
+				pokemonBackgroundImageView = null;
 			}
 
-			if (PokemonBackgroundImageView != null) {
-				PokemonBackgroundImageView.Dispose ();
-				PokemonBackgroundImageView = null;
+			if (pokemonImageView != null) {
+				pokemonImageView.Dispose ();
+				pokemonImageView = null;
 			}
 
-			if (PokemonImageView != null) {
-				PokemonImageView.Dispose ();
-				PokemonImageView = null;
+			if (pokemonNameLabel != null) {
+				pokemonNameLabel.Dispose ();
+				pokemonNameLabel = null;
 			}
 
-			if (PokemonNameLabel != null) {
-				PokemonNameLabel.Dispose ();
-				PokemonNameLabel = null;
+			if (pokemonNumberLabel != null) {
+				pokemonNumberLabel.Dispose ();
+				pokemonNumberLabel = null;
 			}
 
-			if (PokemonNumberLabel != null) {
-				PokemonNumberLabel.Dispose ();
-				PokemonNumberLabel = null;
+			if (pokemonViewBackground != null) {
+				pokemonViewBackground.Dispose ();
+				pokemonViewBackground = null;
 			}
 
-			if (PokemonFirstTypeImageView != null) {
-				PokemonFirstTypeImageView.Dispose ();
-				PokemonFirstTypeImageView = null;
+			if (pokemonFirstTypeView != null) {
+				pokemonFirstTypeView.Dispose ();
+				pokemonFirstTypeView = null;
 			}
 
-			if (PokemonSecondTypeImageView != null) {
-				PokemonSecondTypeImageView.Dispose ();
-				PokemonSecondTypeImageView = null;
+			if (pokemonSecondTypeView != null) {
+				pokemonSecondTypeView.Dispose ();
+				pokemonSecondTypeView = null;
+			}
+
+			if (pokemonFirstTypeLabel != null) {
+				pokemonFirstTypeLabel.Dispose ();
+				pokemonFirstTypeLabel = null;
+			}
+
+			if (pokemonSecondTypeLabel != null) {
+				pokemonSecondTypeLabel.Dispose ();
+				pokemonSecondTypeLabel = null;
 			}
 		}
 	}

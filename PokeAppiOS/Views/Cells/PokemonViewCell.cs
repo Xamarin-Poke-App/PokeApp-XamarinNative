@@ -8,6 +8,7 @@ using UIKit;
 using SharedCode.Controller;
 using SharedCode.Util;
 using SharedCode.Services;
+using System.Linq;
 
 namespace PokeAppiOS.Views.Cells
 {
@@ -28,8 +29,10 @@ namespace PokeAppiOS.Views.Cells
 		{
 			set
 			{
-                PokemonNameLabel.Text = value.FormatedName();
-                PokemonNumberLabel.Text = "#" + value.GetIdFromUrl().ToString();
+                pokemonNameLabel.Text = value.FormatedName();
+                pokemonNumberLabel.Text = "#" + value.GetIdFromUrl().ToString();
+                pokemonFirstTypeView.Layer.CornerRadius = 10;
+                pokemonSecondTypeView.Layer.CornerRadius = 10;
                 controller = IocContainer.GetDependency<IPokemonDetailController>();
                 controller.listener = this;
                 controller.LoadPokemonImage(value.GetIdFromUrl());
@@ -41,7 +44,7 @@ namespace PokeAppiOS.Views.Cells
         {
             if (image.Success)
             {
-                PokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
+                pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
             }
         }
 
@@ -49,18 +52,22 @@ namespace PokeAppiOS.Views.Cells
         {
             if (pokemon.Success)
             {
-                //Will only use the first type for background color
-                PokemonViewBackground.BackgroundColor = UIColor.FromName(pokemon.Value.types[0].type.name).ColorWithAlpha(0.8f);
-
-                // This is temporary until be repleaced for another component
+                // Pokemons will only have as max two types of pokemon
                 if (pokemon.Value.types.Count == 1)
                 {
-                    PokemonFirstTypeImageView.Image = UIImage.FromBundle(pokemon.Value.types[0].type.name + "Type");
+                    pokemonSecondTypeView.Hidden = true;
+                    pokemonViewBackground.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name).ColorWithAlpha(0.8f);
+                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name);
+                    pokemonFirstTypeLabel.Text = pokemon.Value.types.FirstOrDefault().type.name;
                 }
                 else if (pokemon.Value.types.Count > 1)
                 {
-                    PokemonFirstTypeImageView.Image = UIImage.FromBundle(pokemon.Value.types[0].type.name + "Type");
-                    PokemonSecondTypeImageView.Image = UIImage.FromBundle(pokemon.Value.types[1].type.name + "Type");
+                    pokemonSecondTypeView.Hidden = false;
+                    pokemonViewBackground.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name).ColorWithAlpha(0.8f);
+                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name);
+                    pokemonFirstTypeLabel.Text = pokemon.Value.types.FirstOrDefault().type.name;
+                    pokemonSecondTypeView.BackgroundColor = UIColor.FromName(pokemon.Value.types.Last().type.name);
+                    pokemonSecondTypeLabel.Text = pokemon.Value.types.Last().type.name;
                 }
             }
         }

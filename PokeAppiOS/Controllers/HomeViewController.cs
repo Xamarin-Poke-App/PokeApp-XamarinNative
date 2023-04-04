@@ -84,7 +84,6 @@ namespace PokeAppiOS.Controllers
                 cell.Layer.CornerRadius = 20;
                 var pokemon = viewController.Pokemons[indexPath.Row];
                 cell.Pokemon = pokemon;
-                cell.CellNewImageSize(collectionView.Frame.Height * 0.15, collectionView.Frame.Width * 0.48);
                 return cell;
             }
 
