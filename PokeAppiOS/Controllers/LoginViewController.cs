@@ -6,6 +6,7 @@ using SharedCode.Model;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
+using GlobalToast;
 
 namespace PokeAppiOS.Controllers
 {
@@ -173,8 +174,8 @@ namespace PokeAppiOS.Controllers
         private void LoginButton_TouchUpInside(object sender, EventArgs e)
         {
             loginService.UserLoggedIn += LoginService_UserLoggedIn;
-            string email = "test@test.com";
-            string password = "tester";
+            string email = usernameTextField.Text;
+            string password = passwordTextField.Text;
 
             User user = new User(email, password);
             loginService.PerformLogin(user);
@@ -188,7 +189,7 @@ namespace PokeAppiOS.Controllers
             }
             else
             {
-                Console.WriteLine(userLoggedInResult.Error);
+                Toast.MakeToast(userLoggedInResult.Error).Show();
             }
         }
 
