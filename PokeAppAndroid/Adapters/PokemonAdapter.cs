@@ -11,6 +11,7 @@ using SharedCode.Model;
 using SharedCode.Services;
 using SharedCode.Util;
 using Square.Picasso;
+using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.Adapters
 {
@@ -35,9 +36,20 @@ namespace PokeAppAndroid.Adapters
             PokemonViewHolder viewHolder = holder as PokemonViewHolder;
             var value = pokemomList[position];
             string pokemonID = value.ID;
-            int primariIdColor = getColorForType(value.Types[0]);
+            var coloredDrwawable = GetDrawableWithColor(viewHolder.Container.Context, value.Types[0], true);
 
-            viewHolder.Container.SetBackgroundColor(new Android.Graphics.Color(ContextCompat.GetColor(viewHolder.Container.Context, primariIdColor)));
+            viewHolder.Container.Background = coloredDrwawable;
+
+            viewHolder.FirstType.Text = value.Types[0].ToString();
+            var firstTypeDrawable = GetDrawableWithColor(viewHolder.FirstType.Context, value.Types[0]);
+            viewHolder.FirstType.Background = firstTypeDrawable;
+            if (value.Types.Count > 1)
+            {
+                viewHolder.SecondType.Visibility = ViewStates.Visible;
+                viewHolder.SecondType.Text = value.Types[1].ToString();
+                var secondTypeDrawable = GetDrawableWithColor(viewHolder.SecondType.Context, value.Types[1]);
+                viewHolder.SecondType.Background = secondTypeDrawable;
+            }
             viewHolder.TvPokemonName.Text = value.Name;
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
             Picasso.Get()
@@ -58,6 +70,9 @@ namespace PokeAppAndroid.Adapters
             public ImageView IvPokemonImage { get; set; }
             public TextView TvPokemonNumber { get; set; }
             public ConstraintLayout Container { get; set; }
+            public TextView FirstType { get; set; }
+            public TextView SecondType { get; set; }
+
 
             public PokemonViewHolder(Android.Views.View card, Action<int> listener) : base(card)
             {
@@ -65,6 +80,8 @@ namespace PokeAppAndroid.Adapters
                 IvPokemonImage = card.FindViewById<ImageView>(Resource.Id.PokemonImage);
                 TvPokemonNumber = card.FindViewById<TextView>(Resource.Id.TvPokemonNumber);
                 Container = card.FindViewById<ConstraintLayout>(Resource.Id.Container);
+                FirstType = card.FindViewById<TextView>(Resource.Id.FirstType);
+                SecondType = card.FindViewById<TextView>(Resource.Id.SecondType);
                 card.Click += (sender, e) => listener(base.AbsoluteAdapterPosition);
             }
         }
@@ -73,6 +90,17 @@ namespace PokeAppAndroid.Adapters
         {
             if (ItemClick != null)
                 ItemClick(this, obj);
+        }
+
+        private Android.Graphics.Drawables.Drawable GetDrawableWithColor(Context context, Enums.PokemonTypes type, bool useAlpha = false)
+        {
+            int primariIdColor = getColorForType(type);
+            var background = ContextCompat.GetDrawable(context, Resource.Drawable.rounded_background);
+            var color = new Android.Graphics.Color(ContextCompat.GetColor(context, primariIdColor));
+            if (useAlpha)
+                color.A = (byte)(0.80 * 255);
+            background.SetTint(color);
+            return background;
         }
 
         private int getColorForType(Enums.PokemonTypes type)
