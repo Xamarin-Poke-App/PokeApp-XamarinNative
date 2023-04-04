@@ -31,6 +31,9 @@ namespace PokeAppiOS.Views.Cells
 		UIKit.UILabel pokemonNumberLabel { get; set; }
 
 		[Outlet]
+		UIKit.UILabel pokemonRegionLabel { get; set; }
+
+		[Outlet]
 		UIKit.UILabel pokemonSecondTypeLabel { get; set; }
 
 		[Outlet]
@@ -46,6 +49,16 @@ namespace PokeAppiOS.Views.Cells
 				pokemonBackgroundImageView = null;
 			}
 
+			if (pokemonFirstTypeLabel != null) {
+				pokemonFirstTypeLabel.Dispose ();
+				pokemonFirstTypeLabel = null;
+			}
+
+			if (pokemonFirstTypeView != null) {
+				pokemonFirstTypeView.Dispose ();
+				pokemonFirstTypeView = null;
+			}
+
 			if (pokemonImageView != null) {
 				pokemonImageView.Dispose ();
 				pokemonImageView = null;
@@ -56,19 +69,19 @@ namespace PokeAppiOS.Views.Cells
 				pokemonNameLabel = null;
 			}
 
+			if (pokemonRegionLabel != null) {
+				pokemonRegionLabel.Dispose ();
+				pokemonRegionLabel = null;
+			}
+
 			if (pokemonNumberLabel != null) {
 				pokemonNumberLabel.Dispose ();
 				pokemonNumberLabel = null;
 			}
 
-			if (pokemonViewBackground != null) {
-				pokemonViewBackground.Dispose ();
-				pokemonViewBackground = null;
-			}
-
-			if (pokemonFirstTypeView != null) {
-				pokemonFirstTypeView.Dispose ();
-				pokemonFirstTypeView = null;
+			if (pokemonSecondTypeLabel != null) {
+				pokemonSecondTypeLabel.Dispose ();
+				pokemonSecondTypeLabel = null;
 			}
 
 			if (pokemonSecondTypeView != null) {
@@ -76,14 +89,9 @@ namespace PokeAppiOS.Views.Cells
 				pokemonSecondTypeView = null;
 			}
 
-			if (pokemonFirstTypeLabel != null) {
-				pokemonFirstTypeLabel.Dispose ();
-				pokemonFirstTypeLabel = null;
-			}
-
-			if (pokemonSecondTypeLabel != null) {
-				pokemonSecondTypeLabel.Dispose ();
-				pokemonSecondTypeLabel = null;
+			if (pokemonViewBackground != null) {
+				pokemonViewBackground.Dispose ();
+				pokemonViewBackground = null;
 			}
 		}
 	}
