@@ -12,6 +12,7 @@ namespace SharedCode.Controller
         IPokemonDetailControllerListener listener { get; set; }
         void GetPokemonInfo(int pokeId);
         void LoadPokemonImage(int pokeId);
+        void GetEvolutionChainByPokemonId(int id);
     }
 
     public interface IPokemonDetailControllerListener
@@ -39,6 +40,12 @@ namespace SharedCode.Controller
         {
             var image = await Repository.GetPokemonImage(pokeId);
             viewListener.updatePokemonImage(image);
+        }
+
+        public async void GetEvolutionChainByPokemonId(int id)
+        {
+            var data = await Repository.GetEvolutionChainByPokemonId(id);
+            var aux = data.Success;
         }
     }
 }
