@@ -36,18 +36,18 @@ namespace PokeAppAndroid.Adapters
             PokemonViewHolder viewHolder = holder as PokemonViewHolder;
             var value = pokemomList[position];
             string pokemonID = value.ID;
-            var coloredDrwawable = GetDrawableWithColor(viewHolder.Container.Context, value.Types[0], true);
+            var coloredDrwawable = GetDrawableWithColor(viewHolder.Container.Context, Resource.Drawable.rounded_background, value.Types[0], true);
 
             viewHolder.Container.Background = coloredDrwawable;
 
             viewHolder.FirstType.Text = value.Types[0].ToString();
-            var firstTypeDrawable = GetDrawableWithColor(viewHolder.FirstType.Context, value.Types[0]);
+            var firstTypeDrawable = GetDrawableWithColor(viewHolder.FirstType.Context, Resource.Drawable.rounded_background_type, value.Types[0]);
             viewHolder.FirstType.Background = firstTypeDrawable;
             if (value.Types.Count > 1)
             {
                 viewHolder.SecondType.Visibility = ViewStates.Visible;
                 viewHolder.SecondType.Text = value.Types[1].ToString();
-                var secondTypeDrawable = GetDrawableWithColor(viewHolder.SecondType.Context, value.Types[1]);
+                var secondTypeDrawable = GetDrawableWithColor(viewHolder.SecondType.Context, Resource.Drawable.rounded_background_type, value.Types[1]);
                 viewHolder.SecondType.Background = secondTypeDrawable;
             }
             viewHolder.TvPokemonName.Text = value.Name;
@@ -92,10 +92,10 @@ namespace PokeAppAndroid.Adapters
                 ItemClick(this, obj);
         }
 
-        private Android.Graphics.Drawables.Drawable GetDrawableWithColor(Context context, Enums.PokemonTypes type, bool useAlpha = false)
+        private Android.Graphics.Drawables.Drawable GetDrawableWithColor(Context context, int drawable, Enums.PokemonTypes type, bool useAlpha = false)
         {
             int primariIdColor = getColorForType(type);
-            var background = ContextCompat.GetDrawable(context, Resource.Drawable.rounded_background);
+            var background = ContextCompat.GetDrawable(context, drawable);
             var color = new Android.Graphics.Color(ContextCompat.GetColor(context, primariIdColor));
             if (useAlpha)
                 color.A = (byte)(0.80 * 255);
