@@ -113,12 +113,17 @@
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
             <Visible>false</Visible>
         </ImageAsset>
+        <ImageAsset Include="Assets.xcassets\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\Pokeball.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\Pokeball.imageset\Pokeball.svg" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="CommonView\" />
         <Folder Include="Utils\" />
         <Folder Include="Views\Cells\" />
         <Folder Include="Resources\" />
+        <Folder Include="Views\PokemonDetail\" />
+        <Folder Include="Views\PokemonDetail\Cells\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -126,6 +131,7 @@
         <InterfaceDefinition Include="Views\Login.storyboard" />
         <InterfaceDefinition Include="Views\Home.storyboard" />
         <InterfaceDefinition Include="Views\Cells\PokemonViewCell.xib" />
+        <InterfaceDefinition Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -156,6 +162,10 @@
         <Compile Include="Utils\PathManager.cs" />
         <Compile Include="Utils\BottomLine.cs" />
         <Compile Include="Utils\UIViewExtension.cs" />
+        <Compile Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.cs" />
+        <Compile Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.designer.cs">
+          <DependentUpon>EvolutionVariantTableViewCell.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">

@@ -4,6 +4,7 @@ using SharedCode.Controller;
 using SharedCode.Model;
 using SharedCode.Services;
 using SharedCode.Util;
+using SharedCode.Helper;
 using UIKit;
 
 namespace PokeAppiOS.Controllers
@@ -44,10 +45,23 @@ namespace PokeAppiOS.Controllers
             if (pokemon.Success)
 			{
 				PokemonInfo = pokemon.Value;
-				pokemonNameLabel.Text = PokemonInfo.name;
-                Title = PokemonInfo.name;
+				pokemonNameLabel.Text = PokemonInfo.name.Capitalize();
                 controller.LoadPokemonImage(PokemonInfo.id);
 			}
+        }
+
+        class PokemonDetailViewControllerDataSource : UITableViewDataSource
+        {
+            public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override nint RowsInSection(UITableView tableView, nint section)
+            {
+                throw new NotImplementedException();
+            }
+
         }
     }
 }

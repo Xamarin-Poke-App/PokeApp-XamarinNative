@@ -13,6 +13,9 @@ namespace PokeAppiOS.Controllers
 	partial class PokemonDetailViewController
 	{
 		[Outlet]
+		UIKit.UITableView evolutionVariantsTableView { get; set; }
+
+		[Outlet]
 		UIKit.UIImageView pokemonImageView { get; set; }
 
 		[Outlet]
@@ -28,6 +31,11 @@ namespace PokeAppiOS.Controllers
 			if (pokemonNameLabel != null) {
 				pokemonNameLabel.Dispose ();
 				pokemonNameLabel = null;
+			}
+
+			if (evolutionVariantsTableView != null) {
+				evolutionVariantsTableView.Dispose ();
+				evolutionVariantsTableView = null;
 			}
 		}
 	}
