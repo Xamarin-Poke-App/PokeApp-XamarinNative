@@ -46,6 +46,30 @@ namespace SharedCode.Model
         {
             return $"{Constants.PokemonArtWorksImagesBaseAddress}{id}.png";
         }
+
+        public PokemonFixed ToPokemonFixed()
+        {
+            string ID = GetIdFromUrl().ToString();
+            string imageURL = GetPokemonImageURL(ID);
+            string name = this.FormatedName();
+            var list = getRandomTypes();
+            return new PokemonFixed(ID, name, imageURL, list);
+        }
+
+        private List<Enums.PokemonTypes> getRandomTypes()
+        {
+            var list = new List<Enums.PokemonTypes>();
+            Random random = new Random();
+            Array values = Enum.GetValues(typeof(Enums.PokemonTypes));
+
+            if (random.Next() % 2 == 0)
+            {
+                list.Add((Enums.PokemonTypes)values.GetValue(random.Next(values.Length)));
+            }
+            list.Add((Enums.PokemonTypes)values.GetValue(random.Next(values.Length)));
+
+            return list;
+        }
     }
 }
 

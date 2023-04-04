@@ -26,7 +26,7 @@ namespace PokeAppAndroid.View
     {
         private RecyclerView recyclerView;
         private RecyclerView.LayoutManager mLayoutManager;
-        private List<ResultPokemons> pokemonList;
+        private List<PokemonFixed> pokemonList;
         private PokemonAdapter adapter;
         private IPokemonController controller;
 
@@ -65,25 +65,25 @@ namespace PokeAppAndroid.View
         {
             if (data.Success)
             {
-                pokemonList = new List<ResultPokemons>();
+                pokemonList = new List<PokemonFixed>();
                 foreach (var item in data.Value)
                 {
-                    pokemonList.Add(item);
+                    pokemonList.Add(item.ToPokemonFixed());
                 }
                 SetupRecyclerView();
             }
             else
             {
-                pokemonList = new List<ResultPokemons>();
+                pokemonList = new List<PokemonFixed>();
             }
         }
 
         private void GoToDetailItemClick(object sender, int e)
         {
-            ResultPokemons selectedPokemon = pokemonList[e];
+            PokemonFixed selectedPokemon = pokemonList[e];
             PokemonDetailFragment pokemonDetailFragment = new PokemonDetailFragment();
             Bundle args = new Bundle();
-            args.PutInt("pokemonId", selectedPokemon.GetIdFromUrl());
+            args.PutInt("pokemonId", int.Parse(selectedPokemon.ID));
             pokemonDetailFragment.Arguments = args;
 
             var appCompatActivity = Platform.CurrentActivity as AppCompatActivity;
