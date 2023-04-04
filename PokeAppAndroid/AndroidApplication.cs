@@ -3,6 +3,14 @@ using Android.App;
 using Android.App.Job;
 using SharedCode.DI;
 using SharedCode.Services;
+using PokeAppAndroid.Utils;
+using SharedCode.Interfaces;
+using SharedCode.Util;
+using System.ComponentModel;
+using Unity;
+using Org.Xmlpull.V1.Sax2;
+using Unity.Injection;
+using Xamarin.Google.ErrorProne.Annotations;
 
 namespace PokeAppAndroid
 {
@@ -16,7 +24,11 @@ namespace PokeAppAndroid
         public override void OnCreate()
         {
             base.OnCreate();
-			IocContainer.CreateContainer();
+
+            // Storage Utils
+            IocContainer.CreateContainer();
+            IocContainer.RegisterType<IStorage, Storage>();
+            IocContainer.RegisterType<IStorageUtils, StorageUtils>();
         }
     }
 }

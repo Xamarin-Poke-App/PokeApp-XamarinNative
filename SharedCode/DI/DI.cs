@@ -3,8 +3,10 @@ using SharedCode.Controller;
 using SharedCode.Repository;
 using SharedCode.Services;
 using SharedCode.Util;
+using SharedCode.Interfaces;
 using Unity;
 using Unity.Lifetime;
+using System.ComponentModel;
 
 namespace SharedCode.DI
 {
@@ -23,6 +25,6 @@ namespace SharedCode.DI
 			container.RegisterType<IPokemonController, PokemonController>();
 			container.RegisterType<IPokemonDetailController, PokemonDetailController>();
 		}
-	}
+    }
 }
 	
