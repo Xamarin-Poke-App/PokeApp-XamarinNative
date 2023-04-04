@@ -28,7 +28,7 @@ namespace SharedCode.Services
 
         public static void RegisterType<I, T>() where T : I
         {
-            DI.DI.RegisterType<I, T>();
+            container.RegisterType<I, T>();
         }
     }
 }

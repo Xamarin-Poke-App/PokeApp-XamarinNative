@@ -25,12 +25,6 @@ namespace SharedCode.DI
 			container.RegisterType<IPokemonController, PokemonController>();
 			container.RegisterType<IPokemonDetailController, PokemonDetailController>();
 		}
-
-		public static void RegisterType<I, T>() where T : I
-        {
-            var container = IocContainer.Instance;
-			container.RegisterType<I, T>();
-        }
     }
 }
 	
