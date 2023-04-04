@@ -43,5 +43,11 @@
       <style name="DefaultImageMarginBottom">
         <item name="android:layout_marginBottom">10dp</item>
       </style>
+
+      <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="backgroundTint">@android:color/white</item>
+      </style>
 </resources>
 

@@ -70,6 +70,9 @@
     <Compile Include="Adapters\PokemonAdapter.cs" />
     <Compile Include="View\PokemonListFragment.cs" />
     <Compile Include="View\PokemonDetailFragment.cs" />
+    <Compile Include="View\CurvedTopView.cs" />
+    <Compile Include="View\PokemonInformationFragment.cs" />
+    <Compile Include="View\PokemonEvolutionFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -146,6 +149,22 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\values-sw600dp\styles.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_information_detail.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_evolution_detail.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\typeComponent.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\oval_background.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

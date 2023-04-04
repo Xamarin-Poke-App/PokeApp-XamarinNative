@@ -1,19 +1,23 @@
 ﻿using System;
+using Android.OS;
+using Android.Support.V4.App;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
-using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Fragment.App;
 using SharedCode.Controller;
 using SharedCode.Model;
 using SharedCode.Services;
 using SharedCode.Util;
+using Java.Util.Zip;
+using System.ComponentModel;
 
 namespace PokeAppAndroid.View
 {
@@ -41,7 +45,32 @@ namespace PokeAppAndroid.View
             pokemonImage = view.FindViewById<ImageView>(Resource.Id.pokemonImageView);
             pokemonNameText = view.FindViewById<TextView>(Resource.Id.pokemonNameTextView);
 
+            Button informationButton = view.FindViewById<Button>(Resource.Id.informationButton);
+            Button evolutionButton = view.FindViewById<Button>(Resource.Id.evolutionButton);
+
+            informationButton.Click += InformationButton_Click;
+            evolutionButton.Click += EvolutionButton_Click;
+
+            ReplaceFragment(new PokemonInformationFragment());
+
             return view;
+        }
+
+        private void InformationButton_Click(object sender, EventArgs e)
+        {
+            ReplaceFragment(new PokemonInformationFragment());
+        }
+
+        private void EvolutionButton_Click(object sender, EventArgs e)
+        {
+            ReplaceFragment(new PokemonEvolutionFragment());
+        }
+
+        private void ReplaceFragment(AndroidX.Fragment.App.Fragment fragment)
+        {
+            AndroidX.Fragment.App.FragmentTransaction transaction = ChildFragmentManager.BeginTransaction();
+            transaction.Replace(Resource.Id.fragmentBaseDetail, fragment);
+            transaction.Commit();
         }
 
         public void updatePokemonImage(Result<byte[]> image)

@@ -5,5 +5,8 @@
     <color name="colorAccent">#3498db</color>    
     <color name="button_text_color">#FFFFFF</color>
     <color name="button_border_color">#007ACC</color>
+    <color name="bugType">#22bd6f</color>
+    <color name="white">#FFFFFF</color>
+    <color name="type_color"></color>
 </resources>
 

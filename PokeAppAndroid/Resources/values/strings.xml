@@ -11,5 +11,7 @@
     <string name="passwordText">Password:</string>    
     <string name="usernamePlaceholder">Insert you email</string>
     <string name="passwordPlaceholder">Insert your password</string>
+    <string name="informationButton">Information</string>
+    <string name="evolutionButton">Evolution</string>
 </resources>
 
