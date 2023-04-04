@@ -156,6 +156,7 @@
         <Compile Include="Utils\PathManager.cs" />
         <Compile Include="Utils\BottomLine.cs" />
         <Compile Include="Utils\UIViewExtension.cs" />
+        <Compile Include="Utils\Storage.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
