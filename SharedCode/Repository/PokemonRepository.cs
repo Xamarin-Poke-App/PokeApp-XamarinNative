@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using SharedCode.Database;
 using SharedCode.Model;
+using SharedCode.Model.Local;
+using SharedCode.Services;
 using SharedCode.Util;
 
 namespace SharedCode.Repository
@@ -17,6 +22,8 @@ namespace SharedCode.Repository
 
 	public class PokemonRepository : IPokemonRepository
 	{
+        IDatabaseManager dataBaseManager = IocContainer.GetDependency<DatabaseManager>();
+
         private readonly INetworkHandler NetworkHandler;
 
 		public PokemonRepository(INetworkHandler networkHandler)
@@ -122,6 +129,55 @@ namespace SharedCode.Repository
             {
                 return Result.Fail<EvolutionChainResponse>($"Check your internet connection {ex}");
             }
+        }
+
+        public void StoreEvolutionChain(EvolutionChainResponse evolutionChain)
+        {
+            var evolutionChainString = Newtonsoft.Json.JsonConvert.SerializeObject(evolutionChain);
+            var localEvolutionChain = new EvolutionChainLocal { Id = evolutionChain.id, Chain = evolutionChainString };
+            dataBaseManager.StoreData(localEvolutionChain, Constants.EvolutionChainTable);
+        }
+
+        public Result<EvolutionChainResponse> GetEvolutionChainByIdFromLocal(int id)
+        {
+            try
+            {
+                var dbResponse = dataBaseManager.GetAllData<EvolutionChainLocal>();
+
+                if (dbResponse.IsFailure)
+                {
+                    return Result.Fail<EvolutionChainResponse>("Could not get data");
+                }
+                var row = dbResponse.Value.Where(r => r.Id == id).First();
+
+                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
+                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
+
+                return Result.Ok<EvolutionChainResponse>(evolutionChainFromLocal);
+            } catch (Exception)
+            {
+                return Result.Fail<EvolutionChainResponse>("Could not get data");
+            }
+        }
+
+        public Result<List<EvolutionChainResponse>> GetAllEvolutionChainFromLocal(int id)
+        {
+            var dbResponse = dataBaseManager.GetAllData<EvolutionChainLocal>();
+
+            if (dbResponse.IsFailure)
+            {
+                return Result.Fail<List<EvolutionChainResponse>>("Could not get all data");
+            }
+
+            var rowsFromLocal = new List<EvolutionChainResponse>();
+            foreach (var row in dbResponse.Value)
+            {
+                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
+                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
+                rowsFromLocal.Add(evolutionChainFromLocal);
+            }
+
+            return Result.Ok<List<EvolutionChainResponse>>(rowsFromLocal);
         }
     }
 }

@@ -9,10 +9,9 @@ namespace SharedCode.Model
         public int id { get; set; }
     }
 
-    public partial class Chain
+    public class Chain
     {
         public Chain[] evolves_to { get; set; }
         public ResultPokemons species { get; set; }
     }
 }
-

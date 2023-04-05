@@ -23,6 +23,9 @@ namespace PokeAppiOS.Controllers
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
             controller.GetPokemonInfo(PokemonID);
+
+			// TODO: remove after
+			controller.GetEvolutionChainByPokemonId(1);
 		}
 
 		public override void DidReceiveMemoryWarning ()

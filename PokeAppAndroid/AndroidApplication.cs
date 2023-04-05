@@ -11,6 +11,7 @@ using Unity;
 using Org.Xmlpull.V1.Sax2;
 using Unity.Injection;
 using Xamarin.Google.ErrorProne.Annotations;
+using SharedCode.Database;
 
 namespace PokeAppAndroid
 {
@@ -25,10 +26,15 @@ namespace PokeAppAndroid
         {
             base.OnCreate();
 
-            // Storage Utils
             IocContainer.CreateContainer();
+
+            // Storage Utils
             IocContainer.RegisterType<IStorage, Storage>();
             IocContainer.RegisterType<IStorageUtils, StorageUtils>();
+
+            // Db
+            IocContainer.RegisterType<IPathManager, PathManager>();
+            IocContainer.RegisterType<IDatabaseManager, DatabaseManager>();
         }
     }
 }

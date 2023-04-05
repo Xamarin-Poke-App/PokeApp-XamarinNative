@@ -13,6 +13,7 @@
     <None Remove="DI\" />
     <None Remove="Repository\" />
     <None Remove="Database\" />
+    <None Remove="Model\Local\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -23,6 +24,7 @@
     <Folder Include="Repository\" />
     <Folder Include="Database\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Model\Local\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
