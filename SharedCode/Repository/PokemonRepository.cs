@@ -45,7 +45,7 @@ namespace SharedCode.Repository
             }
         }
 
-        public async Task<Result<PokemonSpecie>> GetPokemonInfo(int pokeId)
+        public async Task<Result<PokemonSpecie>> GetPokemonSpecieInfo(int pokeId)
         {
             try
             {
@@ -187,11 +187,6 @@ namespace SharedCode.Repository
             {
                 return Result.Fail<GenerationResponse>($"Check your internet connection {ex.ToString()}");
             }
-        }
-
-        public Result<List<PokemonLocal>> GetPokemonLocalList()
-        {
-            return Result.Fail<List<PokemonLocal>>("Not implemented");
         }
     }
 }

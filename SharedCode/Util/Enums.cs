@@ -8,5 +8,27 @@ namespace SharedCode.Util
 			User,
 			Pokemon
 		}
+
+		public enum PokemonTypes
+		{
+			Bug,
+			Dark,
+			Dragon,
+			Electric,
+			Fairy,
+			Fighting,
+			Fire,
+			Flying,
+			Ghost,
+			Normal,
+			Grass,
+			Ground,
+			Ice,
+			Poison,
+			Psychic,
+			Rock,
+			Steel,
+			Water,
+		}
 	}
 }

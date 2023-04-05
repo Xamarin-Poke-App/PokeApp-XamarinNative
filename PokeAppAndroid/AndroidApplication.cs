@@ -11,6 +11,8 @@ using Unity;
 using Org.Xmlpull.V1.Sax2;
 using Unity.Injection;
 using Xamarin.Google.ErrorProne.Annotations;
+using SharedCode.Database;
+using Unity.Lifetime;
 
 namespace PokeAppAndroid
 {
@@ -27,6 +29,8 @@ namespace PokeAppAndroid
 
             // Storage Utils
             IocContainer.CreateContainer();
+            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
+            IocContainer.RegisterType<IPathManager, PathManager>();
             IocContainer.RegisterType<IStorage, Storage>();
             IocContainer.RegisterType<IStorageUtils, StorageUtils>();
         }

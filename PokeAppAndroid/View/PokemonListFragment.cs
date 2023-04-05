@@ -32,19 +32,14 @@ namespace PokeAppAndroid.View
         private PokemonAdapter adapter;
         private IPokemonController controller;
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            controller = IocContainer.GetDependency<IPokemonController>();
-            controller.listener = this;
-            controller.GetAllPokemonsSpecies();
-        }
-
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_pokemon_list, container, false);
             recyclerView = view.FindViewById<RecyclerView>(Resource.Id.rv_pokemonList);
             mLayoutManager = new GridLayoutManager(view.Context, 2);
+            controller = IocContainer.GetDependency<IPokemonController>();
+            controller.listener = this;
+            controller.GetAllPokemonsSpecies();
 
             TextInputEditText searchInput = view.FindViewById<TextInputEditText>(Resource.Id.edt_searchPokemon);
             searchInput.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) => {

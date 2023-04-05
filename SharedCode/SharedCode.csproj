@@ -16,6 +16,7 @@
     <None Remove="Model\Api\" />
     <None Remove="Repository\DB\" />
     <None Remove="Repository\Interfaces\" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -29,6 +30,7 @@
     <Folder Include="Model\Api\" />
     <Folder Include="Repository\DB\" />
     <Folder Include="Repository\Interfaces\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />

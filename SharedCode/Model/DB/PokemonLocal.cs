@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharedCode.Util;
 using SQLite;
 
 namespace SharedCode.Model.DB
@@ -22,6 +23,15 @@ namespace SharedCode.Model.DB
 			Name = name;
 			Id = id;
 			Types = "";
+			RegularSpriteUrl = Constants.PokemonArtWorksImagesBaseAddress + $"{id}.png";
+		}
+
+		public string[] TypesArray
+		{
+			get
+			{
+				return Types.Split('%');
+            }
 		}
 	}
 }
