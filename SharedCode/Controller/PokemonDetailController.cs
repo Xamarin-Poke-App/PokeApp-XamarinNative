@@ -11,13 +11,15 @@ namespace SharedCode.Controller
     {
         IPokemonDetailControllerListener listener { get; set; }
         void GetPokemonInfo(int pokeId);
+        void GetPokemonSpecieInfo(int pokeId);
         void LoadPokemonImage(int pokeId);
     }
 
     public interface IPokemonDetailControllerListener
     {
         void updatePokemonImage(Result<byte[]> image);
-        void updatePokemonInfo(Result<PokemonSpecie> pokemon);
+        void updatePokemonSpecieInfo(Result<PokemonSpecie> pokemon);
+        void updatePokemonInfo(Result<PokemonInfo> pokemon);
     }
 
 	public class PokemonDetailController : IPokemonDetailController
@@ -28,6 +30,12 @@ namespace SharedCode.Controller
         public IPokemonRepository Repository;
 
         public IPokemonDetailControllerListener listener { get => viewListener; set => viewListener = value; }
+
+        public async void GetPokemonSpecieInfo(int pokeId)
+        {
+            var data = await Repository.GetPokemonSpecieInfo(pokeId);
+            viewListener.updatePokemonSpecieInfo(data);
+        }
 
         public async void GetPokemonInfo(int pokeId)
         {

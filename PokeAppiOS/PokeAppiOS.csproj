@@ -113,6 +113,30 @@
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
             <Visible>false</Visible>
         </ImageAsset>
+        <ImageAsset Include="Assets.xcassets\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\pokeball.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\pokeball.imageset\pokeball.svg" />
+        <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Bulbasaur.svg" />
+        <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\dragon.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\fire.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\dark.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\fighting.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\electric.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\fairy.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\bug.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\ghost.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\normal.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\psychic.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\ice.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\poison.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\flying.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\ground.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\grass.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\water.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\rock.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\TypeColors\steel.colorset\Contents.json" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="CommonView\" />
