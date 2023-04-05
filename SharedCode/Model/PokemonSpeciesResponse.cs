@@ -27,6 +27,19 @@ namespace SharedCode.Model
             }
             return -1;
         }
+
+        public string FormatedName()
+        {
+            var list = name.Split('-');
+            string newName = "";
+            for (var i = 0; i < list.Length; i++)
+            {
+                var str = list[i];
+                newName += (char.ToUpper(str[0]) + str.Substring(1)) + " ";
+            }
+
+            return newName.Trim();
+        }
     }
 }
 

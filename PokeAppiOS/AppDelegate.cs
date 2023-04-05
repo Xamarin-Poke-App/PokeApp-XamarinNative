@@ -1,6 +1,9 @@
 ﻿using Foundation;
+using PokeAppiOS.Utils;
 using SharedCode.DI;
+using SharedCode.Interfaces;
 using SharedCode.Services;
+using SharedCode.Util;
 using UIKit;
 
 namespace PokeAppiOS
@@ -17,6 +20,8 @@ namespace PokeAppiOS
         public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
             IocContainer.CreateContainer();
+            IocContainer.RegisterType<IStorage, Storage>();
+            IocContainer.RegisterType<IStorageUtils, StorageUtils>();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

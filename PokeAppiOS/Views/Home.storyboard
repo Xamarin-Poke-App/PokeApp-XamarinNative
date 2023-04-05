@@ -35,13 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ih6-8h-pfO">
-                                <rect key="frame" x="31" y="103" width="331" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VZa-QB-daY">
-                                <rect key="frame" x="0.0" y="142" width="393" height="710"/>
+                                <rect key="frame" x="20" y="179" width="353" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SAj-1g-Ufc">
                                     <size key="itemSize" width="128" height="128"/>
@@ -52,21 +47,31 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by pokemon name" translatesAutoresizingMaskIntoConstraints="NO" id="xEe-DI-ZKj">
+                                <rect key="frame" x="20" y="103" width="353" height="56"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pZQ-Yh-lma" id="Mb7-yl-qiU"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="VZa-QB-daY" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" id="3o7-HD-7fQ"/>
-                            <constraint firstAttribute="trailing" secondItem="VZa-QB-daY" secondAttribute="trailing" id="3sc-mB-bhZ"/>
-                            <constraint firstItem="Ih6-8h-pfO" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leadingMargin" constant="15" id="7jI-M4-fgA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ih6-8h-pfO" secondAttribute="trailing" constant="15" id="9bj-2w-A8F"/>
+                            <constraint firstItem="VZa-QB-daY" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" constant="20" id="3o7-HD-7fQ"/>
+                            <constraint firstAttribute="trailing" secondItem="VZa-QB-daY" secondAttribute="trailing" constant="20" id="3sc-mB-bhZ"/>
+                            <constraint firstAttribute="trailing" secondItem="xEe-DI-ZKj" secondAttribute="trailing" constant="20" id="9g7-WP-lCm"/>
                             <constraint firstAttribute="bottom" secondItem="VZa-QB-daY" secondAttribute="bottom" id="DfN-Aa-ddZ"/>
-                            <constraint firstItem="Ih6-8h-pfO" firstAttribute="top" secondItem="LDv-T7-hCj" secondAttribute="bottom" id="Zld-7T-OHH"/>
-                            <constraint firstItem="VZa-QB-daY" firstAttribute="top" secondItem="Ih6-8h-pfO" secondAttribute="bottom" constant="5" id="ol1-cb-abm"/>
+                            <constraint firstItem="VZa-QB-daY" firstAttribute="top" secondItem="xEe-DI-ZKj" secondAttribute="bottom" constant="20" id="Diq-75-I2J"/>
+                            <constraint firstAttribute="bottom" secondItem="VZa-QB-daY" secondAttribute="bottom" id="jp9-4X-sdv"/>
+                            <constraint firstItem="xEe-DI-ZKj" firstAttribute="top" secondItem="LDv-T7-hCj" secondAttribute="bottom" id="l7x-Ns-6gb"/>
+                            <constraint firstItem="xEe-DI-ZKj" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" constant="20" id="tNz-0A-80Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UR9-Wp-Lj9"/>
                     <connections>
                         <outlet property="PokemonCollectionView" destination="VZa-QB-daY" id="g0t-ep-gK8"/>
+                        <outlet property="pokemonSearchBar" destination="xEe-DI-ZKj" id="aDx-vm-tdU"/>
                         <segue destination="bZo-97-d2O" kind="show" identifier="ToDetailSegue" id="CEj-vY-cJE"/>
                     </connections>
                 </viewController>
@@ -118,6 +123,9 @@
     </scenes>
     <resources>
         <image name="circle.inset.filled" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

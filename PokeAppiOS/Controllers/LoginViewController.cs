@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreGraphics;
 using PokeAppiOS.View;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
 using GlobalToast;
+using PokeAppiOS.Utils;
 
 namespace PokeAppiOS.Controllers
 {
@@ -185,7 +186,9 @@ namespace PokeAppiOS.Controllers
         {
             if (userLoggedInResult.Success)
             {
+                StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
                 SceneDelegate.Current.SegueToHome();
+                storageUtils.SetIsLoggedIn(true);
             }
             else
             {
