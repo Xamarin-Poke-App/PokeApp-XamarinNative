@@ -10,20 +10,21 @@ using AndroidX.RecyclerView.Widget;
 using PokeAppAndroid.Utils;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 using Square.Picasso;
+using SharedCode.Helpers;
 using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.Adapters
 {
     public class PokemonAdapter : RecyclerView.Adapter
     {
-
-        public List<PokemonFixed> pokemomList;
+        public List<PokemonLocal> pokemomList;
         public event EventHandler<int> ItemClick;
 
-        public PokemonAdapter(List<PokemonFixed> pokemons)
+        public PokemonAdapter(List<PokemonLocal> pokemons)
         {
             pokemomList = pokemons;
         }
@@ -37,24 +38,25 @@ namespace PokeAppAndroid.Adapters
         {
             PokemonViewHolder viewHolder = holder as PokemonViewHolder;
             var value = pokemomList[position];
-            string pokemonID = value.ID;
+            string pokemonID = value.Id.ToString();
 
-            viewHolder.Container.SetDrawableBackgroundForType(value.Types.First());
+            viewHolder.Container.SetDrawableBackgroundForType(value.TypesArray.First());
 
-            viewHolder.FirstType.Text = value.Types.First().ToString();
-            viewHolder.FirstType.SetDrawableBackgroundForType(value.Types.First());
-
-            if (value.Types.Count > 1)
+            viewHolder.FirstType.Text = value.TypesArray.First().ToString();
+            viewHolder.FirstType.SetDrawableBackgroundForType(value.TypesArray.First());
+            viewHolder.SecondType.Visibility = ViewStates.Gone;
+            if (value.TypesArray.Count() > 1)
             {
                 viewHolder.SecondType.Visibility = ViewStates.Visible;
-                viewHolder.SecondType.Text = value.Types[1].ToString();
-                viewHolder.SecondType.SetDrawableBackgroundForType(value.Types[1]);
+                viewHolder.SecondType.Text = value.TypesArray.Last().ToString();
+                viewHolder.SecondType.SetDrawableBackgroundForType(value.TypesArray.Last());
             }
 
-            viewHolder.TvPokemonName.Text = value.Name;
+            viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
+            Console.WriteLine(value.RegularSpriteUrl);
             Picasso.Get()
-                .Load(value.ImageURL)
+                .Load(value.RegularSpriteUrl)
                 .Into(viewHolder.IvPokemonImage);
         }
 

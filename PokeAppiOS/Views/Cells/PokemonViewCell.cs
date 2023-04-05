@@ -5,10 +5,13 @@ using CoreGraphics;
 using Foundation;
 using SharedCode.Model;
 using UIKit;
+using SharedCode.Model.DB;
 using SharedCode.Controller;
 using SharedCode.Util;
 using SharedCode.Services;
 using System.Linq;
+using SharedCode.Helpers;
+using SharedCode.Model.Api;
 
 namespace PokeAppiOS.Views.Cells
 {
@@ -25,18 +28,35 @@ namespace PokeAppiOS.Views.Cells
             // Note: this .ctor should not contain any initialization logic.
         }
 
-        public ResultPokemons Pokemon
+        public PokemonLocal Pokemon
 		{
 			set
 			{
-                pokemonNameLabel.Text = value.FormatedName();
-                pokemonNumberLabel.Text = "#" + value.GetIdFromUrl().ToString();
+                pokemonNameLabel.Text = value.Name.FormatedName();
+                pokemonNumberLabel.Text = "#" + value.Id.ToString();
+                pokemonRegionLabel.Text = value.Region.FormatedName();
                 pokemonFirstTypeView.Layer.CornerRadius = 10;
                 pokemonSecondTypeView.Layer.CornerRadius = 10;
                 controller = IocContainer.GetDependency<IPokemonDetailController>();
                 controller.listener = this;
-                controller.LoadPokemonImage(value.GetIdFromUrl());
-                controller.GetPokemonInfo(value.GetIdFromUrl());
+                controller.LoadPokemonImage(value.Id);
+                // Pokemons will only have as max two types of pokemon
+                if (value.TypesArray.Count() == 1)
+                {
+                    pokemonSecondTypeView.Hidden = true;
+                    pokemonViewBackground.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
+                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault());
+                    pokemonFirstTypeLabel.Text = value.TypesArray.FirstOrDefault();
+                }
+                else if (value.TypesArray.Count() > 1)
+                {
+                    pokemonSecondTypeView.Hidden = false;
+                    pokemonViewBackground.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
+                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault());
+                    pokemonFirstTypeLabel.Text = value.TypesArray.FirstOrDefault();
+                    pokemonSecondTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.Last());
+                    pokemonSecondTypeLabel.Text = value.TypesArray.Last();
+                }
             }
         }
 
@@ -48,33 +68,12 @@ namespace PokeAppiOS.Views.Cells
             }
         }
 
-        public void updatePokemonInfo(Result<PokemonInfo> pokemon)
+        public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.Success)
             {
-                // Pokemons will only have as max two types of pokemon
-                if (pokemon.Value.types.Count == 1)
-                {
-                    pokemonSecondTypeView.Hidden = true;
-                    pokemonViewBackground.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name).ColorWithAlpha(0.8f);
-                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name);
-                    pokemonFirstTypeLabel.Text = pokemon.Value.types.FirstOrDefault().type.name;
-                }
-                else if (pokemon.Value.types.Count > 1)
-                {
-                    pokemonSecondTypeView.Hidden = false;
-                    pokemonViewBackground.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name).ColorWithAlpha(0.8f);
-                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(pokemon.Value.types.FirstOrDefault().type.name);
-                    pokemonFirstTypeLabel.Text = pokemon.Value.types.FirstOrDefault().type.name;
-                    pokemonSecondTypeView.BackgroundColor = UIColor.FromName(pokemon.Value.types.Last().type.name);
-                    pokemonSecondTypeLabel.Text = pokemon.Value.types.Last().type.name;
-                }
+                
             }
-        }
-
-        public void updatePokemonSpecieInfo(Result<PokemonSpecie> pokemon)
-        {
-            // Nothing to implement
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using Foundation;
 using PokeAppiOS.Utils;
+using SharedCode.Database;
 using SharedCode.DI;
 using SharedCode.Interfaces;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
+using Unity;
+using Unity.Lifetime;
 
 namespace PokeAppiOS
 {
@@ -20,6 +23,8 @@ namespace PokeAppiOS
         public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
             IocContainer.CreateContainer();
+            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
+            IocContainer.RegisterType<IPathManager, PathManager>();
             IocContainer.RegisterType<IStorage, Storage>();
             IocContainer.RegisterType<IStorageUtils, StorageUtils>();
             // Override point for customization after application launch.

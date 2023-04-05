@@ -3,12 +3,13 @@ using Android.Widget;
 using AndroidX.ConstraintLayout.Widget;
 using AndroidX.Core.Content;
 using SharedCode.Util;
+using SharedCode.Helpers;
 
 namespace PokeAppAndroid.Utils
 {
 	public static class ViewExtensions
 	{
-		public static TextView SetDrawableBackgroundForType(this TextView view, Enums.PokemonTypes type)
+		public static TextView SetDrawableBackgroundForType(this TextView view, string type)
 		{
             var colorID = GetColorForType(type);
             var background = ContextCompat.GetDrawable(view.Context, Resource.Drawable.rounded_background_type);
@@ -19,7 +20,7 @@ namespace PokeAppAndroid.Utils
         }
 
 
-        public static ConstraintLayout SetDrawableBackgroundForType(this ConstraintLayout view, Enums.PokemonTypes type)
+        public static ConstraintLayout SetDrawableBackgroundForType(this ConstraintLayout view, string type)
         {
             var colorID = GetColorForType(type);
             var background = ContextCompat.GetDrawable(view.Context, Resource.Drawable.rounded_background);
@@ -30,45 +31,46 @@ namespace PokeAppAndroid.Utils
             return view;
         }
 
-        private static int GetColorForType(Enums.PokemonTypes type)
+        private static int GetColorForType(string type)
         {
-            switch (type)
+            var formatedType = type.FormatedName();
+            switch (formatedType)
             {
-                case Enums.PokemonTypes.Bug:
+                case "Bug":
                     return Resource.Color.bug;
-                case Enums.PokemonTypes.Dark:
+                case "Dark":
                     return Resource.Color.dark;
-                case Enums.PokemonTypes.Dragon:
+                case "Dragon":
                     return Resource.Color.dragon;
-                case Enums.PokemonTypes.Electric:
+                case "Electric":
                     return Resource.Color.electric;
-                case Enums.PokemonTypes.Fairy:
+                case "Fairy":
                     return Resource.Color.fairy;
-                case Enums.PokemonTypes.Fighting:
+                case "Fighting":
                     return Resource.Color.fighting;
-                case Enums.PokemonTypes.Fire:
+                case "Fire":
                     return Resource.Color.fire;
-                case Enums.PokemonTypes.Flying:
+                case "Flying":
                     return Resource.Color.flying;
-                case Enums.PokemonTypes.Ghost:
+                case "Ghost":
                     return Resource.Color.ghost;
-                case Enums.PokemonTypes.Grass:
+                case "Grass":
                     return Resource.Color.grass;
-                case Enums.PokemonTypes.Ground:
+                case "Ground":
                     return Resource.Color.ground;
-                case Enums.PokemonTypes.Ice:
+                case "Ice":
                     return Resource.Color.ice;
-                case Enums.PokemonTypes.Normal:
+                case "Normal":
                     return Resource.Color.normal;
-                case Enums.PokemonTypes.Poison:
+                case "Poison":
                     return Resource.Color.poison;
-                case Enums.PokemonTypes.Psychic:
+                case "Psychic":
                     return Resource.Color.psychic;
-                case Enums.PokemonTypes.Rock:
+                case "Rock":
                     return Resource.Color.rock;
-                case Enums.PokemonTypes.Steel:
+                case "Steel":
                     return Resource.Color.steel;
-                case Enums.PokemonTypes.Water:
+                case "Water":
                     return Resource.Color.water;
                 default:
                     return Resource.Color.colorAccent;

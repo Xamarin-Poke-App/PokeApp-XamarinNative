@@ -2,6 +2,7 @@
 using Foundation;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
@@ -22,7 +23,6 @@ namespace PokeAppiOS.Controllers
 			base.ViewDidLoad ();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-            controller.GetPokemonSpecieInfo(PokemonID);
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -50,7 +50,7 @@ namespace PokeAppiOS.Controllers
 			}
         }
 
-        public void updatePokemonInfo(Result<PokemonInfo> pokemon)
+        public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             // Nothing to implement
         }

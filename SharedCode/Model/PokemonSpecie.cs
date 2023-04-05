@@ -81,12 +81,6 @@ namespace SharedCode.Model
         public Pokedex pokedex { get; set; }
     }
 
-    public class Pokemon
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
     public class PokemonSpecie
     {
         public int base_happiness { get; set; }
@@ -102,7 +96,6 @@ namespace SharedCode.Model
         public List<Genera> genera { get; set; }
         public Generation generation { get; set; }
         public GrowthRate growth_rate { get; set; }
-        //public object habitat { get; set; }
         public bool has_gender_differences { get; set; }
         public int hatch_counter { get; set; }
         public int id { get; set; }
@@ -112,22 +105,14 @@ namespace SharedCode.Model
         public string name { get; set; }
         public List<Name> names { get; set; }
         public int order { get; set; }
-        //public List<object> pal_park_encounters { get; set; }
         public List<PokedexNumber> pokedex_numbers { get; set; }
         public Shape shape { get; set; }
-        public List<Variety> varieties { get; set; }
     }
 
     public class Shape
     {
         public string name { get; set; }
         public string url { get; set; }
-    }
-
-    public class Variety
-    {
-        public bool is_default { get; set; }
-        public Pokemon pokemon { get; set; }
     }
 
     public class Version
