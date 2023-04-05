@@ -6,6 +6,7 @@ using SharedCode.Model;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
+using PokeAppiOS.Utils;
 
 namespace PokeAppiOS.Controllers
 {
@@ -184,7 +185,9 @@ namespace PokeAppiOS.Controllers
         {
             if (userLoggedInResult.Success)
             {
+                StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
                 SceneDelegate.Current.SegueToHome();
+                storageUtils.SetIsLoggedIn(true);
             }
             else
             {
