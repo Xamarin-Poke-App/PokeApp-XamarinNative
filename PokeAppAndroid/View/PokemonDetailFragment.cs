@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 
@@ -20,7 +21,7 @@ namespace PokeAppAndroid.View
 	public class PokemonDetailFragment : AndroidX.Fragment.App.Fragment, IPokemonDetailControllerListener
     {
         private int pokemonId;
-        private PokemonSpecie pokemonInfo;
+        private PokemonLocal pokemonInfo;
         private ImageView pokemonImage;
         private TextView pokemonNameText;
         private IPokemonDetailController controller;
@@ -32,7 +33,6 @@ namespace PokeAppAndroid.View
 
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-            controller.GetPokemonInfo(pokemonId);
         }
 
 		public override Android.Views.View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -52,12 +52,12 @@ namespace PokeAppAndroid.View
             pokemonImage.SetImageBitmap(bitmap);
         }
 
-        public void updatePokemonInfo(Result<PokemonSpecie> pokemon)
+        public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.IsFailure) return;
             pokemonInfo = pokemon.Value;
-            pokemonNameText.Text = pokemonInfo.name;
-            controller.LoadPokemonImage(pokemonInfo.id);
+            pokemonNameText.Text = pokemonInfo.Name;
+            controller.LoadPokemonImage(pokemonInfo.Id);
         }
 
         private void checkArgs()

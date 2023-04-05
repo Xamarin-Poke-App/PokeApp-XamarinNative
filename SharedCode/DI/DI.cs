@@ -1,6 +1,8 @@
 ﻿using System;
 using SharedCode.Controller;
 using SharedCode.Repository;
+using SharedCode.Repository.DB;
+using SharedCode.Repository.Interfaces;
 using SharedCode.Services;
 using SharedCode.Util;
 using Unity;
@@ -26,6 +28,9 @@ namespace SharedCode.DI
 
 			// Managers
 			container.RegisterType<IDatabaseManager, DatabaseManager>();
+
+			// DB
+			container.RegisterType<IPokemonRepositoryLocal, PokemonRepositoryLocal>();
 		}
     }
 }

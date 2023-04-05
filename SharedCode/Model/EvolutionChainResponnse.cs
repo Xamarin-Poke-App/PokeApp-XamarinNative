@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using SharedCode.Model.Api;
 
 namespace SharedCode.Model
 {
@@ -12,6 +13,6 @@ namespace SharedCode.Model
     public class Chain
     {
         public Chain[] evolves_to { get; set; }
-        public ResultPokemons species { get; set; }
+        public ResultItem species { get; set; }
     }
 }

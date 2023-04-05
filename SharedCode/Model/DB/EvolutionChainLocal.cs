@@ -2,7 +2,7 @@
 using SQLite;
 using SharedCode.Util;
 
-namespace SharedCode.Model.Local
+namespace SharedCode.Model.DB
 {
     [Table(name: Constants.EvolutionChainTable)]
     public class EvolutionChainLocal

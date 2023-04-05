@@ -54,15 +54,14 @@ namespace PokeAppAndroid
             }
             else
             {
-                Console.WriteLine(resultLogin.Error);
+                Toast.MakeText(Application.Context, resultLogin.Error, ToastLength.Short).Show();
             }
         }
 
         private void LoginButton_Click(object sender, System.EventArgs e)
         {
-            string email = "test@test.com";
-            string password = "tester";
-
+            string email = FindViewById<TextView>(Resource.Id.usernameEditText).Text;
+            string password = FindViewById<TextView>(Resource.Id.passwordEditText).Text;
             User user = new User(email, password);
 
             loginService.PerformLogin(user);

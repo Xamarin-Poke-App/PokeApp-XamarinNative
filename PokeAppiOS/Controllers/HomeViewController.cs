@@ -6,6 +6,7 @@ using Foundation;
 using PokeAppiOS.Views.Cells;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
@@ -17,7 +18,7 @@ namespace PokeAppiOS.Controllers
 
         public static string SegueIdentifier = "ToDetailSegue";
         private IPokemonController controller;
-        private List<ResultPokemons> Pokemons = new List<ResultPokemons>();
+        private List<PokemonLocal> Pokemons = new List<PokemonLocal>();
         
 	
 		public HomeViewController (IntPtr handle) : base(handle)
@@ -31,7 +32,7 @@ namespace PokeAppiOS.Controllers
                 var indexPath = (NSIndexPath)sender;
                 PokemonDetailViewController controller = (PokemonDetailViewController)segue.DestinationViewController;
 
-                controller.PokemonID = Pokemons[indexPath.Row].GetIdFromUrl();
+                controller.PokemonID = Pokemons[indexPath.Row].Id;
 
             }
         }
@@ -43,10 +44,10 @@ namespace PokeAppiOS.Controllers
             controller.listener = this;
             controller.GetAllPokemonsSpecies();
 
-
             PokemonCollectionView.RegisterNibForCell(PokemonViewCell.Nib, PokemonViewCell.Key);
             PokemonCollectionView.DataSource = new HomeViewControllerDataSource(this);
             PokemonCollectionView.Delegate = new UICollectionViewFlowDelegate(this);
+            pokemonSearchBar.Delegate = new HomeViewControllerSearchBarDelegate(this);
         }
 
 		public override void DidReceiveMemoryWarning ()
@@ -57,7 +58,7 @@ namespace PokeAppiOS.Controllers
 
 
 
-        public void updateView(Result<List<ResultPokemons>> data)
+        public void updateView(Result<List<PokemonLocal>> data)
         {
             if (data.Success)
             {
@@ -66,7 +67,10 @@ namespace PokeAppiOS.Controllers
             }
         }
 
-        
+        private void SearchByPokemonName(string pokemonName)
+        {
+            controller.FilterPokemonListByName(pokemonName);
+        }
 
         class HomeViewControllerDataSource : UICollectionViewDataSource
         {
@@ -80,6 +84,7 @@ namespace PokeAppiOS.Controllers
             public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
             {
                 PokemonViewCell cell = (PokemonViewCell)collectionView.DequeueReusableCell(PokemonViewCell.Key, indexPath);
+                cell.Layer.CornerRadius = 20;
                 var pokemon = viewController.Pokemons[indexPath.Row];
                 cell.Pokemon = pokemon;
                 return cell;
@@ -87,11 +92,9 @@ namespace PokeAppiOS.Controllers
 
             public override nint GetItemsCount(UICollectionView collectionView, nint section)
             {
-                    return viewController.Pokemons.Count;
+                return viewController.Pokemons.Count;
             }
-  
         }
-
         
         class UICollectionViewFlowDelegate : UICollectionViewDelegateFlowLayout
         {
@@ -104,10 +107,10 @@ namespace PokeAppiOS.Controllers
             [Export("collectionView:layout:sizeForItemAtIndexPath:")]
             public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
             {
-                var width = collectionView.Frame.Width * 0.4;
-                var height = collectionView.Frame.Height * 0.1;
-                return new CGSize(width, height);
+                var width = collectionView.Frame.Width * 0.48;
+                var height = collectionView.Frame.Height * 0.15;
 
+                return new CGSize(width: width, height: height);
             }
 
             [Export("collectionView:didSelectItemAtIndexPath:")]
@@ -120,9 +123,21 @@ namespace PokeAppiOS.Controllers
             }
         }
 
-    }
+        class HomeViewControllerSearchBarDelegate : UISearchBarDelegate
+        {
+            HomeViewController viewController;
 
-    
+            public HomeViewControllerSearchBarDelegate(HomeViewController viewController)
+            {
+                this.viewController = viewController;
+            }
+
+            public override void TextChanged(UISearchBar searchBar, string searchText)
+            {
+                viewController.SearchByPokemonName(searchText);
+            }
+        }
+    }
 }
 
 

@@ -6,6 +6,8 @@ using SharedCode.Interfaces;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
+using Unity;
+using Unity.Lifetime;
 
 namespace PokeAppiOS
 {
@@ -27,8 +29,8 @@ namespace PokeAppiOS
             IocContainer.RegisterType<IStorageUtils, StorageUtils>();
 
             // Db
+            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
             IocContainer.RegisterType<IPathManager, PathManager>();
-            IocContainer.RegisterType<IDatabaseManager, DatabaseManager>();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

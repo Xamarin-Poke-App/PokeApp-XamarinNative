@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using SharedCode.Model;
+using SharedCode.Model.Api;
+using SharedCode.Model.DB;
 using SharedCode.Repository;
+using SharedCode.Repository.Interfaces;
 using SharedCode.Util;
 using Unity;
 
@@ -16,18 +20,18 @@ namespace SharedCode.Controller
 
 	public interface IPokemonControllerListener
 	{
-		void updateView(Result<List<ResultPokemons>> data);
+		void updateView(Result<List<PokemonLocal>> data);
     }
 
 	public class PokemonController : IPokemonController
     {
-        private List<ResultPokemons> pokemons;
-        private List<ResultPokemons> filteredPokemons;
+        private List<PokemonLocal> pokemons;
+        private List<PokemonLocal> filteredPokemons;
 
         public IPokemonControllerListener viewListener;
         
         [Dependency]
-		public IPokemonRepository Repository;
+		public IPokemonRepositoryLocal Repository;
 
 		public IPokemonControllerListener listener
 		{
@@ -43,13 +47,14 @@ namespace SharedCode.Controller
 
 		public PokemonController()
 		{
-            pokemons = new List<ResultPokemons>();
-            filteredPokemons = new List<ResultPokemons>();
+            pokemons = new List<PokemonLocal>();
+            filteredPokemons = new List<PokemonLocal>();
         }
 
 		public async void GetAllPokemonsSpecies()
 		{
-			var data = await Repository.GetPokemonList();
+
+            var data = await Repository.GetPokemonLocalListAsync();
             viewListener.updateView(data);
 			if (data.IsFailure) return;
             pokemons = data.Value;
@@ -65,7 +70,7 @@ namespace SharedCode.Controller
                 return;
             }
             string lowerQuery = query.ToLower();
-            filteredPokemons = pokemons.Where(p => p.name.ToLower().Contains(lowerQuery)).ToList();
+            filteredPokemons = pokemons.Where(p => p.Name.ToLower().Contains(lowerQuery)).ToList();
             viewListener.updateView(Result.Ok(filteredPokemons));
         }
     }

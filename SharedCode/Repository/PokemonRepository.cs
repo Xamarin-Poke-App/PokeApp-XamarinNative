@@ -6,20 +6,14 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SharedCode.Database;
 using SharedCode.Model;
-using SharedCode.Model.Local;
 using SharedCode.Services;
+using SharedCode.Model.Api;
+using SharedCode.Model.DB;
+using SharedCode.Repository.Interfaces;
 using SharedCode.Util;
 
 namespace SharedCode.Repository
 {
-	public interface IPokemonRepository
-	{
-        Task<Result<List<ResultPokemons>>> GetPokemonList();
-        Task<Result<PokemonSpecie>> GetPokemonInfo(int pokeId);
-        Task<Result<byte[]>> GetPokemonImage(int pokeId);
-        Task<Result<EvolutionChainResponse>> GetEvolutionChainByPokemonId(int id);
-    }
-
 	public class PokemonRepository : IPokemonRepository
 	{
         IDatabaseManager dataBaseManager = IocContainer.GetDependency<DatabaseManager>();
@@ -31,11 +25,11 @@ namespace SharedCode.Repository
             NetworkHandler = networkHandler;
 		}
 
-        public async Task<Result<List<ResultPokemons>>> GetPokemonList()
+        public async Task<Result<List<ResultItem>>> GetPokemonList()
         {
             try
             {
-                var pokemons = await NetworkHandler.GetData<PokemonSpeciesResponse>(Constants.PokemonAPIBaseAddress + "pokemon-species?limit=10000");
+                var pokemons = await NetworkHandler.GetData<BasicListResponse>(Constants.PokemonAPIBaseAddress + "pokemon?limit=1008");
                 return Result.Ok(pokemons.results);
             }
             catch (NetworkErrorException ex)
@@ -44,20 +38,20 @@ namespace SharedCode.Repository
                 switch (ex.Code)
                 {
                     case (int)HttpStatusCode.InternalServerError:
-                        return Result.Fail<List<ResultPokemons>>("It seems like PokeApi server is down");
+                        return Result.Fail<List<ResultItem>>("It seems like PokeApi server is down");
                     case (int)HttpStatusCode.NotFound:
-                        return Result.Fail<List<ResultPokemons>>("The pokemon list seems to be unavailable right now");
+                        return Result.Fail<List<ResultItem>>("The pokemon list seems to be unavailable right now");
                     default:
-                        return Result.Fail<List<ResultPokemons>>(ex.Message ?? "Something went wrong");
+                        return Result.Fail<List<ResultItem>>(ex.Message ?? "Something went wrong");
                 }
             }
             catch (Exception ex)
             {
-                return Result.Fail<List<ResultPokemons>>($"Check your internet connection {ex}");
+                return Result.Fail<List<ResultItem>>($"Check your internet connection {ex}");
             }
         }
 
-        public async Task<Result<PokemonSpecie>> GetPokemonInfo(int pokeId)
+        public async Task<Result<PokemonSpecie>> GetPokemonSpecieInfo(int pokeId)
         {
             try
             {
@@ -105,6 +99,102 @@ namespace SharedCode.Repository
             }
         }
 
+        public async Task<Result<List<ResultItem>>> GetPokemonTypesList()
+        {
+            try
+            {
+                var typesList = await NetworkHandler.GetData<BasicListResponse>(Constants.PokemonAPIBaseAddress + "type/");
+                return Result.Ok(typesList.results);
+            }
+            catch (NetworkErrorException ex)
+            {
+                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
+                switch (ex.Code)
+                {
+                    case (int)HttpStatusCode.NotFound:
+                        return Result.Fail<List<ResultItem>>("Can't retrieve types list at this moment");
+                    default:
+                        return Result.Fail<List<ResultItem>>(ex.Message ?? "Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<List<ResultItem>>($"Check your internet connection {ex.ToString()}");
+            }
+        }
+
+        public async Task<Result<TypeResponse>> GetTypeInfo(int typeId)
+        {
+            try
+            {
+                var type = await NetworkHandler.GetData<TypeResponse>(Constants.PokemonAPIBaseAddress + "type/" + typeId);
+                return Result.Ok(type);
+            }
+            catch (NetworkErrorException ex)
+            {
+                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
+                switch (ex.Code)
+                {
+                    case (int)HttpStatusCode.NotFound:
+                        return Result.Fail<TypeResponse>("Can't retrieve type info at this moment");
+                    default:
+                        return Result.Fail<TypeResponse>(ex.Message ?? "Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<TypeResponse>($"Check your internet connection {ex.ToString()}");
+            }
+        }
+
+        public async Task<Result<List<ResultItem>>> GetPokemonGenerationList()
+        {
+            try
+            {
+                var generationList = await NetworkHandler.GetData<BasicListResponse>(Constants.PokemonAPIBaseAddress + "generation/");
+                return Result.Ok(generationList.results);
+            }
+            catch (NetworkErrorException ex)
+            {
+                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
+                switch (ex.Code)
+                {
+                    case (int)HttpStatusCode.NotFound:
+                        return Result.Fail<List<ResultItem>>("Can't retrieve generation list at this moment");
+                    default:
+                        return Result.Fail<List<ResultItem>>(ex.Message ?? "Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<List<ResultItem>>($"Check your internet connection {ex.ToString()}");
+            }
+        }
+
+        public async Task<Result<GenerationResponse>> GetGenerationInfo(int generationId)
+        {
+            try
+            {
+                var generation = await NetworkHandler.GetData<GenerationResponse>(Constants.PokemonAPIBaseAddress + "generation/" + generationId);
+                return Result.Ok(generation);
+            }
+            catch (NetworkErrorException ex)
+            {
+                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
+                switch (ex.Code)
+                {
+                    case (int)HttpStatusCode.NotFound:
+                        return Result.Fail<GenerationResponse>("Can't retrieve generation info at this moment");
+                    default:
+                        return Result.Fail<GenerationResponse>(ex.Message ?? "Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<GenerationResponse>($"Check your internet connection {ex.ToString()}");
+            }
+        }
+
         public async Task<Result<EvolutionChainResponse>> GetEvolutionChainByPokemonId(int id)
         {
             try
@@ -129,55 +219,6 @@ namespace SharedCode.Repository
             {
                 return Result.Fail<EvolutionChainResponse>($"Check your internet connection {ex}");
             }
-        }
-
-        public void StoreEvolutionChain(EvolutionChainResponse evolutionChain)
-        {
-            var evolutionChainString = Newtonsoft.Json.JsonConvert.SerializeObject(evolutionChain);
-            var localEvolutionChain = new EvolutionChainLocal { Id = evolutionChain.id, Chain = evolutionChainString };
-            dataBaseManager.StoreData(localEvolutionChain, Constants.EvolutionChainTable);
-        }
-
-        public Result<EvolutionChainResponse> GetEvolutionChainByIdFromLocal(int id)
-        {
-            try
-            {
-                var dbResponse = dataBaseManager.GetAllData<EvolutionChainLocal>();
-
-                if (dbResponse.IsFailure)
-                {
-                    return Result.Fail<EvolutionChainResponse>("Could not get data");
-                }
-                var row = dbResponse.Value.Where(r => r.Id == id).First();
-
-                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
-                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
-
-                return Result.Ok<EvolutionChainResponse>(evolutionChainFromLocal);
-            } catch (Exception)
-            {
-                return Result.Fail<EvolutionChainResponse>("Could not get data");
-            }
-        }
-
-        public Result<List<EvolutionChainResponse>> GetAllEvolutionChainFromLocal(int id)
-        {
-            var dbResponse = dataBaseManager.GetAllData<EvolutionChainLocal>();
-
-            if (dbResponse.IsFailure)
-            {
-                return Result.Fail<List<EvolutionChainResponse>>("Could not get all data");
-            }
-
-            var rowsFromLocal = new List<EvolutionChainResponse>();
-            foreach (var row in dbResponse.Value)
-            {
-                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
-                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
-                rowsFromLocal.Add(evolutionChainFromLocal);
-            }
-
-            return Result.Ok<List<EvolutionChainResponse>>(rowsFromLocal);
         }
     }
 }
