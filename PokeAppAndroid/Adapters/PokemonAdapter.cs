@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -38,10 +39,10 @@ namespace PokeAppAndroid.Adapters
             var value = pokemomList[position];
             string pokemonID = value.ID;
 
-            viewHolder.Container.SetDrawableBackgroundForType(value.Types[0]);
+            viewHolder.Container.SetDrawableBackgroundForType(value.Types.First());
 
             viewHolder.FirstType.Text = value.Types[0].ToString();
-            viewHolder.FirstType.SetDrawableBackgroundForType(value.Types[0]);
+            viewHolder.FirstType.SetDrawableBackgroundForType(value.Types.First());
 
             if (value.Types.Count > 1)
             {
