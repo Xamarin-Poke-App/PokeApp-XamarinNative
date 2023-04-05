@@ -41,7 +41,7 @@ namespace PokeAppAndroid.Adapters
 
             viewHolder.Container.SetDrawableBackgroundForType(value.Types.First());
 
-            viewHolder.FirstType.Text = value.Types[0].ToString();
+            viewHolder.FirstType.Text = value.Types.First().ToString();
             viewHolder.FirstType.SetDrawableBackgroundForType(value.Types.First());
 
             if (value.Types.Count > 1)
