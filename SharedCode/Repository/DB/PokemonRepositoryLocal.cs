@@ -72,6 +72,21 @@ namespace SharedCode.Repository.DB
             }
 		}
 
+        public async Task UpdatePokemonInfo(PokemonLocal pokemon)
+        {
+            var data = await Repository.GetPokemonSpecieInfo(pokemon.Id);
+
+            if (data.Success)
+            {
+                pokemon.BaseHappiness = data.Value.base_happiness;
+                pokemon.Generation = data.Value.generation.name;
+                if (data.Value.habitat != null)
+                    pokemon.Habitat = data.Value.habitat.name;
+
+                DatabaseManager.UpdateData<PokemonLocal>(pokemon, DBModels.Pokemon.ToString());
+            }
+        }
+
         public Dictionary<int, PokemonLocal> PopulateTypeForPokemons(Dictionary<int, PokemonLocal> pokemonsList, List<Pokemon> pokemonTypeList, string TypeName)
 		{
 			var pokemonTypeListIndex = 0;
@@ -117,6 +132,16 @@ namespace SharedCode.Repository.DB
                 return DatabaseManager.GetAllData<PokemonLocal>();
             }
             return Result.Fail<List<PokemonLocal>>("Can't get info from db");
+        }
+
+        public async Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(PokemonLocal pokemon)
+        {
+            await UpdatePokemonInfo(pokemon);
+            if (DatabaseManager.checkTableExists(DBModels.Pokemon.ToString()))
+            {
+                return DatabaseManager.GetDataById<PokemonLocal>(pokemon.Id, DBModels.Pokemon.ToString());
+            }
+            return Result.Fail<PokemonLocal>("Can't get info from db");
         }
     }
 }

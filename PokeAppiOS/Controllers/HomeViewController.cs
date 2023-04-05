@@ -33,7 +33,7 @@ namespace PokeAppiOS.Controllers
                 PokemonDetailViewController controller = (PokemonDetailViewController)segue.DestinationViewController;
 
                 controller.PokemonID = Pokemons[indexPath.Row].Id;
-
+                controller.PokemonInfo = Pokemons[indexPath.Row];
             }
         }
 

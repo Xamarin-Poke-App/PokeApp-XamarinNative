@@ -5,6 +5,8 @@ using SQLite;
 using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
 using SharedCode.Util;
+using System.ComponentModel;
+using System.Linq;
 
 namespace SharedCode.Database
 {
@@ -94,6 +96,20 @@ namespace SharedCode.Database
                 return Result.Ok<List<T>>(typeList);
             } catch {
                 return Result.Fail<List<T>>("Could not get all data");
+            }
+        }
+
+        public Result<T> GetDataById<T>(int id, string tableName) where T : new()
+        {
+            try
+            {
+                var query = "SELECT * FROM " + tableName + " WHERE Id = ?";
+                var data = db.Query<T>(query, id);
+                return Result.Ok<T>(data.FirstOrDefault());
+            }
+            catch
+            {
+                return Result.Fail<T>("Could not get data");
             }
         }
 	}
