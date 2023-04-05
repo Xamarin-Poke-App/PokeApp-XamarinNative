@@ -6,6 +6,7 @@ using Foundation;
 using PokeAppiOS.Views.Cells;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
@@ -17,7 +18,7 @@ namespace PokeAppiOS.Controllers
 
         public static string SegueIdentifier = "ToDetailSegue";
         private IPokemonController controller;
-        private List<ResultPokemons> Pokemons = new List<ResultPokemons>();
+        private List<PokemonLocal> Pokemons = new List<PokemonLocal>();
         
 	
 		public HomeViewController (IntPtr handle) : base(handle)
@@ -31,7 +32,7 @@ namespace PokeAppiOS.Controllers
                 var indexPath = (NSIndexPath)sender;
                 PokemonDetailViewController controller = (PokemonDetailViewController)segue.DestinationViewController;
 
-                controller.PokemonID = Pokemons[indexPath.Row].GetIdFromUrl();
+                controller.PokemonID = Pokemons[indexPath.Row].Id;
 
             }
         }
@@ -57,7 +58,7 @@ namespace PokeAppiOS.Controllers
 
 
 
-        public void updateView(Result<List<ResultPokemons>> data)
+        public void updateView(Result<List<PokemonLocal>> data)
         {
             if (data.Success)
             {

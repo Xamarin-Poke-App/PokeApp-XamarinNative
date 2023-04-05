@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SharedCode.Model
+namespace SharedCode.Model.Api
 {
-    public class PokemonSpeciesResponse
+    public class BasicListResponse
     {
         public int count { get; set; }
         public string next { get; set; }
-        public object previous { get; set; }
-        public List<ResultPokemons> results { get; set; }
+        public string previous { get; set; }
+        public List<ResultItem> results { get; set; }
     }
 
-    public class ResultPokemons
+    public class ResultItem
     {
         public string name { get; set; }
         public string url { get; set; }

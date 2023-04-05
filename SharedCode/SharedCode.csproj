@@ -7,22 +7,28 @@
   <ItemGroup>
     <None Remove="Model\" />
     <None Remove="Util\" />
-    <None Remove="Helper\" />
     <None Remove="Event\" />
     <None Remove="Interfaces\" />
     <None Remove="DI\" />
     <None Remove="Repository\" />
     <None Remove="Database\" />
+    <None Remove="Model\DB\" />
+    <None Remove="Model\Api\" />
+    <None Remove="Repository\DB\" />
+    <None Remove="Repository\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Util\" />
-    <Folder Include="Helper\" />
     <Folder Include="Event\" />
     <Folder Include="DI\" />
     <Folder Include="Repository\" />
     <Folder Include="Database\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Model\DB\" />
+    <Folder Include="Model\Api\" />
+    <Folder Include="Repository\DB\" />
+    <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />

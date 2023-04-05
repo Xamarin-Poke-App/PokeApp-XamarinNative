@@ -1,7 +1,11 @@
 ﻿using Foundation;
+using PokeAppiOS.Utils;
+using SharedCode.Database;
 using SharedCode.DI;
 using SharedCode.Services;
 using UIKit;
+using Unity;
+using Unity.Lifetime;
 
 namespace PokeAppiOS
 {
@@ -17,6 +21,8 @@ namespace PokeAppiOS
         public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
             IocContainer.CreateContainer();
+            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
+            IocContainer.RegisterType<IPathManager, PathManager>();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

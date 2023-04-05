@@ -4,6 +4,7 @@ using SharedCode.Util;
 using System.Net;
 using SharedCode.Repository;
 using Unity;
+using SharedCode.Repository.Interfaces;
 
 namespace SharedCode.Controller
 {

@@ -4,15 +4,16 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 
 namespace PokeAppAndroid.Adapters
 {
     public class PokemonAdapter : RecyclerView.Adapter
     {
-        public List<ResultPokemons> pokemomList;
+        public List<PokemonLocal> pokemomList;
         public event EventHandler<int> ItemClick;
 
-        public PokemonAdapter(List<ResultPokemons> pokemons)
+        public PokemonAdapter(List<PokemonLocal> pokemons)
         {
             pokemomList = pokemons;
         }
@@ -25,7 +26,7 @@ namespace PokeAppAndroid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             PokemonViewHolder viewHolder = holder as PokemonViewHolder;
-            viewHolder.TvPokemonName.Text = pokemomList[position].name;
+            viewHolder.TvPokemonName.Text = pokemomList[position].Name;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

@@ -5,6 +5,7 @@ using CoreGraphics;
 using Foundation;
 using SharedCode.Model;
 using UIKit;
+using SharedCode.Model.DB;
 
 namespace PokeAppiOS.Views.Cells
 {
@@ -20,12 +21,11 @@ namespace PokeAppiOS.Views.Cells
             // Note: this .ctor should not contain any initialization logic.
         }
 
-        public ResultPokemons Pokemon
+        public PokemonLocal Pokemon
 		{
 			set
 			{
-                PokemonNameLabel.Text = value.name;
-
+                PokemonNameLabel.Text = value.Region;
             }
         }
 	}
