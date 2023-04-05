@@ -5,25 +5,26 @@ using SQLite;
 using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
 using SharedCode.Util;
+using System.Threading.Tasks;
 
 namespace SharedCode.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{
         private IPathManager path;
-        private SQLiteConnection db;
+        private SQLiteAsyncConnection db;
 
         public DatabaseManager(IPathManager pathManager)
 		{
 			this.path = pathManager;
-            this.db = new SQLiteConnection(pathManager.GetPath());
+            this.db = new SQLiteAsyncConnection(pathManager.GetPath());
         }
 
-        public bool checkTableExists(string tableName)
+        public async Task<bool> checkTableExistsAsync(string tableName)
 		{
 			try
 			{
-                var tableInfo = db.GetTableInfo(tableName);
+                var tableInfo = await db.GetTableInfoAsync(tableName);
                 if (tableInfo.Count > 0)
 				{
 					return true;
@@ -35,33 +36,33 @@ namespace SharedCode.Database
 			}
         }
 
-		public void StoreData<T>(T newItem, string tableName) where T : new()
+		public async Task StoreDataAsync<T>(T newItem, string tableName) where T : new()
         {
             try
 			{
-                if (checkTableExists(tableName))
+                if (await checkTableExistsAsync(tableName))
 				{
-                    db.Insert(newItem);
+                    await db.InsertAsync(newItem);
                 } else {
-					db.CreateTable<T>();
-					db.Insert(newItem);
+					await db.CreateTableAsync<T>();
+					await db.InsertAsync(newItem);
 				}
             } catch(Exception e) {
 				Console.WriteLine("Error: " + e);
 			}
         }
 
-		public void UpdateData<T>(T updateItem, string tableName) where T : new()
+		public async Task UpdateDataAsync<T>(T updateItem, string tableName) where T : new()
         {
             try
             {
-                if (checkTableExists(tableName))
+                if (await checkTableExistsAsync(tableName))
 				{
-                    db.Update(updateItem);
+                    await db.UpdateAsync(updateItem);
                 }
                 else {
-                    db.CreateTable<T>();
-                    db.Insert(updateItem);
+                    await db.CreateTableAsync<T>();
+                    await db.InsertAsync(updateItem);
                 }
             }
             catch (Exception e) {
@@ -69,24 +70,24 @@ namespace SharedCode.Database
             }
         }
 
-		public void DeleteDataById<T>(T item, string tableName, int id) where T : new()
+		public async Task DeleteDataByIdAsync<T>(T item, string tableName, int id) where T : new()
         {
 			try
 			{
-                if (checkTableExists(tableName))
-					db.Delete<T>(id);
+                if (await checkTableExistsAsync(tableName))
+					await db.DeleteAsync<T>(id);
 			} catch (Exception e) {
                 Console.WriteLine("Error: " + e);
             }
         }
 
 
-        public Result<List<T>> GetAllData<T>() where T : new()
+        public async Task<Result<List<T>>> GetAllDataAsync<T>() where T : new()
 		{
             List<T> typeList = new List<T>();
             try
             {
-                var data = db.Table<T>();
+                var data = await db.Table<T>().ToListAsync();
                 foreach (var res in data)
                 {
                     typeList.Add(res);
