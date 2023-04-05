@@ -5,7 +5,8 @@ namespace SharedCode.Util
 	{
 		public enum DBModels
 		{
-			User
+			User,
+			Pokemon
 		}
 	}
 }

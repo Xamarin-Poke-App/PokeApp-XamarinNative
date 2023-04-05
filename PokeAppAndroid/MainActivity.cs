@@ -10,13 +10,16 @@ using SharedCode.Controller;
 using SharedCode.Services;
 using SharedCode.Model;
 using SharedCode.Util;
+using SharedCode.Interfaces;
+using PokeAppAndroid.Utils;
 
 namespace PokeAppAndroid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        static LoginService loginService = IocContainer.GetDependency<LoginService>();
+        LoginService loginService = IocContainer.GetDependency<LoginService>();
+        StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
 
         private Button LoginButton;
 
@@ -26,9 +29,17 @@ namespace PokeAppAndroid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            bool isLoggedIn = storageUtils.GetIsLoggedIn();
+            if(isLoggedIn)
+            {
+                StartActivity(typeof(PokemonHomeActivity));
+                Finish();
+                return;
+            }
+
             loginService.UserLoggedIn += LoginService_UserLoggedIn;
             
-
             LoginButton = FindViewById<Button>(Resource.Id.loginButton);
             LoginButton.Click += LoginButton_Click;
         }
@@ -38,6 +49,7 @@ namespace PokeAppAndroid
             if (resultLogin.Success)
             {
                 StartActivity(typeof(PokemonHomeActivity));
+                storageUtils.SetIsLoggedIn(true);
                 Finish();
             }
             else

@@ -9,6 +9,7 @@ using SharedCode.Model.DB;
 using SharedCode.Repository.Interfaces;
 using SharedCode.Util;
 using Unity;
+using static SharedCode.Util.Enums;
 
 namespace SharedCode.Repository.DB
 {
@@ -25,12 +26,11 @@ namespace SharedCode.Repository.DB
 		{
             this.Repository = repository;
 			this.DatabaseManager = databaseManager;
-            //BuildPokemonLocalList();
 		}
 
 		public async Task BuildPokemonLocalList()
 		{
-			if (DatabaseManager.checkTableExists("Pokemon"))
+			if (DatabaseManager.checkTableExists(DBModels.Pokemon.ToString()))
 				return;
 
 			var data = await Repository.GetPokemonList();
@@ -67,7 +67,7 @@ namespace SharedCode.Repository.DB
 
                 foreach (var finalPokemon in pokemons)
                 {
-                    DatabaseManager.StoreData<PokemonLocal>(finalPokemon.Value, "Pokemon");
+                    DatabaseManager.StoreData<PokemonLocal>(finalPokemon.Value, DBModels.Pokemon.ToString());
                 }
             }
 		}
@@ -112,7 +112,7 @@ namespace SharedCode.Repository.DB
         public async Task<Result<List<PokemonLocal>>> GetPokemonLocalListAsync()
         {
             await BuildPokemonLocalList();
-            if (DatabaseManager.checkTableExists("Pokemon"))
+            if (DatabaseManager.checkTableExists(DBModels.Pokemon.ToString()))
             {
                 return DatabaseManager.GetAllData<PokemonLocal>();
             }

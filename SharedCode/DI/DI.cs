@@ -5,8 +5,10 @@ using SharedCode.Repository.DB;
 using SharedCode.Repository.Interfaces;
 using SharedCode.Services;
 using SharedCode.Util;
+using SharedCode.Interfaces;
 using Unity;
 using Unity.Lifetime;
+using System.ComponentModel;
 
 namespace SharedCode.DI
 {
@@ -28,6 +30,6 @@ namespace SharedCode.DI
 			// DB
 			container.RegisterType<IPokemonRepositoryLocal, PokemonRepositoryLocal>();
 		}
-	}
+    }
 }
 	
