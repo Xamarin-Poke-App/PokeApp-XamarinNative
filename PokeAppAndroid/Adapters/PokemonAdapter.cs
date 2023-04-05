@@ -38,8 +38,10 @@ namespace PokeAppAndroid.Adapters
             var value = pokemomList[position];
             string pokemonID = value.ID;
 
-            viewHolder.FirstType.Text = value.Types[0].ToString();
             viewHolder.Container.SetDrawableBackgroundForType(value.Types[0]);
+
+            viewHolder.FirstType.Text = value.Types[0].ToString();
+            viewHolder.FirstType.SetDrawableBackgroundForType(value.Types[0]);
 
             if (value.Types.Count > 1)
             {
