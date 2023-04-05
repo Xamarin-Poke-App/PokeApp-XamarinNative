@@ -2,10 +2,10 @@
 using SharedCode.Model;
 using SharedCode.Util;
 
-namespace SharedCode.Services
+namespace SharedCode.Event
 {
 	// Note: If this class get some changes that includes dependencies, register this class and its dependecies in Ioc Container to manage DI
-	public class LoginService
+	public class LoginEvent
 	{
         public event EventHandler<Result<string>> UserLoggedIn;
 

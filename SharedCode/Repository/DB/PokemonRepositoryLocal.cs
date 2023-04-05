@@ -15,8 +15,6 @@ namespace SharedCode.Repository.DB
 {
 	public class PokemonRepositoryLocal : IPokemonRepositoryLocal
 	{
-		private readonly INetworkHandler NetworkHandler;
-
         public IPokemonRepository Repository;
 
         [Dependency]
