@@ -41,14 +41,15 @@ namespace PokeAppAndroid.Adapters
             string pokemonID = value.Id.ToString();
 
             viewHolder.Container.SetDrawableBackgroundForType(value.TypesArray.First());
+            viewHolder.TvRegion.Text = value.Region.FormatedName();
 
-            viewHolder.FirstType.Text = value.TypesArray.First().ToString();
+            viewHolder.FirstType.Text = value.TypesArray.First().ToString().FormatedName();
             viewHolder.FirstType.SetDrawableBackgroundForType(value.TypesArray.First());
             viewHolder.SecondType.Visibility = ViewStates.Gone;
             if (value.TypesArray.Count() > 1)
             {
                 viewHolder.SecondType.Visibility = ViewStates.Visible;
-                viewHolder.SecondType.Text = value.TypesArray.Last().ToString();
+                viewHolder.SecondType.Text = value.TypesArray.Last().ToString().FormatedName();
                 viewHolder.SecondType.SetDrawableBackgroundForType(value.TypesArray.Last());
             }
 
@@ -75,6 +76,7 @@ namespace PokeAppAndroid.Adapters
             public ConstraintLayout Container { get; set; }
             public TextView FirstType { get; set; }
             public TextView SecondType { get; set; }
+            public TextView TvRegion { get; set; }
 
 
             public PokemonViewHolder(Android.Views.View card, Action<int> listener) : base(card)
@@ -85,6 +87,7 @@ namespace PokeAppAndroid.Adapters
                 Container = card.FindViewById<ConstraintLayout>(Resource.Id.Container);
                 FirstType = card.FindViewById<TextView>(Resource.Id.FirstType);
                 SecondType = card.FindViewById<TextView>(Resource.Id.SecondType);
+                TvRegion = card.FindViewById<TextView>(Resource.Id.TvRegion);
                 card.Click += (sender, e) => listener(base.AbsoluteAdapterPosition);
             }
         }
