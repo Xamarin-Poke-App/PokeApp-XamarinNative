@@ -103,8 +103,8 @@ namespace SharedCode.Database
         {
             try
             {
-                var query = "SELECT * FROM " + tableName + " WHERE Id = ?";
-                var data = db.Query<T>(query, id);
+                var query = "SELECT * FROM " + tableName + " WHERE Id LIKE ?";
+                var data = db.Query<T>(query, "%" + id + "%");
                 return Result.Ok<T>(data.FirstOrDefault());
             }
             catch
