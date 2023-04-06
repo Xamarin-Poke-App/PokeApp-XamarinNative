@@ -22,8 +22,11 @@ namespace SharedCode.DI
 			// Singleton
 			container.RegisterType<INetworkHandler, NetworkHandler>(new ContainerControlledLifetimeManager());
 
-			// Pokemon List
-			container.RegisterType<IPokemonRepository, PokemonRepository>();
+            // Service
+            container.RegisterType<IPokemonService, PokemonService>();
+
+            // Pokemon List
+            container.RegisterType<IPokemonRepository, PokemonRepository>();
 			container.RegisterType<IPokemonController, PokemonController>();
 			container.RegisterType<IPokemonDetailController, PokemonDetailController>();
 
@@ -32,4 +35,5 @@ namespace SharedCode.DI
 		}
     }
 }
+	
 	
