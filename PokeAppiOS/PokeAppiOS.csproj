@@ -153,6 +153,7 @@
         <InterfaceDefinition Include="Views\Login.storyboard" />
         <InterfaceDefinition Include="Views\Home.storyboard" />
         <InterfaceDefinition Include="Views\Cells\PokemonViewCell.xib" />
+        <InterfaceDefinition Include="Views\Cells\TypeCollectionViewCell.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -184,6 +185,10 @@
         <Compile Include="Utils\BottomLine.cs" />
         <Compile Include="Utils\UIViewExtension.cs" />
         <Compile Include="Utils\Storage.cs" />
+        <Compile Include="Views\Cells\TypeCollectionViewCell.cs" />
+        <Compile Include="Views\Cells\TypeCollectionViewCell.designer.cs">
+          <DependentUpon>TypeCollectionViewCell.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
