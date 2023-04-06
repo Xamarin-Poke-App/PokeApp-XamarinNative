@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,6 +44,63 @@ namespace SharedCode.Repository.DB
             return Result.Ok<List<PokemonLocal>>(new List<PokemonLocal>());
             
         }
+
+        public async Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(int pokeId)
+        {
+            if (await DatabaseManager.checkTableExistsAsync(DBModels.Pokemon.ToString()))
+            {
+                return await DatabaseManager.GetDataByIdAsync<PokemonLocal>(pokeId, DBModels.Pokemon.ToString());
+            }
+            return Result.Fail<PokemonLocal>("Can't get info from db");
+        }
+        
+        public async Task StoreEvolutionChainAsync(EvolutionChainResponse evolutionChain)
+        {
+            var evolutionChainString = Newtonsoft.Json.JsonConvert.SerializeObject(evolutionChain);
+            var localEvolutionChain = new EvolutionChainLocal { Id = evolutionChain.id, Chain = evolutionChainString };
+            await DatabaseManager.StoreDataAsync(localEvolutionChain, Constants.EvolutionChainTable);
+        }
+
+        public async Task<Result<EvolutionChainResponse>> GetEvolutionChainByIdFromLocalAsync(int id)
+        {
+            try
+            {
+                var dbResponse = await DatabaseManager.GetAllDataAsync<EvolutionChainLocal>();
+
+                if (dbResponse.IsFailure)
+                {
+                    return Result.Fail<EvolutionChainResponse>("Could not get data");
+                }
+                var row = dbResponse.Value.Where(r => r.Id == id).First();
+
+                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
+                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
+
+                return Result.Ok<EvolutionChainResponse>(evolutionChainFromLocal);
+            } catch (Exception)
+            {
+                return Result.Fail<EvolutionChainResponse>("Could not get data");
+            }
+        }
+
+        public async Task<Result<List<EvolutionChainResponse>>> GetAllEvolutionChainFromLocalAsync()
+        {
+            var dbResponse = await DatabaseManager.GetAllDataAsync<EvolutionChainLocal>();
+
+            if (dbResponse.IsFailure)
+            {
+                return Result.Fail<List<EvolutionChainResponse>>("Could not get all data");
+            }
+
+            var rowsFromLocal = new List<EvolutionChainResponse>();
+            foreach (var row in dbResponse.Value)
+            {
+                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
+                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
+                rowsFromLocal.Add(evolutionChainFromLocal);
+            }
+
+            return Result.Ok<List<EvolutionChainResponse>>(rowsFromLocal);
+        }
     }
 }
-

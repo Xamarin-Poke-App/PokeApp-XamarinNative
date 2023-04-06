@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharedCode.Model.Api;
 
 namespace SharedCode.Model
 {
@@ -18,6 +19,18 @@ namespace SharedCode.Model
     public class EvolutionChain
     {
         public string url { get; set; }
+
+        public int GetEvolutionChainIdFromUrl()
+        {
+            var auxUrl = url.Remove(url.Length - 1);
+            var index = auxUrl.LastIndexOf("/");
+            int id;
+            if (Int32.TryParse(auxUrl.Substring(index + 1), out id))
+            {
+                return id;
+            }
+            return -1;
+        }
     }
 
     public class EvolvesFromSpecies
@@ -96,6 +109,7 @@ namespace SharedCode.Model
         public List<Genera> genera { get; set; }
         public Generation generation { get; set; }
         public GrowthRate growth_rate { get; set; }
+        public ResultItem habitat { get; set; }
         public bool has_gender_differences { get; set; }
         public int hatch_counter { get; set; }
         public int id { get; set; }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using SQLite;
-using SQLiteNetExtensions.Attributes;
-using SQLiteNetExtensions.Extensions;
 using SharedCode.Util;
 using System.Threading.Tasks;
 
@@ -95,6 +92,19 @@ namespace SharedCode.Database
                 return Result.Ok<List<T>>(typeList);
             } catch {
                 return Result.Fail<List<T>>("Could not get all data");
+            }
+        }
+
+        public async Task<Result<T>> GetDataByIdAsync<T>(int id, string tableName) where T : IGenericId, new()
+        {
+            try
+            {
+                var data = await db.Table<T>().Where(i => i.Id == id).FirstOrDefaultAsync();
+                return Result.Ok<T>(data);
+            }
+            catch
+            {
+                return Result.Fail<T>("Could not get data");
             }
         }
 	}

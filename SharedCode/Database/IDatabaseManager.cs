@@ -12,6 +12,7 @@ namespace SharedCode.Database
         Task UpdateDataAsync<T>(T updateItem, string tableName) where T : new();
         Task DeleteDataByIdAsync<T>(T item, string tableName, int id) where T : new();
         Task<Result<List<T>>> GetAllDataAsync<T>() where T : new();
+        Task<Result<T>> GetDataByIdAsync<T>(int id, string tableName) where T : IGenericId, new();
     }
 }
 
