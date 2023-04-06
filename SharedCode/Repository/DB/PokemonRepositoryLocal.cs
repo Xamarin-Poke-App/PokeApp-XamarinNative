@@ -147,7 +147,7 @@ namespace SharedCode.Repository.DB
             }
         }
 
-        public Result<List<EvolutionChainResponse>> GetAllEvolutionChainFromLocal(int id)
+        public Result<List<EvolutionChainResponse>> GetAllEvolutionChainFromLocal()
         {
             var dbResponse = DatabaseManager.GetAllData<EvolutionChainLocal>();
 

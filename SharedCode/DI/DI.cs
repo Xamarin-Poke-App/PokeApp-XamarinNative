@@ -26,9 +26,6 @@ namespace SharedCode.DI
 			container.RegisterType<IPokemonController, PokemonController>();
 			container.RegisterType<IPokemonDetailController, PokemonDetailController>();
 
-			// Managers
-			container.RegisterType<IDatabaseManager, DatabaseManager>();
-
 			// DB
 			container.RegisterType<IPokemonRepositoryLocal, PokemonRepositoryLocal>();
 		}

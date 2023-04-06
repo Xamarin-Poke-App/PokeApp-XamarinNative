@@ -16,8 +16,6 @@ namespace SharedCode.Repository
 {
 	public class PokemonRepository : IPokemonRepository
 	{
-        IDatabaseManager dataBaseManager = IocContainer.GetDependency<DatabaseManager>();
-
         private readonly INetworkHandler NetworkHandler;
 
 		public PokemonRepository(INetworkHandler networkHandler)
