@@ -99,13 +99,12 @@ namespace SharedCode.Database
             }
         }
 
-        public Result<T> GetDataById<T>(int id, string tableName) where T : new()
+        public Result<T> GetDataById<T>(int id, string tableName) where T : IGenericId, new()
         {
             try
             {
-                var query = "SELECT * FROM " + tableName + " WHERE Id LIKE ?";
-                var data = db.Query<T>(query, "%" + id + "%");
-                return Result.Ok<T>(data.FirstOrDefault());
+                var data = db.Table<T>().Where(i => i.Id == id).FirstOrDefault();
+                return Result.Ok<T>(data);
             }
             catch
             {

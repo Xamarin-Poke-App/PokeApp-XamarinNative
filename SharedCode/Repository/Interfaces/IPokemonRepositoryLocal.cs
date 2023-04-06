@@ -9,7 +9,7 @@ namespace SharedCode.Repository.Interfaces
 	public interface IPokemonRepositoryLocal
 	{
         Task<Result<List<PokemonLocal>>> GetPokemonLocalListAsync();
-        Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(PokemonLocal pokemon);
+        Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(int pokeId);
     }
 }
 

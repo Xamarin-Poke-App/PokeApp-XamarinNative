@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharedCode.Model.Api;
 
 namespace SharedCode.Model
 {
@@ -57,12 +58,6 @@ namespace SharedCode.Model
         public string url { get; set; }
     }
 
-    public class Habitat
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
     public class Language
     {
         public string name { get; set; }
@@ -102,7 +97,7 @@ namespace SharedCode.Model
         public List<Genera> genera { get; set; }
         public Generation generation { get; set; }
         public GrowthRate growth_rate { get; set; }
-        public Habitat habitat { get; set; }
+        public ResultItem habitat { get; set; }
         public bool has_gender_differences { get; set; }
         public int hatch_counter { get; set; }
         public int id { get; set; }

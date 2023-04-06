@@ -6,7 +6,7 @@ using SQLite;
 namespace SharedCode.Model.DB
 {
     [Table("Pokemon")]
-    public class PokemonLocal
+    public class PokemonLocal : IGenericId
 	{
 		public string Name { get; set; }
 

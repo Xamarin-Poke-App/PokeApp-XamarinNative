@@ -12,7 +12,6 @@ namespace PokeAppiOS.Controllers
 	public partial class PokemonDetailViewController : UIViewController, IPokemonDetailControllerListener
 	{
 		public int PokemonID;
-		public PokemonLocal PokemonInfo;
         private IPokemonDetailController controller;
         public PokemonDetailViewController(IntPtr handle) : base(handle)
         {
@@ -24,7 +23,7 @@ namespace PokeAppiOS.Controllers
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
 			controller.LoadPokemonImage(PokemonID);
-			controller.LoadPokemonInfo(PokemonInfo);
+			controller.LoadPokemonInfo(PokemonID);
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -45,8 +44,8 @@ namespace PokeAppiOS.Controllers
         {
             if (pokemon.Success)
 			{
-                pokemonNameLabel.Text = PokemonInfo.Name;
-                Title = PokemonInfo.Name;
+                pokemonNameLabel.Text = pokemon.Value.Name;
+                Title = pokemon.Value.Name;
             }
         }
     }
