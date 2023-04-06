@@ -27,12 +27,14 @@ namespace PokeAppAndroid
         {
             base.OnCreate();
 
-            // Storage Utils
             IocContainer.CreateContainer();
-            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
-            IocContainer.RegisterType<IPathManager, PathManager>();
+            // Storage Utils
             IocContainer.RegisterType<IStorage, Storage>();
             IocContainer.RegisterType<IStorageUtils, StorageUtils>();
+
+            // Db
+            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
+            IocContainer.RegisterType<IPathManager, PathManager>();
         }
     }
 }

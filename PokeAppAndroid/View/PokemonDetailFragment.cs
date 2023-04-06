@@ -21,7 +21,6 @@ namespace PokeAppAndroid.View
 	public class PokemonDetailFragment : AndroidX.Fragment.App.Fragment, IPokemonDetailControllerListener
     {
         private int pokemonId;
-        private PokemonLocal pokemonInfo;
         private ImageView pokemonImage;
         private TextView pokemonNameText;
         private IPokemonDetailController controller;
@@ -33,6 +32,7 @@ namespace PokeAppAndroid.View
 
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
+            controller.LoadPokemonInfo(pokemonId);
         }
 
 		public override Android.Views.View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -55,9 +55,8 @@ namespace PokeAppAndroid.View
         public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.IsFailure) return;
-            pokemonInfo = pokemon.Value;
-            pokemonNameText.Text = pokemonInfo.Name;
-            controller.LoadPokemonImage(pokemonInfo.Id);
+            pokemonNameText.Text = pokemon.Value.Name;
+            controller.LoadPokemonImage(pokemon.Value.Id);
         }
 
         private void checkArgs()

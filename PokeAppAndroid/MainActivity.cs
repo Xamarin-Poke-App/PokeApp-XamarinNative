@@ -12,13 +12,14 @@ using SharedCode.Model;
 using SharedCode.Util;
 using SharedCode.Interfaces;
 using PokeAppAndroid.Utils;
+using SharedCode.Event;
 
 namespace PokeAppAndroid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        LoginService loginService = IocContainer.GetDependency<LoginService>();
+        LoginEvent loginService = IocContainer.GetDependency<LoginEvent>();
         StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
 
         private Button LoginButton;

@@ -1,68 +1,104 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SharedCode.Model.Api
 {
     public class DoubleDamageFrom
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class GameIndex
     {
-        public int game_index { get; set; }
-        public Generation generation { get; set; }
+        [JsonPropertyName("game_index")]
+        public int GameIndexNumber { get; set; }
+
+        [JsonPropertyName("generation")]
+        public Generation Generation { get; set; }
     }
 
     public class Generation
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class Language
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class Move
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class Name
     {
-        public Language language { get; set; }
-        public string name { get; set; }
+        [JsonPropertyName("language")]
+        public Language Language { get; set; }
+
+        [JsonPropertyName("name")]
+        public string NameText { get; set; }
     }
 
     public class NoDamageFrom
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class NoDamageTo
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class Pokemon
     {
-        public ResultItem pokemon { get; set; }
-        public int slot { get; set; }
+        [JsonPropertyName("pokemon")]
+        public ResultItem PokemonItem { get; set; }
+
+        [JsonPropertyName("slot")]
+        public int Slot { get; set; }
     }
 
     public class TypeResponse
     {
-        public Generation generation { get; set; }
-        public int id { get; set; }
-        public string name { get; set; }
-        public List<Pokemon> pokemon { get; set; }
+        [JsonPropertyName("generation")]
+        public Generation Generation { get; set; }
+
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("pokemon")]
+        public List<Pokemon> Pokemon { get; set; }
     }
 
 }
