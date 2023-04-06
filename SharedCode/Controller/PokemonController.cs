@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
+using SharedCode.Interfaces;
 using SharedCode.Model;
 using SharedCode.Model.Api;
 using SharedCode.Model.DB;
@@ -31,7 +32,7 @@ namespace SharedCode.Controller
         public IPokemonControllerListener viewListener;
         
         [Dependency]
-		public IPokemonRepositoryLocal Repository;
+		public IPokemonService Repository;
 
 		public IPokemonControllerListener listener
 		{
@@ -54,9 +55,8 @@ namespace SharedCode.Controller
 		public async void GetAllPokemonsSpecies()
 		{
 
-            var data = await Repository.GetPokemonLocalListAsync();
+            var data = await Repository.GetPokemonDataAsync();
             viewListener.updateView(data);
-			if (data.IsFailure) return;
             pokemons = data.Value;
             filteredPokemons = data.Value;
         }

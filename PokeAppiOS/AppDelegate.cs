@@ -23,10 +23,14 @@ namespace PokeAppiOS
         public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
             IocContainer.CreateContainer();
-            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
-            IocContainer.RegisterType<IPathManager, PathManager>();
+
+            // Storage Utils
             IocContainer.RegisterType<IStorage, Storage>();
             IocContainer.RegisterType<IStorageUtils, StorageUtils>();
+
+            // Db
+            IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
+            IocContainer.RegisterType<IPathManager, PathManager>();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,109 +14,95 @@ using static SharedCode.Util.Enums;
 
 namespace SharedCode.Repository.DB
 {
-	public class PokemonRepositoryLocal : IPokemonRepositoryLocal
+    public class PokemonRepositoryLocal : IPokemonRepositoryLocal
 	{
         public IPokemonRepository Repository;
 
         [Dependency]
 		public IDatabaseManager DatabaseManager;
 
-        public PokemonRepositoryLocal(IDatabaseManager databaseManager, IPokemonRepository repository)
+        public PokemonRepositoryLocal(IDatabaseManager databaseManager)
 		{
-            this.Repository = repository;
 			this.DatabaseManager = databaseManager;
 		}
 
-		public async Task BuildPokemonLocalList()
-		{
-			if (DatabaseManager.checkTableExists(DBModels.Pokemon.ToString()))
-				return;
-
-			var data = await Repository.GetPokemonList();
-
-			if (data.Success)
-			{
-                Dictionary<int, PokemonLocal> pokemons = data.Value.Select(pokemon => new PokemonLocal(pokemon.Name, pokemon.GetIdFromUrl())).ToDictionary(x => x.Id, x => x);
-				var typesList = await Repository.GetPokemonTypesList();
-				if (typesList.Success)
-				{
-                    foreach (var type in typesList.Value)
-					{
-						var typeInfo = await Repository.GetTypeInfo(type.GetIdFromUrl());
-						if (typeInfo.Success)
-						{
-							pokemons = PopulateTypeForPokemons(pokemons, typeInfo.Value.Pokemon, typeInfo.Value.Name);
-						}
-					}
-					
-                }
-
-				var generationsList = await Repository.GetPokemonGenerationList();
-				if (generationsList.Success)
-				{
-					foreach (var generation in generationsList.Value)
-					{
-						var generationInfo = await Repository.GetGenerationInfo(generation.GetIdFromUrl());
-						if (generationInfo.Success)
-						{
-                            pokemons = PopulateRegionForPokemons(pokemons, generationInfo.Value.PokemonSpecies, generationInfo.Value.MainRegion.Name);
-						}
-					}
-				}
-
-                foreach (var finalPokemon in pokemons)
-                {
-                    DatabaseManager.StoreData<PokemonLocal>(finalPokemon.Value, DBModels.Pokemon.ToString());
-                }
-            }
-		}
-
-        public Dictionary<int, PokemonLocal> PopulateTypeForPokemons(Dictionary<int, PokemonLocal> pokemonsList, List<Pokemon> pokemonTypeList, string TypeName)
-		{
-			var pokemonTypeListIndex = 0;
-			var auxPokemonList = pokemonsList;
-			while(pokemonTypeListIndex < pokemonTypeList.Count())
-			{
-                var id = pokemonTypeList[pokemonTypeListIndex].PokemonItem.GetIdFromUrl();
-                if (id > 1010)
-                {
-                    pokemonTypeListIndex++;
-                    continue;
-                }
-                if (auxPokemonList[id].Types == "")
-                    auxPokemonList[id].Types += TypeName;
-                else
-                    auxPokemonList[id].Types += $"%{TypeName}";
-				pokemonTypeListIndex++;
-			}
-
-			return auxPokemonList;
-		}
-
-        public Dictionary<int, PokemonLocal> PopulateRegionForPokemons(Dictionary<int, PokemonLocal> pokemonsList, List<ResultItem> pokemonSpeciesList, string regionName)
+        public async Task StorePokemonListAsync(List<PokemonLocal> pokemons)
         {
-            var pokemonSpeciesListIndex = 0;
-            var auxPokemonList = pokemonsList;
-            while (pokemonSpeciesListIndex < pokemonSpeciesList.Count())
+            if (await DatabaseManager.checkTableExistsAsync(DBModels.Pokemon.ToString()))
+                return;
+
+            foreach (var finalPokemon in pokemons)
             {
-                var id = pokemonSpeciesList[pokemonSpeciesListIndex].GetIdFromUrl();
-                auxPokemonList[id].Region = regionName;
-
-                pokemonSpeciesListIndex++;
+                await DatabaseManager.StoreDataAsync<PokemonLocal>(finalPokemon, DBModels.Pokemon.ToString());
             }
-
-            return auxPokemonList;
         }
 
         public async Task<Result<List<PokemonLocal>>> GetPokemonLocalListAsync()
         {
-            await BuildPokemonLocalList();
-            if (DatabaseManager.checkTableExists(DBModels.Pokemon.ToString()))
+            if (await DatabaseManager.checkTableExistsAsync(DBModels.Pokemon.ToString()))
             {
-                return DatabaseManager.GetAllData<PokemonLocal>();
+                return await DatabaseManager.GetAllDataAsync<PokemonLocal>();
             }
-            return Result.Fail<List<PokemonLocal>>("Can't get info from db");
+            return Result.Ok<List<PokemonLocal>>(new List<PokemonLocal>());
+            
+        }
+
+        public async Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(int pokeId)
+        {
+            if (await DatabaseManager.checkTableExistsAsync(DBModels.Pokemon.ToString()))
+            {
+                return await DatabaseManager.GetDataByIdAsync<PokemonLocal>(pokeId, DBModels.Pokemon.ToString());
+            }
+            return Result.Fail<PokemonLocal>("Can't get info from db");
+        }
+        
+        public async Task StoreEvolutionChainAsync(EvolutionChainResponse evolutionChain)
+        {
+            var evolutionChainString = Newtonsoft.Json.JsonConvert.SerializeObject(evolutionChain);
+            var localEvolutionChain = new EvolutionChainLocal { Id = evolutionChain.Id, Chain = evolutionChainString };
+            await DatabaseManager.StoreDataAsync(localEvolutionChain, Constants.EvolutionChainTable);
+        }
+
+        public async Task<Result<EvolutionChainResponse>> GetEvolutionChainByIdFromLocalAsync(int id)
+        {
+            try
+            {
+                var dbResponse = await DatabaseManager.GetAllDataAsync<EvolutionChainLocal>();
+
+                if (dbResponse.IsFailure)
+                {
+                    return Result.Fail<EvolutionChainResponse>("Could not get data");
+                }
+                var row = dbResponse.Value.Where(r => r.Id == id).First();
+
+                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
+                var evolutionChainFromLocal = new EvolutionChainResponse { Id = row.Id, Chain = evolutionChainResponse.Chain };
+
+                return Result.Ok<EvolutionChainResponse>(evolutionChainFromLocal);
+            } catch (Exception)
+            {
+                return Result.Fail<EvolutionChainResponse>("Could not get data");
+            }
+        }
+
+        public async Task<Result<List<EvolutionChainResponse>>> GetAllEvolutionChainFromLocalAsync()
+        {
+            var dbResponse = await DatabaseManager.GetAllDataAsync<EvolutionChainLocal>();
+
+            if (dbResponse.IsFailure)
+            {
+                return Result.Fail<List<EvolutionChainResponse>>("Could not get all data");
+            }
+
+            var rowsFromLocal = new List<EvolutionChainResponse>();
+            foreach (var row in dbResponse.Value)
+            {
+                EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
+                var evolutionChainFromLocal = new EvolutionChainResponse { Id = row.Id, Chain = evolutionChainResponse.Chain };
+                rowsFromLocal.Add(evolutionChainFromLocal);
+            }
+
+            return Result.Ok<List<EvolutionChainResponse>>(rowsFromLocal);
         }
     }
 }
-
