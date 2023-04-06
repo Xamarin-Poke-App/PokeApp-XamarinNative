@@ -48,7 +48,7 @@ namespace SharedCode.Services
                         }
                     } else
                     {
-                        return Result.Fail<PokemonLocal>("No Internet conecction");
+                        return Result.Fail<PokemonLocal>("No Internet connection");
                     }
                 }
             }
@@ -67,7 +67,7 @@ namespace SharedCode.Services
                 return await Repository.GetPokemonImage(pokeId);
             } else
             {
-                return Result.Fail<byte[]>("No Internet conecction");
+                return Result.Fail<byte[]>("No Internet connection");
             }
         }
 
@@ -81,7 +81,7 @@ namespace SharedCode.Services
             }
             else
             {
-                return Result.Fail<EvolutionChainResponse>("No Internet conecction");
+                return Result.Fail<EvolutionChainResponse>("No Internet connection");
             }
         }
     }
