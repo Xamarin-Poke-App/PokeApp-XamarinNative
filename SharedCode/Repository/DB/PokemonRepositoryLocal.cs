@@ -71,6 +71,26 @@ namespace SharedCode.Repository.DB
             }
 		}
 
+        public async Task UpdatePokemonInfo(int pokeId)
+        {
+            var data = await Repository.GetPokemonSpecieInfo(pokeId);
+
+            if (data.Success)
+            {
+                var pokemonDb = DatabaseManager.GetDataById<PokemonLocal>(pokeId, DBModels.Pokemon.ToString());
+
+                if (pokemonDb.Success)
+                {
+                    pokemonDb.Value.BaseHappiness = data.Value.base_happiness;
+                    pokemonDb.Value.Generation = data.Value.generation.name;
+                    if (data.Value.habitat != null)
+                        pokemonDb.Value.Habitat = data.Value.habitat.name;
+
+                    DatabaseManager.UpdateData<PokemonLocal>(pokemonDb.Value, DBModels.Pokemon.ToString());
+                }
+            }
+        }
+
         public Dictionary<int, PokemonLocal> PopulateTypeForPokemons(Dictionary<int, PokemonLocal> pokemonsList, List<Pokemon> pokemonTypeList, string TypeName)
 		{
 			var pokemonTypeListIndex = 0;
@@ -118,6 +138,16 @@ namespace SharedCode.Repository.DB
             return Result.Fail<List<PokemonLocal>>("Can't get info from db");
         }
 
+        public async Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(int pokeId)
+        {
+            await UpdatePokemonInfo(pokeId);
+            if (DatabaseManager.checkTableExists(DBModels.Pokemon.ToString()))
+            {
+                return DatabaseManager.GetDataById<PokemonLocal>(pokeId, DBModels.Pokemon.ToString());
+            }
+            return Result.Fail<PokemonLocal>("Can't get info from db");
+        }
+        
         public void StoreEvolutionChain(EvolutionChainResponse evolutionChain)
         {
             var evolutionChainString = Newtonsoft.Json.JsonConvert.SerializeObject(evolutionChain);

@@ -10,9 +10,10 @@ namespace SharedCode.Repository.Interfaces
 	public interface IPokemonRepositoryLocal
 	{
         Task<Result<List<PokemonLocal>>> GetPokemonLocalListAsync();
+        Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(int pokeId);
         void StoreEvolutionChain(EvolutionChainResponse evolutionChain);
         Result<EvolutionChainResponse> GetEvolutionChainByIdFromLocal(int id);
-        Result<List<EvolutionChainResponse>> GetAllEvolutionChainFromLocal(int id);
+        Result<List<EvolutionChainResponse>> GetAllEvolutionChainFromLocal();
     }
 }
 

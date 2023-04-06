@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using SQLite;
 using SharedCode.Util;
+using System.ComponentModel;
+using System.Linq;
 
 namespace SharedCode.Database
 {
@@ -93,5 +95,18 @@ namespace SharedCode.Database
                 return Result.Fail<List<T>>("Could not get all data");
             }
         }
-    }
+
+        public Result<T> GetDataById<T>(int id, string tableName) where T : IGenericId, new()
+        {
+            try
+            {
+                var data = db.Table<T>().Where(i => i.Id == id).FirstOrDefault();
+                return Result.Ok<T>(data);
+            }
+            catch
+            {
+                return Result.Fail<T>("Could not get data");
+            }
+        }
+	}
 }

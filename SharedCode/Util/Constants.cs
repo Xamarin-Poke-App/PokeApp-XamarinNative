@@ -3,9 +3,10 @@ namespace SharedCode.Util
 {
 	public static class Constants
 	{
-		public const string PokemonAPIBaseAddress = "https://pokeapi.co/api/v2/";
-		public const string PokemonArtWorksImagesBaseAddress = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
-		public const string IsLoggedInKey = "isLoggedIn";
+		public static string PokemonAPIBaseAddress = "https://pokeapi.co/api/v2/";
+		public static string PokemonArtWorksImagesBaseAddress = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+        public static string PokemonShinyArtWorksImagesBaseAddress = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/";
+        public static string IsLoggedInKey = "isLoggedIn";
 		public const string EvolutionChainTable = "evolution_chain";
     }
 }
