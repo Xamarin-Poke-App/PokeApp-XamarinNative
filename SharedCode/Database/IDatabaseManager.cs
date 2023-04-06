@@ -1,17 +1,18 @@
 ﻿using System;
 using SharedCode.Util;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SharedCode.Database
 {
 	public interface IDatabaseManager
 	{
-        bool checkTableExists(string tableName);
-        void StoreData<T>(T newItem, string tableName) where T : new();
-        void UpdateData<T>(T updateItem, string tableName) where T : new();
-        void DeleteDataById<T>(T item, string tableName, int id) where T : new();
-        Result<List<T>> GetAllData<T>() where T : new();
-        Result<T> GetDataById<T>(int id, string tableName) where T : IGenericId, new();
+        Task<bool> checkTableExistsAsync(string tableName);
+        Task StoreDataAsync<T>(T newItem, string tableName) where T : new();
+        Task UpdateDataAsync<T>(T updateItem, string tableName) where T : new();
+        Task DeleteDataByIdAsync<T>(T item, string tableName, int id) where T : new();
+        Task<Result<List<T>>> GetAllDataAsync<T>() where T : new();
+        Task<Result<T>> GetDataByIdAsync<T>(int id, string tableName) where T : IGenericId, new();
     }
 }
 

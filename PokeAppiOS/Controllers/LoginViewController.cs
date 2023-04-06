@@ -8,12 +8,13 @@ using SharedCode.Util;
 using UIKit;
 using GlobalToast;
 using PokeAppiOS.Utils;
+using SharedCode.Event;
 
 namespace PokeAppiOS.Controllers
 {
     public partial class LoginViewController : UIViewController
     {
-        static LoginService loginService = IocContainer.GetDependency<LoginService>();
+        LoginEvent loginService = IocContainer.GetDependency<LoginEvent>();
 
         public LoginViewController(IntPtr handle) : base(handle)
         {
