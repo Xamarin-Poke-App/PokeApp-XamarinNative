@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using SQLite;
-using SQLiteNetExtensions.Attributes;
-using SQLiteNetExtensions.Extensions;
 using SharedCode.Util;
 
 namespace SharedCode.Database
@@ -96,5 +93,5 @@ namespace SharedCode.Database
                 return Result.Fail<List<T>>("Could not get all data");
             }
         }
-	}
+    }
 }

@@ -18,6 +18,18 @@ namespace SharedCode.Model
     public class EvolutionChain
     {
         public string url { get; set; }
+
+        public int GetEvolutionChainIdFromUrl()
+        {
+            var auxUrl = url.Remove(url.Length - 1);
+            var index = auxUrl.LastIndexOf("/");
+            int id;
+            if (Int32.TryParse(auxUrl.Substring(index + 1), out id))
+            {
+                return id;
+            }
+            return -1;
+        }
     }
 
     public class EvolvesFromSpecies

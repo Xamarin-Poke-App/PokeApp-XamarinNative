@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using SharedCode.Database;
 using SharedCode.Model;
+using SharedCode.Services;
 using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Repository.Interfaces;
@@ -186,6 +190,32 @@ namespace SharedCode.Repository
             catch (Exception ex)
             {
                 return Result.Fail<GenerationResponse>($"Check your internet connection {ex.ToString()}");
+            }
+        }
+
+        public async Task<Result<EvolutionChainResponse>> GetEvolutionChainByPokemonId(int id)
+        {
+            try
+            {
+                var evolutionChain = await NetworkHandler.GetData<EvolutionChainResponse>(Constants.PokemonAPIBaseAddress + $"evolution-chain/{id}");
+                return Result.Ok(evolutionChain);
+            }
+            catch (NetworkErrorException ex)
+            {
+                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
+                switch (ex.Code)
+                {
+                    case (int)HttpStatusCode.InternalServerError:
+                        return Result.Fail<EvolutionChainResponse>("It seems like PokeApi server is down");
+                    case (int)HttpStatusCode.NotFound:
+                        return Result.Fail<EvolutionChainResponse>($"The evolution chain \"{id}\" seems to be unavailable right now");
+                    default:
+                        return Result.Fail<EvolutionChainResponse>(ex.Message ?? "Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<EvolutionChainResponse>($"Check your internet connection {ex}");
             }
         }
     }
