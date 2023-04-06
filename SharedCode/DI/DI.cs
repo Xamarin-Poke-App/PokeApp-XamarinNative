@@ -22,6 +22,7 @@ namespace SharedCode.DI
 
             // Service
             container.RegisterType<IPokemonService, PokemonService>();
+			container.RegisterType<IPokemonDetailService, PokemonDetailService>();
 
             // Pokemon List
             container.RegisterType<IPokemonRepository, PokemonRepository>();
