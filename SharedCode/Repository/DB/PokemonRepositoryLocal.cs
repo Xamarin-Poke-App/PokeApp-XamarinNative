@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SharedCode.Database;
 using SharedCode.Model;
+using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Repository.Interfaces;
 using SharedCode.Util;
@@ -15,6 +16,8 @@ namespace SharedCode.Repository.DB
 {
     public class PokemonRepositoryLocal : IPokemonRepositoryLocal
 	{
+        public IPokemonRepository Repository;
+
         [Dependency]
 		public IDatabaseManager DatabaseManager;
 
@@ -56,7 +59,7 @@ namespace SharedCode.Repository.DB
         public async Task StoreEvolutionChainAsync(EvolutionChainResponse evolutionChain)
         {
             var evolutionChainString = Newtonsoft.Json.JsonConvert.SerializeObject(evolutionChain);
-            var localEvolutionChain = new EvolutionChainLocal { Id = evolutionChain.id, Chain = evolutionChainString };
+            var localEvolutionChain = new EvolutionChainLocal { Id = evolutionChain.Id, Chain = evolutionChainString };
             await DatabaseManager.StoreDataAsync(localEvolutionChain, Constants.EvolutionChainTable);
         }
 
@@ -73,7 +76,7 @@ namespace SharedCode.Repository.DB
                 var row = dbResponse.Value.Where(r => r.Id == id).First();
 
                 EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
-                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
+                var evolutionChainFromLocal = new EvolutionChainResponse { Id = row.Id, Chain = evolutionChainResponse.Chain };
 
                 return Result.Ok<EvolutionChainResponse>(evolutionChainFromLocal);
             } catch (Exception)
@@ -95,7 +98,7 @@ namespace SharedCode.Repository.DB
             foreach (var row in dbResponse.Value)
             {
                 EvolutionChainResponse evolutionChainResponse = JsonConvert.DeserializeObject<EvolutionChainResponse>(row.Chain);
-                var evolutionChainFromLocal = new EvolutionChainResponse { id = row.Id, chain = evolutionChainResponse.chain };
+                var evolutionChainFromLocal = new EvolutionChainResponse { Id = row.Id, Chain = evolutionChainResponse.Chain };
                 rowsFromLocal.Add(evolutionChainFromLocal);
             }
 

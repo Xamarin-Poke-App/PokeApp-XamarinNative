@@ -1,25 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using SharedCode.Util;
+using System.Text.Json.Serialization;
 
 namespace SharedCode.Model.Api
 {
     public class BasicListResponse
     {
-        public int count { get; set; }
-        public string next { get; set; }
-        public string previous { get; set; }
-        public List<ResultItem> results { get; set; }
+        [JsonPropertyName("count")]
+        public int Count { get; set; }
+
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
+
+        [JsonPropertyName("previous")]
+        public string Previous { get; set; }
+
+        [JsonPropertyName("results")]
+        public List<ResultItem> Results { get; set; }
     }
 
     public class ResultItem
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
 
         public int GetIdFromUrl()
         {
-            var auxUrl = url.Remove(url.Length - 1);
+            var auxUrl = Url.Remove(Url.Length - 1);
             var index = auxUrl.LastIndexOf("/");
             int id;
             if (Int32.TryParse(auxUrl.Substring(index + 1), out id))
@@ -31,7 +42,7 @@ namespace SharedCode.Model.Api
         
         public string FormatedName()
         {
-            var list = name.Split('-');
+            var list = Name.Split('-');
             string newName = "";
             for (var i = 0; i < list.Length; i++)
             {

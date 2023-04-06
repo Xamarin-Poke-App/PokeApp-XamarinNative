@@ -3,7 +3,7 @@ using SharedCode.Model.DB;
 using SharedCode.Util;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SharedCode.Model;
+using SharedCode.Model.Api;
 
 namespace SharedCode.Repository.Interfaces
 {

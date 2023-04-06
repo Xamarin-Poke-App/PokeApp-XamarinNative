@@ -27,7 +27,7 @@ namespace SharedCode.Services
 
         public async Task<Result<List<PokemonLocal>>> GetPokemonDataAsync()
         {
-
+            
             var localData = await RepositoryLocal.GetPokemonLocalListAsync();
             var isNetworkAvailable = networkConnection.GetIsConnectedCurrentStatus();
 
@@ -67,7 +67,7 @@ namespace SharedCode.Services
 
             if (data.Success)
             {
-                Dictionary<int, PokemonLocal> pokemons = data.Value.Select(pokemon => new PokemonLocal(pokemon.name, pokemon.GetIdFromUrl())).ToDictionary(x => x.Id, x => x);
+                Dictionary<int, PokemonLocal> pokemons = data.Value.Select(pokemon => new PokemonLocal(pokemon.Name, pokemon.GetIdFromUrl())).ToDictionary(x => x.Id, x => x);
                 var typesList = await Repository.GetPokemonTypesList();
                 if (typesList.Success)
                 {
@@ -76,7 +76,7 @@ namespace SharedCode.Services
                         var typeInfo = await Repository.GetTypeInfo(type.GetIdFromUrl());
                         if (typeInfo.Success)
                         {
-                            pokemons = PopulateTypeForPokemons(pokemons, typeInfo.Value.pokemon, typeInfo.Value.name);
+                            pokemons = PopulateTypeForPokemons(pokemons, typeInfo.Value.Pokemon, typeInfo.Value.Name);
                         }
                         else
                         {
@@ -97,7 +97,7 @@ namespace SharedCode.Services
                         var generationInfo = await Repository.GetGenerationInfo(generation.GetIdFromUrl());
                         if (generationInfo.Success)
                         {
-                            pokemons = PopulateRegionForPokemons(pokemons, generationInfo.Value.pokemon_species, generationInfo.Value.main_region.name);
+                            pokemons = PopulateRegionForPokemons(pokemons, generationInfo.Value.PokemonSpecies, generationInfo.Value.MainRegion.Name);
                         }
                         else
                         {
@@ -124,7 +124,7 @@ namespace SharedCode.Services
             var auxPokemonList = pokemonsList;
             while (pokemonTypeListIndex < pokemonTypeList.Count())
             {
-                var id = pokemonTypeList[pokemonTypeListIndex].pokemon.GetIdFromUrl();
+                var id = pokemonTypeList[pokemonTypeListIndex].PokemonItem.GetIdFromUrl();
                 if (id > 1010)
                 {
                     pokemonTypeListIndex++;
