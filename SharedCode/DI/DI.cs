@@ -5,10 +5,9 @@ using SharedCode.Repository.DB;
 using SharedCode.Repository.Interfaces;
 using SharedCode.Services;
 using SharedCode.Util;
-using SharedCode.Interfaces;
 using Unity;
 using Unity.Lifetime;
-using System.ComponentModel;
+using SharedCode.Database;
 
 namespace SharedCode.DI
 {
