@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using SharedCode.Database;
 using SharedCode.Model;
-using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Repository.Interfaces;
 using SharedCode.Util;
@@ -14,7 +13,7 @@ using static SharedCode.Util.Enums;
 
 namespace SharedCode.Repository.DB
 {
-	public class PokemonRepositoryLocal : IPokemonRepositoryLocal
+    public class PokemonRepositoryLocal : IPokemonRepositoryLocal
 	{
         [Dependency]
 		public IDatabaseManager DatabaseManager;
