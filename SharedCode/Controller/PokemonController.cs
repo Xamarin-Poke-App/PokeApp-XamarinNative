@@ -55,7 +55,7 @@ namespace SharedCode.Controller
 		public async void GetAllPokemonsSpecies()
 		{
 
-            var data = await Repository.GetPokemonData();
+            var data = await Repository.GetPokemonDataAsync();
             viewListener.updateView(data);
             pokemons = data.Value;
             filteredPokemons = data.Value;

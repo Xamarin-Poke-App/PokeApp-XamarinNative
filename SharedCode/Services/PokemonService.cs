@@ -23,15 +23,13 @@ namespace SharedCode.Services
         [Dependency]
         public IPokemonRepository Repository;
 
-        [Dependency]
-        public INetworkConnection Network;
-
+        NetworkConnection networkConnection = IocContainer.GetDependency<NetworkConnection>();
 
         public async Task<Result<List<PokemonLocal>>> GetPokemonDataAsync()
         {
 
             var localData = await RepositoryLocal.GetPokemonLocalListAsync();
-            var res = Network.GetIsConnectedCurrentStatus();
+            var isNetworkAvailable = networkConnection.GetIsConnectedCurrentStatus();
 
             if (localData.Success)
             {
@@ -42,17 +40,25 @@ namespace SharedCode.Services
                 else
                 {
 
-                    //if (no internet return empty list)
-                    //else
-                    var data = await CallPokemonListAndTypes();
-                    if (data.Success)
+                    if (isNetworkAvailable)
                     {
-                        await RepositoryLocal.StorePokemonListAsync(data.Value);
+                        var data = await CallPokemonListAndTypes();
+                        if (data.Success)
+                        {
+                            await RepositoryLocal.StorePokemonListAsync(data.Value);
+                        }
+                        return data;
                     }
-                    return data;
+                    else
+                    {
+                        return Result.Fail<List<PokemonLocal>>("No Data");
+                    }
                 }
             }
-            return localData;
+            else
+            {
+                return localData;
+            }
         }
 
         private async Task<Result<List<PokemonLocal>>> CallPokemonListAndTypes()
@@ -70,7 +76,7 @@ namespace SharedCode.Services
                         var typeInfo = await Repository.GetTypeInfo(type.GetIdFromUrl());
                         if (typeInfo.Success)
                         {
-                            pokemons = PopulateTypeForPokemons(pokemons, typeInfo.Value.pokemon, typeInfo.Value.name.FormatedName());
+                            pokemons = PopulateTypeForPokemons(pokemons, typeInfo.Value.pokemon, typeInfo.Value.name);
                         }
                         else
                         {
