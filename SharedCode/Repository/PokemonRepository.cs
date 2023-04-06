@@ -24,7 +24,7 @@ namespace SharedCode.Repository
             try
             {
                 var pokemons = await NetworkHandler.GetData<BasicListResponse>(Constants.PokemonAPIBaseAddress + "pokemon?limit=1008");
-                return Result.Ok(pokemons.results);
+                return Result.Ok(pokemons.Results);
             }
             catch (NetworkErrorException ex)
             {
@@ -98,7 +98,7 @@ namespace SharedCode.Repository
             try
             {
                 var typesList = await NetworkHandler.GetData<BasicListResponse>(Constants.PokemonAPIBaseAddress + "type/");
-                return Result.Ok(typesList.results);
+                return Result.Ok(typesList.Results);
             }
             catch (NetworkErrorException ex)
             {
@@ -146,7 +146,7 @@ namespace SharedCode.Repository
             try
             {
                 var generationList = await NetworkHandler.GetData<BasicListResponse>(Constants.PokemonAPIBaseAddress + "generation/");
-                return Result.Ok(generationList.results);
+                return Result.Ok(generationList.Results);
             }
             catch (NetworkErrorException ex)
             {

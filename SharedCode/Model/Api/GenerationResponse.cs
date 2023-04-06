@@ -1,29 +1,50 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SharedCode.Model.Api
 {
     public class MainRegion
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 
     public class GenerationResponse
     {
-        public List<object> abilities { get; set; }
-        public int id { get; set; }
-        public MainRegion main_region { get; set; }
-        public List<Move> moves { get; set; }
-        public string name { get; set; }
-        public List<ResultItem> pokemon_species { get; set; }
-        public List<Type> types { get; set; }
+        [JsonPropertyName("abilities")]
+        public List<object> Abilities { get; set; }
+
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("main_region")]
+        public MainRegion MainRegion { get; set; }
+
+        [JsonPropertyName("moves")]
+        public List<Move> Moves { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("pokemon_species")]
+        public List<ResultItem> PokemonSpecies { get; set; }
+
+        [JsonPropertyName("types")]
+        public List<Type> Types { get; set; }
     }
 
     public class Type
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
     }
 }
 
