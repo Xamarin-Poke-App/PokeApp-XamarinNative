@@ -14,6 +14,7 @@ using AndroidX.AppCompat.App;
 using SharedCode;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 
@@ -44,7 +45,7 @@ namespace PokeAppAndroid.View
             Finish();
         }
 
-        public void updateView(Result<List<ResultPokemons>> data)
+        public void updateView(Result<List<PokemonLocal>> data)
         {
             if (data.Success)
             {

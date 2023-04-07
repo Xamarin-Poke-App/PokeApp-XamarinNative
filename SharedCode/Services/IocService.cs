@@ -25,5 +25,10 @@ namespace SharedCode.Services
         {
             return container.Resolve<T>();
         }
+
+        public static void RegisterType<I, T>() where T : I
+        {
+            container.RegisterType<I, T>();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreGraphics;
 using PokeAppiOS.View;
 using System.Collections.Generic;
@@ -6,12 +6,15 @@ using SharedCode.Model;
 using SharedCode.Services;
 using SharedCode.Util;
 using UIKit;
+using GlobalToast;
+using PokeAppiOS.Utils;
+using SharedCode.Event;
 
 namespace PokeAppiOS.Controllers
 {
     public partial class LoginViewController : UIViewController
     {
-        static LoginService loginService = IocContainer.GetDependency<LoginService>();
+        LoginEvent loginService = IocContainer.GetDependency<LoginEvent>();
 
         public LoginViewController(IntPtr handle) : base(handle)
         {
@@ -173,8 +176,8 @@ namespace PokeAppiOS.Controllers
         private void LoginButton_TouchUpInside(object sender, EventArgs e)
         {
             loginService.UserLoggedIn += LoginService_UserLoggedIn;
-            string email = "test@test.com";
-            string password = "tester";
+            string email = usernameTextField.Text;
+            string password = passwordTextField.Text;
 
             User user = new User(email, password);
             loginService.PerformLogin(user);
@@ -184,11 +187,13 @@ namespace PokeAppiOS.Controllers
         {
             if (userLoggedInResult.Success)
             {
+                StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
                 SceneDelegate.Current.SegueToHome();
+                storageUtils.SetIsLoggedIn(true);
             }
             else
             {
-                Console.WriteLine(userLoggedInResult.Error);
+                Toast.MakeToast(userLoggedInResult.Error).Show();
             }
         }
 

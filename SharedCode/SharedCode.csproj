@@ -7,22 +7,30 @@
   <ItemGroup>
     <None Remove="Model\" />
     <None Remove="Util\" />
-    <None Remove="Helper\" />
     <None Remove="Event\" />
     <None Remove="Interfaces\" />
     <None Remove="DI\" />
     <None Remove="Repository\" />
     <None Remove="Database\" />
+    <None Remove="Model\DB\" />
+    <None Remove="Model\Api\" />
+    <None Remove="Repository\DB\" />
+    <None Remove="Repository\Interfaces\" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Util\" />
-    <Folder Include="Helper\" />
     <Folder Include="Event\" />
     <Folder Include="DI\" />
     <Folder Include="Repository\" />
     <Folder Include="Database\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Model\DB\" />
+    <Folder Include="Model\Api\" />
+    <Folder Include="Repository\DB\" />
+    <Folder Include="Repository\Interfaces\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
@@ -32,5 +40,11 @@
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
     <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\..\..\Library\Frameworks\Xamarin.Android.framework\Versions\13.2.0.0\lib\xamarin.android\xbuild-frameworks\MonoAndroid\v13.0\Mono.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Java.Interop, Version=0.1.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065" />
   </ItemGroup>
 </Project>

@@ -10,13 +10,17 @@ using SharedCode.Controller;
 using SharedCode.Services;
 using SharedCode.Model;
 using SharedCode.Util;
+using SharedCode.Interfaces;
+using PokeAppAndroid.Utils;
+using SharedCode.Event;
 
 namespace PokeAppAndroid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        static LoginService loginService = IocContainer.GetDependency<LoginService>();
+        LoginEvent loginService = IocContainer.GetDependency<LoginEvent>();
+        StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
 
         private Button LoginButton;
 
@@ -26,9 +30,17 @@ namespace PokeAppAndroid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            bool isLoggedIn = storageUtils.GetIsLoggedIn();
+            if(isLoggedIn)
+            {
+                StartActivity(typeof(PokemonHomeActivity));
+                Finish();
+                return;
+            }
+
             loginService.UserLoggedIn += LoginService_UserLoggedIn;
             
-
             LoginButton = FindViewById<Button>(Resource.Id.loginButton);
             LoginButton.Click += LoginButton_Click;
         }
@@ -38,19 +50,19 @@ namespace PokeAppAndroid
             if (resultLogin.Success)
             {
                 StartActivity(typeof(PokemonHomeActivity));
+                storageUtils.SetIsLoggedIn(true);
                 Finish();
             }
             else
             {
-                Console.WriteLine(resultLogin.Error);
+                Toast.MakeText(Application.Context, resultLogin.Error, ToastLength.Short).Show();
             }
         }
 
         private void LoginButton_Click(object sender, System.EventArgs e)
         {
-            string email = "test@test.com";
-            string password = "tester";
-
+            string email = FindViewById<TextView>(Resource.Id.usernameEditText).Text;
+            string password = FindViewById<TextView>(Resource.Id.passwordEditText).Text;
             User user = new User(email, password);
 
             loginService.PerformLogin(user);

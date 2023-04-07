@@ -2,6 +2,7 @@
 using Foundation;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 using SharedCode.Helper;
@@ -15,7 +16,6 @@ namespace PokeAppiOS.Controllers
 	public partial class PokemonDetailViewController : UIViewController, IPokemonDetailControllerListener
 	{
 		public int PokemonID;
-		private PokemonSpecie PokemonInfo;
         private IPokemonDetailController controller;
         private UIViewController CurrentViewController;
         public PokemonDetailViewController(IntPtr handle) : base(handle)
@@ -51,8 +51,8 @@ namespace PokeAppiOS.Controllers
 			base.ViewDidLoad ();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-            controller.GetPokemonInfo(PokemonID);
-
+			controller.LoadPokemonImage(PokemonID);
+			controller.LoadPokemonInfo(PokemonID);
             // SegmentedControl
             SetupView();
             statsSegmentedControl.SelectedSegment = 0;
@@ -139,16 +139,13 @@ namespace PokeAppiOS.Controllers
 			}
         }
 
-        public void updatePokemonInfo(Result<PokemonSpecie> pokemon)
+        public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.Success)
 			{
-				PokemonInfo = pokemon.Value;
-				pokemonNameLabel.Text = PokemonInfo.name.Capitalize();
-                controller.LoadPokemonImage(PokemonInfo.id);
-			}
+                pokemonNameLabel.Text = pokemon.Value.Name;
+                Title = pokemon.Value.Name;
+            }
         }
     }
 }
-
-

@@ -13,6 +13,8 @@ namespace SharedCode.Util
             Connectivity.ConnectivityChanged += OnNetworkChanged;
         }
 
+        public NetworkConnection() { }
+
         public EventHandler<NetworkChangedEventArgs> NetworkHasChanged { get; set; }
 
         private void OnNetworkChanged(object sender, ConnectivityChangedEventArgs args)
