@@ -166,6 +166,15 @@
         <Compile Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.designer.cs">
           <DependentUpon>EvolutionVariantTableViewCell.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\PokemonBaseInfoViewController.cs" />
+        <Compile Include="Views\PokemonBaseInfoViewController.designer.cs">
+          <DependentUpon>PokemonBaseInfoViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\PokemonEvolutionViewController.cs" />
+        <Compile Include="Views\PokemonEvolutionViewController.designer.cs">
+          <DependentUpon>PokemonEvolutionViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="CommonView\PokemonTypeCustomView.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">

@@ -13,16 +13,27 @@ namespace PokeAppiOS.Controllers
 	partial class PokemonDetailViewController
 	{
 		[Outlet]
-		UIKit.UITableView evolutionVariantsTableView { get; set; }
+		UIKit.UIView containerView { get; set; }
 
 		[Outlet]
 		UIKit.UIImageView pokemonImageView { get; set; }
 
 		[Outlet]
 		UIKit.UILabel pokemonNameLabel { get; set; }
+
+		[Outlet]
+		UIKit.UIStackView pokemonTypesStackView { get; set; }
+
+		[Outlet]
+		UIKit.UISegmentedControl statsSegmentedControl { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (containerView != null) {
+				containerView.Dispose ();
+				containerView = null;
+			}
+
 			if (pokemonImageView != null) {
 				pokemonImageView.Dispose ();
 				pokemonImageView = null;
@@ -33,9 +44,14 @@ namespace PokeAppiOS.Controllers
 				pokemonNameLabel = null;
 			}
 
-			if (evolutionVariantsTableView != null) {
-				evolutionVariantsTableView.Dispose ();
-				evolutionVariantsTableView = null;
+			if (statsSegmentedControl != null) {
+				statsSegmentedControl.Dispose ();
+				statsSegmentedControl = null;
+			}
+
+			if (pokemonTypesStackView != null) {
+				pokemonTypesStackView.Dispose ();
+				pokemonTypesStackView = null;
 			}
 		}
 	}
