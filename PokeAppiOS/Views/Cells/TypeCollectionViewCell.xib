@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TypeCollectionViewCell" id="gTV-IL-0wX" customClass="TypeCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWQ-OP-Jaw">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQE-5e-819">
+                                <rect key="frame" x="0.0" y="3.0000000000000009" width="50" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="grass"/>
+                        <constraints>
+                            <constraint firstItem="XQE-5e-819" firstAttribute="leading" secondItem="uWQ-OP-Jaw" secondAttribute="leading" id="973-vz-qEK"/>
+                            <constraint firstItem="XQE-5e-819" firstAttribute="centerY" secondItem="uWQ-OP-Jaw" secondAttribute="centerY" id="Qeb-KC-YlP"/>
+                            <constraint firstAttribute="trailing" secondItem="XQE-5e-819" secondAttribute="trailing" id="Ybl-5q-cWc"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstItem="uWQ-OP-Jaw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8T8-w8-ipG"/>
+                <constraint firstAttribute="trailing" secondItem="uWQ-OP-Jaw" secondAttribute="trailing" id="RZB-Qj-kyC"/>
+                <constraint firstItem="uWQ-OP-Jaw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="a18-bd-q0h"/>
+                <constraint firstAttribute="bottom" secondItem="uWQ-OP-Jaw" secondAttribute="bottom" id="weg-64-nWz"/>
+            </constraints>
+            <connections>
+                <outlet property="containerBackgroundView" destination="uWQ-OP-Jaw" id="EGD-r1-MCU"/>
+                <outlet property="typeLabel" destination="XQE-5e-819" id="byN-yQ-96g"/>
+            </connections>
+            <point key="canvasLocation" x="30.534351145038165" y="-11.267605633802818"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="grass">
+            <color red="0.45490196078431372" green="0.79607843137254897" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

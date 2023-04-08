@@ -72,6 +72,8 @@
     <Compile Include="View\PokemonDetailFragment.cs" />
     <Compile Include="Utils\ViewExtensions.cs" />
     <Compile Include="Utils\Storage.cs" />
+    <Compile Include="Adapters\PokemonTypeAdapter.cs" />
+    <Compile Include="Adapters\SpaceItemDecorator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
