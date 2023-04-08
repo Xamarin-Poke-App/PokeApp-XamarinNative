@@ -172,6 +172,9 @@ namespace SharedCode.Model
         [JsonPropertyName("generation")]
         public Generation Generation { get; set; }
 
+        [JsonPropertyName("habitat")]
+        public ResultItem Habitat { get; set; }
+
         [JsonPropertyName("growth_rate")]
         public GrowthRate GrowthRate { get; set; }
 
