@@ -13,29 +13,37 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 	partial class EvolutionVariantTableViewCell
 	{
 		[Outlet]
-		UIKit.UILabel firstEvolutionLabel { get; set; }
+		UIKit.UIImageView fromImageView { get; set; }
 
 		[Outlet]
-		UIKit.UILabel secondEvolutionLabel { get; set; }
+		UIKit.UILabel fromLabel { get; set; }
 
 		[Outlet]
-		UIKit.UILabel thirdEvolutionLabel { get; set; }
+		UIKit.UIImageView toImageView { get; set; }
+
+		[Outlet]
+		UIKit.UILabel toLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (firstEvolutionLabel != null) {
-				firstEvolutionLabel.Dispose ();
-				firstEvolutionLabel = null;
+			if (fromImageView != null) {
+				fromImageView.Dispose ();
+				fromImageView = null;
 			}
 
-			if (secondEvolutionLabel != null) {
-				secondEvolutionLabel.Dispose ();
-				secondEvolutionLabel = null;
+			if (toImageView != null) {
+				toImageView.Dispose ();
+				toImageView = null;
 			}
 
-			if (thirdEvolutionLabel != null) {
-				thirdEvolutionLabel.Dispose ();
-				thirdEvolutionLabel = null;
+			if (fromLabel != null) {
+				fromLabel.Dispose ();
+				fromLabel = null;
+			}
+
+			if (toLabel != null) {
+				toLabel.Dispose ();
+				toLabel = null;
 			}
 		}
 	}

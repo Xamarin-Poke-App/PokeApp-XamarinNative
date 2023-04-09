@@ -10,6 +10,7 @@ using ObjCRuntime;
 using UIKit;
 using PokeAppiOS.Views;
 using PokeAppiOS.CommonView;
+using SharedCode.Model.Api;
 
 namespace PokeAppiOS.Controllers
 {
@@ -18,6 +19,8 @@ namespace PokeAppiOS.Controllers
 		public int PokemonID;
         private IPokemonDetailController controller;
         private UIViewController CurrentViewController;
+        private EvolutionChainResponse _evolutionChainResponse = null;
+
         public PokemonDetailViewController(IntPtr handle) : base(handle)
         {
 		}
@@ -98,6 +101,8 @@ namespace PokeAppiOS.Controllers
             {
                 CurrentViewController.RemoveFromParentViewController();
                 CurrentViewController = pokemonEvolutionViewController.Value;
+                pokemonEvolutionViewController.Value.EvolutionChainResponse = _evolutionChainResponse;
+                pokemonEvolutionViewController.Value.DrawEvolutionChain();
                 RemoveViewControllerAsChild(pokemonBaseInfoViewController.Value);
                 AddViewControllerAsChild(pokemonEvolutionViewController.Value);
             }
@@ -145,7 +150,14 @@ namespace PokeAppiOS.Controllers
 			{
                 pokemonNameLabel.Text = pokemon.Value.Name;
                 Title = pokemon.Value.Name;
+                controller.GetEvolutionChainByPokemonId(pokemon.Value.EvolutionChainId);
             }
+        }
+
+        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
+        {
+            if (evolutionChain.IsFailure) return;
+            _evolutionChainResponse = evolutionChain.Value;
         }
     }
 }

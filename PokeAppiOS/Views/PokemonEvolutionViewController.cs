@@ -5,16 +5,21 @@ using System.Collections.Generic;
 using Foundation;
 using PokeAppiOS.Views.PokemonDetail.Cells;
 using UIKit;
+using SharedCode.Model.Api;
+using CoreAudioKit;
+using CoreGraphics;
+using SharedCode.Services;
+using SharedCode.Controller;
+using SharedCode.Util;
+using SharedCode.Model.DB;
 
 namespace PokeAppiOS.Views
 {
 	public partial class PokemonEvolutionViewController : UIViewController
-	{
-        List<string> testData = new List<string>{"bulbasaur2fdasfdsafdsafdsafdsafdsafadsfadsfadsfadsfadsfasdfadsfadsfasdfasdfadsfasdfasdfads%bulbasaur2%bulbasaur3", "bulbasaur1%bulbasaur2%bulbasaur3", "bulbasaur1%bulbasaur2%bulbasaur3",
-            "bulbasaur1%bulbasaur2%bulbasaur3", "bulbasaur1%bulbasaur2fdasfdsafdsafdsafdsafdsafadsfadsfadsfadsfadsfasdfadsfadsfasdfasdfadsfasdfasdfads%bulbasaur3", "bulbasaur1%bulbasaur2%bulbasaur3",
-            "bulbasaur1%bulbasaur2%bulbasaur3", "bulbasaur1%bulbasaur2%bulbasaur3", "bulbasaur1%bulbasaur2%bulbasaur3", "bulbasaur1%bulbasaur2%bulbasaur3" };
+	{  
+        public EvolutionChainResponse EvolutionChainResponse;
 
-		public PokemonEvolutionViewController (IntPtr handle) : base (handle)
+        public PokemonEvolutionViewController (IntPtr handle) : base (handle)
 		{
 		}
 
@@ -22,31 +27,40 @@ namespace PokeAppiOS.Views
         {
             base.ViewDidLoad();
             pokemonEvolutionChainTableView.RegisterNibForCellReuse(EvolutionVariantTableViewCell.Nib, "EvolutionVariantTableViewCell");
-            pokemonEvolutionChainTableView.DataSource = new PokemonEvolutionViewControllerDataSource(this);
+        }
 
+        public void DrawEvolutionChain()
+        {
+            pokemonEvolutionChainTableView.DataSource = new PokemonEvolutionViewControllerDataSource(this);
+            pokemonEvolutionChainTableView.RowHeight = 120;
         }
 
         class PokemonEvolutionViewControllerDataSource : UITableViewDataSource
         {
             PokemonEvolutionViewController viewController;
+            private List<List<ResultItem>> _evolutionChainPairList;
 
             public PokemonEvolutionViewControllerDataSource(PokemonEvolutionViewController viewController)
             {
                 this.viewController = viewController;
+                _evolutionChainPairList = viewController.EvolutionChainResponse.GetListOfChains();
             }
 
             public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
             {
                 EvolutionVariantTableViewCell cell = (EvolutionVariantTableViewCell)tableView.DequeueReusableCell("EvolutionVariantTableViewCell");
-                var data = viewController.testData[indexPath.Row];
-                string[] dataArray = data.Split("%");
-                cell.EvolutionChain = dataArray;
+                var list = viewController.EvolutionChainResponse.GetListOfChains();
+                var evolutionChainPairList = list[indexPath.Row];
+                if (viewController.EvolutionChainResponse != null)
+                {
+                    cell.EvolutionChainPairList = evolutionChainPairList;
+                }
                 return cell;
             }
 
             public override nint RowsInSection(UITableView tableView, nint section)
             {
-                return 10;
+                return _evolutionChainPairList.Count;
             }
         }
     }
