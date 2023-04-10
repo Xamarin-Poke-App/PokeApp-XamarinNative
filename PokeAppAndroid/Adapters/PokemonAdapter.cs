@@ -24,6 +24,8 @@ namespace PokeAppAndroid.Adapters
         public List<PokemonLocal> pokemomList;
         public event EventHandler<int> ItemClick;
 
+        private Context _context = null;
+
         public PokemonAdapter(List<PokemonLocal> pokemons)
         {
             pokemomList = pokemons;
@@ -41,27 +43,28 @@ namespace PokeAppAndroid.Adapters
             string pokemonID = value.Id.ToString();
 
             viewHolder.Container.SetDrawableBackgroundForType(value.TypesArray.First());
-
-            viewHolder.FirstType.Text = value.TypesArray.First().ToString();
-            viewHolder.FirstType.SetDrawableBackgroundForType(value.TypesArray.First());
-            viewHolder.SecondType.Visibility = ViewStates.Gone;
-            if (value.TypesArray.Count() > 1)
-            {
-                viewHolder.SecondType.Visibility = ViewStates.Visible;
-                viewHolder.SecondType.Text = value.TypesArray.Last().ToString();
-                viewHolder.SecondType.SetDrawableBackgroundForType(value.TypesArray.Last());
-            }
-
+            viewHolder.TvRegion.Text = value.Region.FormatedName();
             viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
             Console.WriteLine(value.RegularSpriteUrl);
             Picasso.Get()
                 .Load(value.RegularSpriteUrl)
                 .Into(viewHolder.IvPokemonImage);
+
+            if (_context == null) return;
+            var mLayoutManager = new LinearLayoutManager(_context, LinearLayoutManager.Horizontal, false);
+            viewHolder.RvTypes.SetLayoutManager(mLayoutManager);
+
+            if (viewHolder.RvTypes.ItemDecorationCount < 1)
+                viewHolder.RvTypes.AddItemDecoration(new SpaceItemDecorator(15, 0));
+
+            var adapter = new PokemonTypeAdapter(value.TypesArray.ToList());
+            viewHolder.RvTypes.SetAdapter(adapter);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
+            _context = parent.Context;
             Android.Views.View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.pokemon_card, parent, false);
             PokemonViewHolder viewHolder = new PokemonViewHolder(view, OnClick);
             return viewHolder;
@@ -73,9 +76,8 @@ namespace PokeAppAndroid.Adapters
             public ImageView IvPokemonImage { get; set; }
             public TextView TvPokemonNumber { get; set; }
             public ConstraintLayout Container { get; set; }
-            public TextView FirstType { get; set; }
-            public TextView SecondType { get; set; }
-
+            public RecyclerView RvTypes;
+            public TextView TvRegion { get; set; }
 
             public PokemonViewHolder(Android.Views.View card, Action<int> listener) : base(card)
             {
@@ -83,8 +85,8 @@ namespace PokeAppAndroid.Adapters
                 IvPokemonImage = card.FindViewById<ImageView>(Resource.Id.PokemonImage);
                 TvPokemonNumber = card.FindViewById<TextView>(Resource.Id.TvPokemonNumber);
                 Container = card.FindViewById<ConstraintLayout>(Resource.Id.Container);
-                FirstType = card.FindViewById<TextView>(Resource.Id.FirstType);
-                SecondType = card.FindViewById<TextView>(Resource.Id.SecondType);
+                RvTypes = card.FindViewById<RecyclerView>(Resource.Id.RvTypes);
+                TvRegion = card.FindViewById<TextView>(Resource.Id.TvRegion);
                 card.Click += (sender, e) => listener(base.AbsoluteAdapterPosition);
             }
         }

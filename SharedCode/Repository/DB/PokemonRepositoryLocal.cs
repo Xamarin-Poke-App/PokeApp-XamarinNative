@@ -47,6 +47,18 @@ namespace SharedCode.Repository.DB
             
         }
 
+        public async Task UpdatePokemonInfo(PokemonSpecie pokemon, PokemonLocal pokemonLocal)
+        {
+            pokemonLocal.BaseHappiness = pokemon.BaseHappiness;
+            pokemonLocal.Generation = pokemon.Generation.Name;
+            pokemonLocal.EvolutionChainId = pokemon.EvolutionChain.GetEvolutionChainIdFromUrl();
+            pokemonLocal.FlavorTextEntry = pokemon.FlavorTextEntries.FirstOrDefault().FlavorText ?? "";
+            if (pokemon.Habitat != null)
+                pokemonLocal.Habitat = pokemon.Habitat.Name;
+
+            await DatabaseManager.UpdateDataAsync<PokemonLocal>(pokemonLocal, DBModels.Pokemon.ToString());
+        }
+
         public async Task<Result<PokemonLocal>> GetPokemonByIdLocalAsync(int pokeId)
         {
             if (await DatabaseManager.checkTableExistsAsync(DBModels.Pokemon.ToString()))

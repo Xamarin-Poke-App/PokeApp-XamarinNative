@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
@@ -58,6 +59,7 @@ namespace PokeAppAndroid.View
             return view;
         }
 
+
         private void SetButtonStyle(Button button, bool isActive)
         {
             if (isActive)
@@ -90,6 +92,10 @@ namespace PokeAppAndroid.View
             SetButtonStyle(informationButton, false);
             SetButtonStyle(evolutionButton, true);
             ReplaceFragment(new PokemonEvolutionFragment());
+
+        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
+        {
+
         }
 
         public void updatePokemonImage(Result<byte[]> image)
