@@ -50,8 +50,8 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 
         private void loadImages(List<ResultItem> evolutionChainPairList)
         {
-            loadEvolutionFromImage(evolutionChainPairList[0]);
-            loadEvolutionToImage(evolutionChainPairList[1]);
+            loadEvolutionFromImage(evolutionChainPairList.FirstOrDefault());
+            loadEvolutionToImage(evolutionChainPairList.LastOrDefault());
         }
 
         private async void loadEvolutionFromImage(ResultItem specieFrom)
