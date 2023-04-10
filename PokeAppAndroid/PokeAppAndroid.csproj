@@ -71,6 +71,7 @@
     <Compile Include="Utils\ViewExtensions.cs" />
     <Compile Include="Utils\Storage.cs" />
     <Compile Include="View\LoginFragment.cs" />
+    <Compile Include="View\UserProfileFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -167,6 +168,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_login.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_profile_user.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
