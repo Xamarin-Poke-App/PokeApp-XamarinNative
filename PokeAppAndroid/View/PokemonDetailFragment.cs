@@ -15,6 +15,7 @@ using SharedCode.Model;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
+using Square.Picasso;
 
 namespace PokeAppAndroid.View
 {
@@ -98,7 +99,6 @@ namespace PokeAppAndroid.View
             Bitmap bitmap = BitmapFactory.DecodeByteArray(imageByte, 0, imageByte.Length);
             pokemonImage.SetImageBitmap(bitmap);
         }
-
 
         private void ReplaceFragment(AndroidX.Fragment.App.Fragment fragment)
         {
