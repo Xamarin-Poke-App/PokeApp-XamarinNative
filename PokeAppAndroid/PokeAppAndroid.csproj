@@ -153,10 +153,6 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\pokeball.xml">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\rounded_background.xml">
       <SubType></SubType>
       <Generator></Generator>
@@ -185,11 +181,11 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\pokeball.svg">
+    <AndroidResource Include="Resources\drawable\background_with_image.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\background_with_image.xml">
+    <AndroidResource Include="Resources\drawable\Pokeball.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

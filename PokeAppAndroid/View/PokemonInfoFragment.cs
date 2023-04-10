@@ -39,7 +39,7 @@ namespace PokeAppAndroid.View
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_info_detail, container, false);
-            //secondaryPokemonSprite = view.FindViewById<ImageView>(Resource.Id.secondaryPokemonSprite);
+            secondaryPokemonSprite = view.FindViewById<ImageView>(Resource.Id.secondaryPokemonSprite);
             pokemonGeneration = view.FindViewById<TextView>(Resource.Id.tvPokemonGeneration);
             pokemonHabitad = view.FindViewById<TextView>(Resource.Id.tvPokemonHabitad);
             pokemonBaseHappiness = view.FindViewById<TextView>(Resource.Id.tvPokemonBaseHappiness);

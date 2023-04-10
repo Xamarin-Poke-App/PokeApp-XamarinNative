@@ -78,7 +78,6 @@ namespace PokeAppAndroid.View
 
             PokemonInfoFragment pokemonInfoFragment = new PokemonInfoFragment();
             Bundle args = new Bundle();
-            args.PutInt("pokemonId", pokemonInfo.Id);
             pokemonInfoFragment.Arguments = args;
 
             ReplaceFragment(pokemonInfoFragment);

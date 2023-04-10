@@ -140,7 +140,7 @@
             android:id="@+id/tvPokemonDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description of the pokemon. This pokemon is a water pokemon that attacks every time is hungry."
+            android:tooltipText="Description of the pokemon. This pokemon is a water pokemon that attacks every time is hungry."
             android:paddingHorizontal="20dp"
             android:gravity="center_horizontal"
             android:layout_marginTop="10dp"/>

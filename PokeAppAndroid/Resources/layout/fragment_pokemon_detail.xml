@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_with_image">
+    android:background="@color/bug">
 
     <TextView
         android:id="@+id/pokemonNameTextView"
