@@ -23,7 +23,8 @@ namespace SharedCode.Services
         [Dependency]
         public IPokemonRepository Repository;
 
-        NetworkConnection networkConnection = IocContainer.GetDependency<NetworkConnection>();
+        [Dependency]
+        public INetworkConnection networkConnection;
 
         public async Task<Result<List<PokemonLocal>>> GetPokemonDataAsync()
         {
