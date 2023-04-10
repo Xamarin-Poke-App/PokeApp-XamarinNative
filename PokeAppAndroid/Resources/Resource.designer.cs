@@ -9375,15 +9375,9 @@ namespace PokeAppAndroid
 			
 			// aapt resource value: 0x7F0800C7
 			public const int fill_vertical = 2131230919;
-
-			// aapt resource value: 0x7F0800C8
-			public const int fitCenter = 2131230920;
 			
 			// aapt resource value: 0x7F0800C9
 			public const int firstEvolution = 2131230921;
-			
-			// aapt resource value: 0x7F080006
-			public const int FirstType = 2131230726;
 			
 			// aapt resource value: 0x7F0800CA
 			public const int fitCenter = 2131230922;
@@ -9542,13 +9536,7 @@ namespace PokeAppAndroid
 			public const int line1 = 2131230972;
 			
 			// aapt resource value: 0x7F0800FD
-
 			public const int line3 = 2131230973;
-
-			public const int loginButton = 2131230973;
-			
-			// aapt resource value: 0x7F080006
-			public const int LogoutButton = 2131230726;
 			
 			// aapt resource value: 0x7F0800FE
 			public const int linear = 2131230974;
@@ -9562,8 +9550,8 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F080101
 			public const int loginButton = 2131230977;
 			
-			// aapt resource value: 0x7F080007
-			public const int LogoutButton = 2131230727;
+			// aapt resource value: 0x7F080006
+			public const int LogoutButton = 2131230726;
 			
 			// aapt resource value: 0x7F080102
 			public const int m3_side_sheet = 2131230978;
@@ -9632,13 +9620,7 @@ namespace PokeAppAndroid
 			public const int material_timepicker_mode_button = 2131230999;
 			
 			// aapt resource value: 0x7F080118
-
 			public const int material_timepicker_ok_button = 2131231000;
-
-			public const int message = 2131231000;
-			
-			// aapt resource value: 0x7F080007
-			public const int META = 2131230727;
 			
 			// aapt resource value: 0x7F080119
 			public const int material_timepicker_view = 2131231001;
@@ -9652,8 +9634,8 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F08011C
 			public const int message = 2131231004;
 			
-			// aapt resource value: 0x7F080008
-			public const int META = 2131230728;
+			// aapt resource value: 0x7F080007
+			public const int META = 2131230727;
 			
 			// aapt resource value: 0x7F08011D
 			public const int middle = 2131231005;
@@ -9788,13 +9770,7 @@ namespace PokeAppAndroid
 			public const int none = 2131231050;
 			
 			// aapt resource value: 0x7F08014B
-
 			public const int normal = 2131231051;
-
-			public const int notification_main_column_container = 2131231051;
-	
-			// aapt resource value: 0x7F080008
-			public const int NO_DEBUG = 2131230728;
 			
 			// aapt resource value: 0x7F08014C
 			public const int north = 2131231052;
@@ -9814,8 +9790,8 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F08014F
 			public const int notification_main_column_container = 2131231055;
 			
-			// aapt resource value: 0x7F080009
-			public const int NO_DEBUG = 2131230729;
+			// aapt resource value: 0x7F080008
+			public const int NO_DEBUG = 2131230728;
 			
 			// aapt resource value: 0x7F080150
 			public const int off = 2131231056;
@@ -9866,16 +9842,7 @@ namespace PokeAppAndroid
 			public const int path = 2131231071;
 			
 			// aapt resource value: 0x7F080160
-
 			public const int pathRelative = 2131231072;
-
-			public const int pin = 2131231072;
-			
-			// aapt resource value: 0x7F080009
-			public const int Pokeball = 2131230729;
-			
-			// aapt resource value: 0x7F08000A
-			public const int PokemonImage = 2131230730;
 			
 			// aapt resource value: 0x7F080161
 			public const int peekHeight = 2131231073;
@@ -9889,11 +9856,11 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F080164
 			public const int pin = 2131231076;
 			
-			// aapt resource value: 0x7F08000A
-			public const int Pokeball = 2131230730;
+			// aapt resource value: 0x7F080009
+			public const int Pokeball = 2131230729;
 			
-			// aapt resource value: 0x7F08000B
-			public const int PokemonImage = 2131230731;
+			// aapt resource value: 0x7F08000A
+			public const int PokemonImage = 2131230730;
 			
 			// aapt resource value: 0x7F080165
 			public const int pokemonImageView = 2131231077;
@@ -9934,9 +9901,6 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F080171
 			public const int rightToLeft = 2131231089;
 			
-			// aapt resource value: 0x7F08000B
-			public const int RvTypes = 2131230731;
-			
 			// aapt resource value: 0x7F080172
 			public const int right_icon = 2131231090;
 			
@@ -9948,6 +9912,9 @@ namespace PokeAppAndroid
 			
 			// aapt resource value: 0x7F080175
 			public const int row_index_key = 2131231093;
+			
+			// aapt resource value: 0x7F08000B
+			public const int RvTypes = 2131230731;
 			
 			// aapt resource value: 0x7F080176
 			public const int rv_pokemonList = 2131231094;
@@ -10044,7 +10011,7 @@ namespace PokeAppAndroid
 			
 			// aapt resource value: 0x7F080195
 			public const int search_view_status_bar_spacer = 2131231125;
-
+			
 			// aapt resource value: 0x7F080196
 			public const int search_view_toolbar = 2131231126;
 			
@@ -10059,9 +10026,6 @@ namespace PokeAppAndroid
 			
 			// aapt resource value: 0x7F080199
 			public const int secondEvolution = 2131231129;
-			
-			// aapt resource value: 0x7F080011
-			public const int SecondType = 2131230737;
 			
 			// aapt resource value: 0x7F08019C
 			public const int selected = 2131231132;
@@ -10246,9 +10210,6 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F0801D2
 			public const int text = 2131231186;
 			
-			// aapt resource value: 0x7F080013
-			public const int TextViewType = 2131230739;
-			
 			// aapt resource value: 0x7F0801D3
 			public const int text2 = 2131231187;
 			
@@ -10285,6 +10246,9 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F0801D8
 			public const int textTop = 2131231192;
 			
+			// aapt resource value: 0x7F080013
+			public const int TextViewType = 2131230739;
+			
 			// aapt resource value: 0x7F0801D9
 			public const int text_input_end_icon = 2131231193;
 			
@@ -10299,13 +10263,6 @@ namespace PokeAppAndroid
 			
 			// aapt resource value: 0x7F0801E3
 			public const int time = 2131231203;
-
-			// aapt resource value: 0x7F080011
-			public const int TOP_END = 2131230737;
-			
-			// aapt resource value: 0x7F080012
-			public const int TOP_START = 2131230738;
-
 			
 			// aapt resource value: 0x7F0801E4
 			public const int title = 2131231204;
@@ -10328,11 +10285,11 @@ namespace PokeAppAndroid
 			// aapt resource value: 0x7F0801EA
 			public const int topPanel = 2131231210;
 			
-			// aapt resource value: 0x7F080012
-			public const int TOP_END = 2131230738;
+			// aapt resource value: 0x7F080011
+			public const int TOP_END = 2131230737;
 			
-			// aapt resource value: 0x7F080013
-			public const int TOP_START = 2131230739;
+			// aapt resource value: 0x7F080012
+			public const int TOP_START = 2131230738;
 			
 			// aapt resource value: 0x7F0801EB
 			public const int touch_outside = 2131231211;

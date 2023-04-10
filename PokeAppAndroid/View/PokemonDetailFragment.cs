@@ -92,6 +92,7 @@ namespace PokeAppAndroid.View
             SetButtonStyle(informationButton, false);
             SetButtonStyle(evolutionButton, true);
             ReplaceFragment(new PokemonEvolutionFragment());
+        }
 
         public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
         {

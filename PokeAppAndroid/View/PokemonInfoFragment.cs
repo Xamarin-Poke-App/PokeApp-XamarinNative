@@ -7,6 +7,7 @@ using Android.Widget;
 using AndroidX.Fragment.App;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
@@ -47,6 +48,11 @@ namespace PokeAppAndroid.View
             pokemonDescription = view.FindViewById<TextView>(Resource.Id.tvPokemonDescription);
 
             return view;
+        }
+
+        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
+        {
+            throw new NotImplementedException();
         }
 
         public void updatePokemonImage(Result<byte[]> image)
