@@ -50,6 +50,10 @@ namespace PokeAppiOS.Views.Cells
             }
         }
 
+        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
+        {
+        }
+
         public void updatePokemonImage(Result<byte[]> image)
         {
             if (image.Success)

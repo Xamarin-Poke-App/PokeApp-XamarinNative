@@ -9,20 +9,20 @@ namespace PokeAppiOS.CommonView
 	{
         public UILabel PokemonTypeNameLabel;
 
-        public PokemonTypeCustomView(string TypeName)
+        public PokemonTypeCustomView(string TypeName, UIColor Color)
         {
             PokemonTypeNameLabel = new UILabel();
             PokemonTypeNameLabel.Text = TypeName;
-            SetupView();
+            SetupView(Color);
             // Note: this .ctor should not contain any initialization logic.
         }
 
-        private void SetupView()
+        private void SetupView(UIColor Color)
         {
             var margins = this.LayoutMarginsGuide;
             this.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(PokemonTypeNameLabel);
-            this.BackgroundColor = UIColor.White.ColorWithAlpha((nfloat)0.4);
+            this.BackgroundColor = Color.ColorWithAlpha((nfloat)0.4);
             PokemonTypeNameLabel.Font = PokemonTypeNameLabel.Font.WithSize(12);
             PokemonTypeNameLabel.Font = UIFont.BoldSystemFontOfSize(12);
             PokemonTypeNameLabel.TextColor = UIColor.White;
@@ -35,7 +35,7 @@ namespace PokeAppiOS.CommonView
                 this.LayoutMarginsGuide.BottomAnchor.ConstraintEqualTo(PokemonTypeNameLabel.LayoutMarginsGuide.BottomAnchor, 5)
             });
 
-            this.Layer.CornerRadius = 12;
+            this.Layer.CornerRadius = 5;
         }
     }
 }

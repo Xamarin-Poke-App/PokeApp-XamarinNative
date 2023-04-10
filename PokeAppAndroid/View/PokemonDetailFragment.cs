@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using SharedCode.Controller;
 using SharedCode.Model;
+using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
@@ -42,6 +43,10 @@ namespace PokeAppAndroid.View
             pokemonNameText = view.FindViewById<TextView>(Resource.Id.pokemonNameTextView);
 
             return view;
+        }
+
+        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
+        {
         }
 
         public void updatePokemonImage(Result<byte[]> image)

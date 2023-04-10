@@ -155,8 +155,8 @@
         <InterfaceDefinition Include="Views\Login.storyboard" />
         <InterfaceDefinition Include="Views\Home.storyboard" />
         <InterfaceDefinition Include="Views\Cells\PokemonViewCell.xib" />
-        <InterfaceDefinition Include="Views\Cells\TypeCollectionViewCell.xib" />
         <InterfaceDefinition Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.xib" />
+        <InterfaceDefinition Include="Views\Cells\TypeCollectionViewCell.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />

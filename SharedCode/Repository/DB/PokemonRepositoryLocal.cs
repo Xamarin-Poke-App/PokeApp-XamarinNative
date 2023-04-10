@@ -51,6 +51,8 @@ namespace SharedCode.Repository.DB
         {
             pokemonLocal.BaseHappiness = pokemon.BaseHappiness;
             pokemonLocal.Generation = pokemon.Generation.Name;
+            pokemonLocal.EvolutionChainId = pokemon.EvolutionChain.GetEvolutionChainIdFromUrl();
+            pokemonLocal.FlavorTextEntry = pokemon.FlavorTextEntries.FirstOrDefault().FlavorText ?? "";
             if (pokemon.Habitat != null)
                 pokemonLocal.Habitat = pokemon.Habitat.Name;
 

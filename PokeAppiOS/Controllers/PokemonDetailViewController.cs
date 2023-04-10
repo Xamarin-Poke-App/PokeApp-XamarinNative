@@ -10,6 +10,10 @@ using ObjCRuntime;
 using UIKit;
 using PokeAppiOS.Views;
 using PokeAppiOS.CommonView;
+using SharedCode.Model.Api;
+using System.Linq;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace PokeAppiOS.Controllers
 {
@@ -18,6 +22,9 @@ namespace PokeAppiOS.Controllers
 		public int PokemonID;
         private IPokemonDetailController controller;
         private UIViewController CurrentViewController;
+        private EvolutionChainResponse _evolutionChainResponse = null;
+        private PokemonLocal _selectedPokemon = null;
+
         public PokemonDetailViewController(IntPtr handle) : base(handle)
         {
 		}
@@ -54,20 +61,29 @@ namespace PokeAppiOS.Controllers
 			controller.LoadPokemonImage(PokemonID);
 			controller.LoadPokemonInfo(PokemonID);
             // SegmentedControl
-            SetupView();
             statsSegmentedControl.SelectedSegment = 0;
             CurrentViewController = pokemonBaseInfoViewController.Value;
             UpdateView();
 		}
 
-		void SetupView()
+		void SetupView(PokemonLocal pokemon)
         {
-            var type1 = new PokemonTypeCustomView("Grass");
-            var type2 = new PokemonTypeCustomView("Poison");
+            NavigationController.NavigationBar.TintColor = UIColor.White;
+            var pokemonTypeViews = new List<PokemonTypeCustomView>();
+            foreach(var type in pokemon.TypesArray)
+            {
+                var typeViewColor = UIColor.FromName(type);
+                PokemonTypeCustomView typeView = new PokemonTypeCustomView(type, typeViewColor);
+                pokemonTypeViews.Add(typeView);
+            }
+            
             pokemonTypesStackView.Spacing = 5;
             pokemonTypesStackView.Distribution = UIStackViewDistribution.FillProportionally;
-            pokemonTypesStackView.AddArrangedSubview(type1);
-            pokemonTypesStackView.AddArrangedSubview(type2);
+
+            foreach(var typeView in pokemonTypeViews)
+            {
+                pokemonTypesStackView.AddArrangedSubview(typeView);
+            }
             SetupSegmentedControl();
         }
 
@@ -77,7 +93,16 @@ namespace PokeAppiOS.Controllers
             statsSegmentedControl.RemoveAllSegments();
             statsSegmentedControl.InsertSegment("About", 0, true);
             statsSegmentedControl.InsertSegment("Evolution", 1, true);
+            statsSegmentedControl.SelectedSegment = 0;
             statsSegmentedControl.AddTarget(this, new Selector("SelectionDidChange:"), UIControlEvent.ValueChanged);
+
+            var titleNormalTextAttributes = new UITextAttributes();
+            titleNormalTextAttributes.TextColor = UIColor.Black;
+            statsSegmentedControl.SetTitleTextAttributes(titleNormalTextAttributes, UIControlState.Normal);
+
+            var titleSelectedTextAttributes = new UITextAttributes();
+            titleSelectedTextAttributes.TextColor = UIColor.White;
+            statsSegmentedControl.SetTitleTextAttributes(titleSelectedTextAttributes, UIControlState.Selected);
         }
 
         [Export("SelectionDidChange:")]
@@ -92,12 +117,17 @@ namespace PokeAppiOS.Controllers
             {
                 CurrentViewController.RemoveFromParentViewController();
                 CurrentViewController = pokemonBaseInfoViewController.Value;
+                pokemonBaseInfoViewController.Value.Pokemon = _selectedPokemon;
+                pokemonBaseInfoViewController.Value.UpdateInfo();
                 RemoveViewControllerAsChild(pokemonEvolutionViewController.Value);
                 AddViewControllerAsChild(pokemonBaseInfoViewController.Value);
             } else
             {
                 CurrentViewController.RemoveFromParentViewController();
                 CurrentViewController = pokemonEvolutionViewController.Value;
+                pokemonEvolutionViewController.Value.EvolutionChainResponse = _evolutionChainResponse;
+                pokemonEvolutionViewController.Value.Pokemon = _selectedPokemon;
+                pokemonEvolutionViewController.Value.DrawEvolutionChain();
                 RemoveViewControllerAsChild(pokemonBaseInfoViewController.Value);
                 AddViewControllerAsChild(pokemonEvolutionViewController.Value);
             }
@@ -143,9 +173,22 @@ namespace PokeAppiOS.Controllers
         {
             if (pokemon.Success)
 			{
-                pokemonNameLabel.Text = pokemon.Value.Name.FormatedName();
+                _selectedPokemon = pokemon.Value;
+                pokemonNameLabel.Text = StringUtils.ToTitleCase(pokemon.Value.Name);
                 Title = "Pokemon Detail";
+                var primaryColor = UIColor.FromName(pokemon.Value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
+                View.BackgroundColor = primaryColor;
+                statsSegmentedControl.SelectedSegmentTintColor = primaryColor;
+                SetupView(pokemon.Value);
+                controller.GetEvolutionChainByPokemonId(pokemon.Value.EvolutionChainId);
+                UpdateView();
             }
+        }
+
+        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
+        {
+            if (evolutionChain.IsFailure) return;
+            _evolutionChainResponse = evolutionChain.Value;
         }
     }
 }

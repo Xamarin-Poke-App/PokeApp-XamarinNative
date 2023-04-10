@@ -18,6 +18,7 @@ namespace SharedCode.Repository.Interfaces
         Task<Result<GenerationResponse>> GetGenerationInfo(int generationId);
         Task<Result<byte[]>> GetPokemonImage(int pokeId);
         Task<Result<EvolutionChainResponse>> GetEvolutionChainByPokemonId(int id);
+        Task<Result<byte[]>> GetPokemonShinyImage(int pokeId);
     }
 }
 
