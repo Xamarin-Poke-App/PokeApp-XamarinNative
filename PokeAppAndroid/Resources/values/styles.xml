@@ -43,5 +43,10 @@
       <style name="DefaultImageMarginBottom">
         <item name="android:layout_marginBottom">10dp</item>
       </style>
+
+    <style name="pokemonDetailBackground">        
+        <item name="android:background">@drawable/pokeball</item>
+        <item name="android:backgroundColor">@color/bug</item>
+    </style>
 </resources>
 

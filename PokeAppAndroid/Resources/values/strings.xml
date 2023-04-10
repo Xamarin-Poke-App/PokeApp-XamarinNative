@@ -11,5 +11,11 @@
     <string name="passwordText">Password:</string>    
     <string name="usernamePlaceholder">Insert you email</string>
     <string name="passwordPlaceholder">Insert your password</string>
+    <string name="informationButton">Information</string>
+    <string name="evolutionButton">Evolution</string>
+    <string name="firstEvolution">Evolution 1</string>
+    <string name="secondEvolution">Evolution 2</string>
+    <string name="thirdEvolution">Evolution 3</string>    
+    <string name="arrow">arrow</string>
 </resources>
 
