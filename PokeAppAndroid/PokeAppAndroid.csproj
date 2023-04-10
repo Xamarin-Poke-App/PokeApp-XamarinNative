@@ -62,7 +62,6 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\SecondActivity.cs" />
     <Compile Include="AndroidApplication.cs" />
     <Compile Include="Utils\PathManager.cs" />
     <Compile Include="Adapters\PokemonAdapter.cs" />
@@ -103,10 +102,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
-    <AndroidResource Include="Resources\layout\activity_second.xml">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\pokemon_card.xml">
       <SubType></SubType>
       <Generator></Generator>
