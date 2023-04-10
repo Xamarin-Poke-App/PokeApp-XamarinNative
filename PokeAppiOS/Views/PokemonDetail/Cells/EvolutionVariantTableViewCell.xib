@@ -76,6 +76,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowImageView" destination="1Mm-il-nas" id="oTO-Rb-PIi"/>
                 <outlet property="fromImageView" destination="4r7-vw-yqR" id="0RU-AA-tCw"/>
                 <outlet property="fromLabel" destination="5kE-00-Src" id="CWB-Ud-ObM"/>
                 <outlet property="toImageView" destination="oRC-9T-BZa" id="it4-gT-ODZ"/>

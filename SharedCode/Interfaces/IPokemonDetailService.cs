@@ -12,6 +12,7 @@ namespace SharedCode.Interfaces
         Task<Result<PokemonLocal>> UpdateOrGetPokemonByIdLocalAsync(int pokeId);
         Task<Result<byte[]>> GetPokemonImage(int pokeId);
         Task<Result<EvolutionChainResponse>> UpdateOrGetEvolutionChainByPokemonId(int id);
+        Task<Result<byte[]>> GetPokemonShinyImage(int pokeId);
     }
 }
 

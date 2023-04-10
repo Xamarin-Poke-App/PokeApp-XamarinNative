@@ -88,6 +88,17 @@ namespace SharedCode.Services
 
             return data;
         }
+
+        public async Task<Result<byte[]>> GetPokemonShinyImage(int pokeId)
+        {
+            var isNetworkAvailable = networkConnection.GetIsConnectedCurrentStatus();
+
+            if (isNetworkAvailable)
+            {
+                return await Repository.GetPokemonShinyImage(pokeId);
+            }
+            return Result.Fail<byte[]>("No Internet connection");
+        }
     }
 }
 

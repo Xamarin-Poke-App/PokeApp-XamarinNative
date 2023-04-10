@@ -12,12 +12,15 @@ using SharedCode.Services;
 using SharedCode.Controller;
 using SharedCode.Util;
 using SharedCode.Model.DB;
+using System.Linq;
 
 namespace PokeAppiOS.Views
 {
 	public partial class PokemonEvolutionViewController : UIViewController
 	{  
         public EvolutionChainResponse EvolutionChainResponse;
+        public PokemonLocal Pokemon;
+        private UIColor _primaryColor;
 
         public PokemonEvolutionViewController (IntPtr handle) : base (handle)
 		{
@@ -31,6 +34,9 @@ namespace PokeAppiOS.Views
 
         public void DrawEvolutionChain()
         {
+            if (Pokemon == null) return;
+            var primaryType = Pokemon.TypesArray.FirstOrDefault();
+            _primaryColor = UIColor.FromName(primaryType);
             pokemonEvolutionChainTableView.DataSource = new PokemonEvolutionViewControllerDataSource(this);
             pokemonEvolutionChainTableView.RowHeight = 120;
         }
@@ -53,6 +59,7 @@ namespace PokeAppiOS.Views
                 var evolutionChainPairList = list[indexPath.Row];
                 if (viewController.EvolutionChainResponse != null)
                 {
+                    cell.PrimaryColor = viewController._primaryColor;
                     cell.EvolutionChainPairList = evolutionChainPairList;
                 }
                 return cell;

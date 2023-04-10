@@ -17,6 +17,8 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 		public static readonly NSString Key = new NSString ("EvolutionVariantTableViewCell");
 		public static readonly UINib Nib;
 
+        public UIColor PrimaryColor;
+
         IPokemonDetailController controller = IocContainer.GetDependency<IPokemonDetailController>();
 
         static EvolutionVariantTableViewCell ()
@@ -33,9 +35,15 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 		{
 			set
 			{
-                fromLabel.Text = value[0].Name;
-                toLabel.Text = value[1].Name;
+                fromLabel.Text = StringUtils.ToTitleCase(value[0].Name);
+                toLabel.Text = StringUtils.ToTitleCase(value[1].Name);
                 loadImages(value);
+                if (PrimaryColor != null)
+                {
+                    fromLabel.TextColor = PrimaryColor;
+                    toLabel.TextColor = PrimaryColor;
+                    arrowImageView.TintColor = PrimaryColor;
+                }
             }
 		}
 

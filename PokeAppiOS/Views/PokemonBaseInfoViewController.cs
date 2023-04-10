@@ -4,13 +4,47 @@ using System;
 
 using Foundation;
 using UIKit;
+using SharedCode.Model.DB;
+using SharedCode.Controller;
+using SharedCode.Services;
+using System.Linq;
+using SharedCode.Util;
 
 namespace PokeAppiOS.Views
 {
 	public partial class PokemonBaseInfoViewController : UIViewController
 	{
+        IPokemonDetailController controller = IocContainer.GetDependency<IPokemonDetailController>();
+        public PokemonLocal Pokemon;
+		private UIColor _primaryColor;
+
 		public PokemonBaseInfoViewController (IntPtr handle) : base (handle)
 		{
 		}
+
+		public async void UpdateInfo()
+		{
+			if (Pokemon == null) return;
+			var primaryType = Pokemon.TypesArray.FirstOrDefault();
+			_primaryColor = UIColor.FromName(primaryType);
+			var imageResponse = await controller.LoadPokemonShinyImageAsync(Pokemon.Id);
+			if (imageResponse.Success)
+			{
+				shinyImageView.Image = UIImage.LoadFromData(NSData.FromArray(imageResponse.Value));
+			}
+			happinessValueLabel.Text = Pokemon.BaseHappiness.ToString();
+			happinessValueLabel.TextColor = _primaryColor;
+
+			habitadValueLabel.Text = StringUtils.ToTitleCase(Pokemon.Habitat ?? "No Habitad");
+			habitadValueLabel.TextColor = _primaryColor;
+
+			generationValueLabel.Text = StringUtils.ToTitleCase(Pokemon.Generation ?? "No Generation");
+			generationValueLabel.TextColor = _primaryColor;
+
+			regionNameLabel.Text = StringUtils.ToTitleCase(Pokemon.Region ?? "No Region");
+			regionNameLabel.TextColor = _primaryColor;
+
+			descriptionLabel.Text = Pokemon.FlavorTextEntry.Replace(System.Environment.NewLine, "");
+        }
 	}
 }

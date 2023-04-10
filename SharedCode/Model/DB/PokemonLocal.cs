@@ -20,6 +20,7 @@ namespace SharedCode.Model.DB
 		public string Generation { get; set; }
 		public string Habitat { get; set; }
 		public int EvolutionChainId { get; set; }
+		public string FlavorTextEntry { get; set; }
 
         public PokemonLocal() { }
 

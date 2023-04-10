@@ -35,7 +35,7 @@ namespace PokeAppiOS.CommonView
                 this.LayoutMarginsGuide.BottomAnchor.ConstraintEqualTo(PokemonTypeNameLabel.LayoutMarginsGuide.BottomAnchor, 5)
             });
 
-            this.Layer.CornerRadius = 12;
+            this.Layer.CornerRadius = 5;
         }
     }
 }

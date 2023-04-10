@@ -13,6 +13,9 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 	partial class EvolutionVariantTableViewCell
 	{
 		[Outlet]
+		UIKit.UIImageView arrowImageView { get; set; }
+
+		[Outlet]
 		UIKit.UIImageView fromImageView { get; set; }
 
 		[Outlet]
@@ -31,19 +34,24 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 				fromImageView = null;
 			}
 
-			if (toImageView != null) {
-				toImageView.Dispose ();
-				toImageView = null;
-			}
-
 			if (fromLabel != null) {
 				fromLabel.Dispose ();
 				fromLabel = null;
 			}
 
+			if (toImageView != null) {
+				toImageView.Dispose ();
+				toImageView = null;
+			}
+
 			if (toLabel != null) {
 				toLabel.Dispose ();
 				toLabel = null;
+			}
+
+			if (arrowImageView != null) {
+				arrowImageView.Dispose ();
+				arrowImageView = null;
 			}
 		}
 	}

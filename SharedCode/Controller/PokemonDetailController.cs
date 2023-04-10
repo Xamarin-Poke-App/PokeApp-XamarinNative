@@ -19,6 +19,7 @@ namespace SharedCode.Controller
         void LoadPokemonInfo(int pokeId);
         void GetEvolutionChainByPokemonId(int id);
         Task<Result<byte[]>> LoadPokemonImageAsync(int pokeId);
+        Task<Result<byte[]>> LoadPokemonShinyImageAsync(int pokeId);
     }
 
     public interface IPokemonDetailControllerListener
@@ -58,6 +59,12 @@ namespace SharedCode.Controller
         public async Task<Result<byte[]>> LoadPokemonImageAsync(int pokeId)
         {
             return await Repository.GetPokemonImage(pokeId);
+        }
+
+
+        public async Task<Result<byte[]>> LoadPokemonShinyImageAsync(int pokeId)
+        {
+            return await Repository.GetPokemonShinyImage(pokeId);
         }
     }
 }
