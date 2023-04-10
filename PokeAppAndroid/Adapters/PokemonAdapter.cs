@@ -43,6 +43,7 @@ namespace PokeAppAndroid.Adapters
             string pokemonID = value.Id.ToString();
 
             viewHolder.Container.SetDrawableBackgroundForType(value.TypesArray.First());
+            viewHolder.TvRegion.Text = value.Region.FormatedName();
             viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
             Console.WriteLine(value.RegularSpriteUrl);
@@ -76,6 +77,7 @@ namespace PokeAppAndroid.Adapters
             public TextView TvPokemonNumber { get; set; }
             public ConstraintLayout Container { get; set; }
             public RecyclerView RvTypes;
+            public TextView TvRegion { get; set; }
 
             public PokemonViewHolder(Android.Views.View card, Action<int> listener) : base(card)
             {
@@ -84,6 +86,7 @@ namespace PokeAppAndroid.Adapters
                 TvPokemonNumber = card.FindViewById<TextView>(Resource.Id.TvPokemonNumber);
                 Container = card.FindViewById<ConstraintLayout>(Resource.Id.Container);
                 RvTypes = card.FindViewById<RecyclerView>(Resource.Id.RvTypes);
+                TvRegion = card.FindViewById<TextView>(Resource.Id.TvRegion);
                 card.Click += (sender, e) => listener(base.AbsoluteAdapterPosition);
             }
         }

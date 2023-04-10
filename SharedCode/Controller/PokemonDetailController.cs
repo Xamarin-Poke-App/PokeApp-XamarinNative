@@ -6,6 +6,7 @@ using SharedCode.Repository;
 using Unity;
 using SharedCode.Repository.Interfaces;
 using SharedCode.Model.DB;
+using SharedCode.Interfaces;
 
 namespace SharedCode.Controller
 {
@@ -28,9 +29,7 @@ namespace SharedCode.Controller
         public IPokemonDetailControllerListener viewListener;
 
         [Dependency]
-        public IPokemonRepository Repository;
-        [Dependency]
-        public IPokemonRepositoryLocal LocalRepository;
+        public IPokemonDetailService Repository;
 
         public IPokemonDetailControllerListener listener { get => viewListener; set => viewListener = value; }
 
@@ -42,7 +41,7 @@ namespace SharedCode.Controller
 
         public async void LoadPokemonInfo(int pokeId)
         {
-            var data = await LocalRepository.GetPokemonByIdLocalAsync(pokeId);
+            var data = await Repository.UpdateOrGetPokemonByIdLocalAsync(pokeId);
             viewListener.updatePokemonInfo(data);
         }
         

@@ -23,7 +23,8 @@ namespace SharedCode.Services
         [Dependency]
         public IPokemonRepository Repository;
 
-        NetworkConnection networkConnection = IocContainer.GetDependency<NetworkConnection>();
+        [Dependency]
+        public INetworkConnection networkConnection;
 
         public async Task<Result<List<PokemonLocal>>> GetPokemonDataAsync()
         {
@@ -130,10 +131,15 @@ namespace SharedCode.Services
                     pokemonTypeListIndex++;
                     continue;
                 }
-                if (auxPokemonList[id].Types == "")
+                if (string.IsNullOrEmpty(auxPokemonList[id].Types))
                     auxPokemonList[id].Types += TypeName;
                 else
-                    auxPokemonList[id].Types += $"%{TypeName}";
+                {
+                    if (pokemonTypeList[pokemonTypeListIndex].Slot == 1)
+                        auxPokemonList[id].Types = $"{TypeName}%{auxPokemonList[id].Types}";
+                    else
+                        auxPokemonList[id].Types += $"%{TypeName}";
+                }
                 pokemonTypeListIndex++;
             }
 
