@@ -72,6 +72,8 @@
     <Compile Include="View\PokemonDetailFragment.cs" />
     <Compile Include="Utils\ViewExtensions.cs" />
     <Compile Include="Utils\Storage.cs" />
+    <Compile Include="View\PokemonEvolutionFragment.cs" />
+    <Compile Include="View\PokemonInfoFragment.cs" />
     <Compile Include="Adapters\PokemonTypeAdapter.cs" />
     <Compile Include="Adapters\SpaceItemDecorator.cs" />
   </ItemGroup>
@@ -153,10 +155,6 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\pokeball.xml">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\rounded_background.xml">
       <SubType></SubType>
       <Generator></Generator>
@@ -170,6 +168,26 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\baseline_search_24.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_evolution_detail.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_info_detail.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\bluearrow.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\background_with_image.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\Pokeball.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
