@@ -35,10 +35,10 @@ namespace PokeAppiOS.Views
 			happinessValueLabel.Text = Pokemon.BaseHappiness.ToString();
 			happinessValueLabel.TextColor = _primaryColor;
 
-			habitadValueLabel.Text = StringUtils.ToTitleCase(Pokemon.Habitat ?? "No Habitad");
+			habitadValueLabel.Text = StringUtils.ToTitleCase(Pokemon.Habitat ?? "No Habitat");
 			habitadValueLabel.TextColor = _primaryColor;
 
-			generationValueLabel.Text = StringUtils.ToTitleCase(Pokemon.Generation ?? "No Generation");
+			generationValueLabel.Text = Pokemon.GetGenerationRomanNumeral();
 			generationValueLabel.TextColor = _primaryColor;
 
 			regionNameLabel.Text = StringUtils.ToTitleCase(Pokemon.Region ?? "No Region");

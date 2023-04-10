@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Java.Net;
 using SharedCode.Util;
 using SQLite;
 
@@ -39,6 +40,13 @@ namespace SharedCode.Model.DB
 			{
 				return Types.Split('%');
             }
+		}
+
+		public string GetGenerationRomanNumeral()
+		{
+			if (Generation == null) return "";
+            var index = Generation.LastIndexOf("-");
+            return Generation.Substring(index + 1).ToUpper();
 		}
 	}
 }

@@ -4,6 +4,7 @@ using Foundation;
 using UIKit;
 using SharedCode.Model.Api;
 using System.Collections.Generic;
+using System.Linq;
 using CoreAudioKit;
 using SharedCode.Controller;
 using SharedCode.Services;
@@ -35,8 +36,8 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
 		{
 			set
 			{
-                fromLabel.Text = StringUtils.ToTitleCase(value[0].Name);
-                toLabel.Text = StringUtils.ToTitleCase(value[1].Name);
+                fromLabel.Text = StringUtils.ToTitleCase(value.FirstOrDefault().Name);
+                toLabel.Text = StringUtils.ToTitleCase(value.LastOrDefault().Name);
                 loadImages(value);
                 if (PrimaryColor != null)
                 {

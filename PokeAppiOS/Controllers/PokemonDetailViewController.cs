@@ -72,8 +72,8 @@ namespace PokeAppiOS.Controllers
             var pokemonTypeViews = new List<PokemonTypeCustomView>();
             foreach(var type in pokemon.TypesArray)
             {
-                PokemonTypeCustomView typeView = new PokemonTypeCustomView(type);
-                typeView.BackgroundColor = UIColor.FromName(type);
+                var typeViewColor = UIColor.FromName(type);
+                PokemonTypeCustomView typeView = new PokemonTypeCustomView(type, typeViewColor);
                 pokemonTypeViews.Add(typeView);
             }
             
@@ -173,10 +173,9 @@ namespace PokeAppiOS.Controllers
         {
             if (pokemon.Success)
 			{
-                var titleCasedName = StringUtils.ToTitleCase(pokemon.Value.Name);
                 _selectedPokemon = pokemon.Value;
-                pokemonNameLabel.Text = titleCasedName;
-                Title = titleCasedName;
+                pokemonNameLabel.Text = StringUtils.ToTitleCase(pokemon.Value.Name);
+                Title = "Pokemon Detail";
                 var primaryColor = UIColor.FromName(pokemon.Value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
                 View.BackgroundColor = primaryColor;
                 statsSegmentedControl.SelectedSegmentTintColor = primaryColor;
