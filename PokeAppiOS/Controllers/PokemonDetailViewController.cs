@@ -5,7 +5,7 @@ using SharedCode.Model;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
-using SharedCode.Helper;
+using SharedCode.Helpers;
 using ObjCRuntime;
 using UIKit;
 using PokeAppiOS.Views;
@@ -143,8 +143,8 @@ namespace PokeAppiOS.Controllers
         {
             if (pokemon.Success)
 			{
-                pokemonNameLabel.Text = pokemon.Value.Name;
-                Title = pokemon.Value.Name;
+                pokemonNameLabel.Text = pokemon.Value.Name.FormatedName();
+                Title = "Pokemon Detail";
             }
         }
     }
