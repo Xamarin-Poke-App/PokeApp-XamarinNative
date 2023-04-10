@@ -62,16 +62,15 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\LoginActivity.cs" />
     <Compile Include="View\SecondActivity.cs" />
     <Compile Include="AndroidApplication.cs" />
     <Compile Include="Utils\PathManager.cs" />
-    <Compile Include="View\PokemonHomeActivity.cs" />
     <Compile Include="Adapters\PokemonAdapter.cs" />
     <Compile Include="View\PokemonListFragment.cs" />
     <Compile Include="View\PokemonDetailFragment.cs" />
     <Compile Include="Utils\ViewExtensions.cs" />
     <Compile Include="Utils\Storage.cs" />
+    <Compile Include="View\LoginFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -104,10 +103,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
     <AndroidResource Include="Resources\layout\activity_second.xml">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_pokemon_home.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -168,6 +163,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\baseline_search_24.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_login.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
