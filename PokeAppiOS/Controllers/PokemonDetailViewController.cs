@@ -5,7 +5,7 @@ using SharedCode.Model;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
-using SharedCode.Helper;
+using SharedCode.Helpers;
 using ObjCRuntime;
 using UIKit;
 using PokeAppiOS.Views;
