@@ -15,11 +15,11 @@ using SharedCode.Model.Api;
 
 namespace PokeAppiOS.Views.Cells
 {
-  
+
     public partial class PokemonViewCell : UICollectionViewCell, IPokemonDetailControllerListener
-	{
-		public static readonly NSString Key = new NSString ("PokemonViewCell");
-		public static readonly UINib Nib = UINib.FromName("PokemonViewCell", NSBundle.MainBundle);
+    {
+        public static readonly NSString Key = new NSString("PokemonViewCell");
+        public static readonly UINib Nib = UINib.FromName("PokemonViewCell", NSBundle.MainBundle);
         private IPokemonDetailController controller;
 
 
@@ -29,9 +29,9 @@ namespace PokeAppiOS.Views.Cells
         }
 
         public PokemonLocal Pokemon
-		{
-			set
-			{
+        {
+            set
+            {
                 pokemonNameLabel.Text = value.Name.FormatedName();
                 pokemonNumberLabel.Text = "#" + value.Id.ToString();
                 pokemonRegionLabel.Text = value.Region.FormatedName();
@@ -72,7 +72,7 @@ namespace PokeAppiOS.Views.Cells
         {
             if (pokemon.Success)
             {
-                
+
             }
         }
     }
