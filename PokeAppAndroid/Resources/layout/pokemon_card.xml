@@ -55,7 +55,6 @@
         android:id="@+id/TvPokemonNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:text="Region"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -67,7 +66,6 @@
         android:id="@+id/TvRegion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:text="Region"
         android:textSize="16sp"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_pokemonName"
@@ -76,25 +74,13 @@
         tools:text="Region 1"
         />
 
-    <include
-        android:id="@+id/FirstType"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RvTypes"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/TvRegion"
-        layout="@layout/type_card"/>
-
-    <include
-        android:id="@+id/SecondType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toBottomOf="@id/TvRegion"
-        app:layout_constraintStart_toEndOf="@id/FirstType"
-        android:visibility="gone"
-        tools:visibility="visible"
-        layout="@layout/type_card"/>
+        />
 </androidx.constraintlayout.widget.ConstraintLayout >
 
   

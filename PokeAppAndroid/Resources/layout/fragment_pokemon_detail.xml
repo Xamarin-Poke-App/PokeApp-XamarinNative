@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bug">
 
     <TextView
+        android:id="@+id/pokemonNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:text="@string/pokemon_detail_title"/>
-    
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_margin="15dp"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
+
 	<ImageView
 		android:id="@+id/pokemonImageView"
 		android:layout_width="match_parent"
@@ -26,13 +27,31 @@
         android:gravity="center_horizontal"
         android:layout_margin="15dp"/>
 
-    <TextView
-        android:id="@+id/pokemonNameTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"
-        android:gravity="center_horizontal" />
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/informationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/informationButton"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/evolutionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evolutionButton"
+            android:layout_weight="1"/>
+
+	</LinearLayout>
+
+    <FrameLayout
+    android:id="@+id/fragmentBaseDetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"/>
 
 </LinearLayout>

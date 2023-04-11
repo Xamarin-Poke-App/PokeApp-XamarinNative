@@ -10,8 +10,7 @@ namespace SharedCode.Interfaces
 	public interface IPokemonDetailService
 	{
         Task<Result<PokemonLocal>> UpdateOrGetPokemonByIdLocalAsync(int pokeId);
-        Task<Result<byte[]>> GetPokemonImage(int pokeId);
-        Task<Result<EvolutionChainResponse>> GetEvolutionChainByPokemonId(int id);
+        Task<Result<EvolutionChainResponse>> UpdateOrGetEvolutionChainByPokemonId(int id);
     }
 }
 

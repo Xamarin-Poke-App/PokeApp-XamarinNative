@@ -37,7 +37,6 @@ namespace SharedCode.Util
     public interface INetworkHandler
     {
         Task<T> GetData<T>(string endpoint);
-        Task<byte[]> LoadImage(string imageUrl);
     }
 
     public class NetworkHandler : INetworkHandler
@@ -57,20 +56,6 @@ namespace SharedCode.Util
                 CheckNetworkException(response);
                 throw ex;
             }
-        }
-
-        public async Task<byte[]> LoadImage(string imageUrl)
-        {
-            try
-            {
-                Task<byte[]> contentsTask = httpClient.GetByteArrayAsync(imageUrl);
-                return await contentsTask;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
         }
 
         private void CheckNetworkException(HttpResponseMessage response)

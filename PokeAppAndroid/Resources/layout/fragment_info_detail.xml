@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingHorizontal="30dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+            
+        <ImageView			
+			android:id="@+id/secondaryPokemonSprite"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+		    android:contentDescription="@string/pikachuTitle"
+            android:layout_marginHorizontal="120dp"/>
+            
+        <TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Shiny variant "		
+			android:paddingTop="2dp"
+            android:gravity="center_horizontal"/>
+
+		    <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"	
+			android:paddingTop="20dp">
+
+                <LinearLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tvPokemonGeneration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50"/>
+
+                     <TextView
+                        android:id="@+id/tvPokemonGenerationLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="Generation"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tvPokemonHabitad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unknown"/>
+
+                     <TextView
+                        android:id="@+id/tvPokemonHabitadLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Habitad"
+                        android:textStyle="bold"                        
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+                <LinearLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tvPokemonBaseHappiness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="V"/>
+
+                     <TextView
+                        android:id="@+id/tvPokemonBaseHappinessLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Base Hapiness"   
+                        android:textStyle="bold"                     
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tvPokemonRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kanto"/>
+
+                     <TextView
+                        android:id="@+id/tvPokemonRegionLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="Region"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/tvPokemonDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description of the pokemon. This pokemon is a water pokemon that attacks every time is hungry."
+            android:paddingHorizontal="20dp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+		</LinearLayout>
+
+</LinearLayout>

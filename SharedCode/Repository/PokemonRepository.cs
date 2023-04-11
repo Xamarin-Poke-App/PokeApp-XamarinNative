@@ -73,30 +73,6 @@ namespace SharedCode.Repository
             }
         }
 
-        public async Task<Result<byte[]>> GetPokemonImage(int pokeId)
-        {
-            try
-            {
-                var data = await NetworkHandler.LoadImage(Constants.PokemonArtWorksImagesBaseAddress + pokeId + ".png");
-                return Result.Ok<byte[]>(data);
-            }
-            catch (NetworkErrorException ex)
-            {
-                // You can customize the error messages just checking the exceptionCode or just use the exceptionMessage instead (see default case)
-                switch (ex.Code)
-                {
-                    case (int)HttpStatusCode.NotFound:
-                        return Result.Fail<byte []>("Can't retrieve pokemon image");
-                    default:
-                        return Result.Fail<byte[]>(ex.Message ?? "Something went wrong");
-                }
-            }
-            catch (Exception ex)
-            {
-                return Result.Fail<byte[]>($"Check your internet connection {ex.ToString()}");
-            }
-        }
-
         public async Task<Result<List<ResultItem>>> GetPokemonTypesList()
         {
             try

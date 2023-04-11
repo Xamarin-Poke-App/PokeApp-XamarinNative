@@ -13,6 +13,7 @@ using System.Linq;
 using SharedCode.Helpers;
 using SharedCode.Model.Api;
 using FFImageLoading;
+using System.Collections.Generic;
 
 namespace PokeAppiOS.Views.Cells
 {
@@ -29,37 +30,70 @@ namespace PokeAppiOS.Views.Cells
         }
 
         public PokemonLocal Pokemon
-		{
-			set
-			{
+        {
+            get { return Pokemon; }
+            set
+            {
                 pokemonNameLabel.Text = value.Name.FormatedName();
                 pokemonNumberLabel.Text = "#" + value.Id.ToString();
                 pokemonRegionLabel.Text = value.Region.FormatedName();
-                pokemonFirstTypeView.Layer.CornerRadius = 10;
-                pokemonSecondTypeView.Layer.CornerRadius = 10;
                 ImageLoaderService.LoadImageFromUrl(value.RegularSpriteUrl)
                 .Error(ex =>
                 {
                     Console.Write(ex);
                 })
                 .Into(pokemonImageView);
-                // Pokemons will only have as max two types of pokemon
-                if (value.TypesArray.Count() == 1)
-                {
-                    pokemonSecondTypeView.Hidden = true;
-                    pokemonViewBackground.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
-                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault());
-                    pokemonFirstTypeLabel.Text = value.TypesArray.FirstOrDefault();
-                }
-                else if (value.TypesArray.Count() > 1)
-                {
-                    pokemonSecondTypeView.Hidden = false;
-                    pokemonViewBackground.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
-                    pokemonFirstTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault());
-                    pokemonFirstTypeLabel.Text = value.TypesArray.FirstOrDefault();
-                    pokemonSecondTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.Last());
-                    pokemonSecondTypeLabel.Text = value.TypesArray.Last();
-                }
+                pokemonViewBackground.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
+                pokemonTypesCollectionView.BackgroundColor = UIColor.Clear.ColorWithAlpha(0f);
+                pokemonTypesCollectionView.RegisterNibForCell(TypeCollectionViewCell.Nib, TypeCollectionViewCell.Key);
+                pokemonTypesCollectionView.DataSource = new PokemonViewCellDataSource(this, value.TypesArray.ToList());
+                pokemonTypesCollectionView.Delegate = new PokemonViewFlowLayout(this);
+            }
+        }
+
+        public class PokemonViewCellDataSource : UICollectionViewDataSource
+        {
+            PokemonViewCell cell;
+            List<string> pokemonTypes;
+            public PokemonViewCellDataSource(PokemonViewCell cell, List<string> typesList)
+            {
+                this.cell = cell;
+                pokemonTypes = typesList;
+            }
+
+            public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
+            {
+                TypeCollectionViewCell cell = (TypeCollectionViewCell)collectionView.DequeueReusableCell(TypeCollectionViewCell.Key, indexPath);
+                cell.Layer.CornerRadius = 5;
+                var typeString = pokemonTypes[indexPath.Row];
+
+                cell.TypeName = typeString;
+                cell.UpdateCell();
+
+                return cell;
+            }
+
+            public override nint GetItemsCount(UICollectionView collectionView, nint section)
+            {
+                return pokemonTypes.Count;
+            }
+        }
+
+        public class PokemonViewFlowLayout: UICollectionViewDelegateFlowLayout
+        {
+            PokemonViewCell cell;
+            public PokemonViewFlowLayout(PokemonViewCell cell)
+            {
+                this.cell = cell;
+            }
+
+            [Export("collectionView:layout:sizeForItemAtIndexPath:")]
+            public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
+            {
+                var width = 45;
+                var height = 25;
+
+                return new CGSize(width: width, height: height);
             }
         }
     }
