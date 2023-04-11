@@ -197,7 +197,9 @@ namespace PokeAppiOS.Controllers
 
         public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
         {
+            var test = evolutionChain.Value;
             if (evolutionChain.IsFailure) return;
+            if (evolutionChain.Value == null) return;
             _evolutionChainResponse = evolutionChain.Value;
         }
     }

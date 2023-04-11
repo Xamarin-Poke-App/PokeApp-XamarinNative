@@ -403,16 +403,31 @@
                                 <rect key="frame" x="16" y="59" width="361" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="M2k-3r-am0">
+                                <rect key="frame" x="141.66666666666666" y="326" width="110" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="No Evolution Chain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ffj-Ws-G4C">
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dJg-Jg-qJo" firstAttribute="top" secondItem="9Zw-Kh-P5I" secondAttribute="bottom" id="MQF-dg-peA"/>
+                            <constraint firstItem="M2k-3r-am0" firstAttribute="centerY" secondItem="jgX-u3-4Oc" secondAttribute="centerY" id="MZb-b8-fOu"/>
+                            <constraint firstItem="M2k-3r-am0" firstAttribute="centerX" secondItem="jgX-u3-4Oc" secondAttribute="centerX" id="Tj4-W9-va4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9Zw-Kh-P5I" secondAttribute="trailing" id="Vad-Lf-dKo"/>
                             <constraint firstItem="9Zw-Kh-P5I" firstAttribute="leading" secondItem="jgX-u3-4Oc" secondAttribute="leadingMargin" id="XWt-le-Afq"/>
                             <constraint firstItem="9Zw-Kh-P5I" firstAttribute="top" secondItem="YXW-Hi-B4c" secondAttribute="bottom" id="dgR-Z1-RB3"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noEvolutionChainLabel" destination="ffj-Ws-G4C" id="nh7-Jp-LDK"/>
                         <outlet property="pokemonEvolutionChainTableView" destination="9Zw-Kh-P5I" id="KTK-gy-i7T"/>
                     </connections>
                 </viewController>

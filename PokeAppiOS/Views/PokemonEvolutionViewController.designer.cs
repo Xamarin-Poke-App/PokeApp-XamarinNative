@@ -13,6 +13,9 @@ namespace PokeAppiOS.Views
 	partial class PokemonEvolutionViewController
 	{
 		[Outlet]
+		UIKit.UILabel noEvolutionChainLabel { get; set; }
+
+		[Outlet]
 		UIKit.UITableView pokemonEvolutionChainTableView { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -20,6 +23,11 @@ namespace PokeAppiOS.Views
 			if (pokemonEvolutionChainTableView != null) {
 				pokemonEvolutionChainTableView.Dispose ();
 				pokemonEvolutionChainTableView = null;
+			}
+
+			if (noEvolutionChainLabel != null) {
+				noEvolutionChainLabel.Dispose ();
+				noEvolutionChainLabel = null;
 			}
 		}
 	}
