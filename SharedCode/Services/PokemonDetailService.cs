@@ -59,19 +59,6 @@ namespace SharedCode.Services
             }
         }
 
-        public async Task<Result<byte[]>> GetPokemonImage(int pokeId)
-        {
-            var isNetworkAvailable = networkConnection.GetIsConnectedCurrentStatus();
-
-            if (isNetworkAvailable)
-            {
-                return await Repository.GetPokemonImage(pokeId);
-            } else
-            {
-                return Result.Fail<byte[]>("No Internet connection");
-            }
-        }
-
         public async Task<Result<EvolutionChainResponse>> UpdateOrGetEvolutionChainByPokemonId(int id)
         {
             var localData = await RepositoryLocal.GetEvolutionChainByIdFromLocalAsync(id);
@@ -87,17 +74,6 @@ namespace SharedCode.Services
             await RepositoryLocal.StoreEvolutionChainAsync(data.Value);
 
             return data;
-        }
-
-        public async Task<Result<byte[]>> GetPokemonShinyImage(int pokeId)
-        {
-            var isNetworkAvailable = networkConnection.GetIsConnectedCurrentStatus();
-
-            if (isNetworkAvailable)
-            {
-                return await Repository.GetPokemonShinyImage(pokeId);
-            }
-            return Result.Fail<byte[]>("No Internet connection");
         }
     }
 }

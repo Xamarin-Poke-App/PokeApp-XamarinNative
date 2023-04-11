@@ -5,6 +5,7 @@ using SharedCode.Model;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
+using FFImageLoading;
 using SharedCode.Helpers;
 using ObjCRuntime;
 using UIKit;
@@ -60,7 +61,6 @@ namespace PokeAppiOS.Controllers
             progressIndicator.StartAnimating();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-			controller.LoadPokemonImage(PokemonID);
 			controller.LoadPokemonInfo(PokemonID);
             // SegmentedControl
             statsSegmentedControl.SelectedSegment = 0;
@@ -169,14 +169,6 @@ namespace PokeAppiOS.Controllers
             viewController.RemoveFromParentViewController();
         }
 
-        public void updatePokemonImage(Result<byte[]> image)
-        {
-            if (image.Success)
-			{
-				pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
-			}
-        }
-
         public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.Success)
@@ -184,6 +176,12 @@ namespace PokeAppiOS.Controllers
                 _selectedPokemon = pokemon.Value;
                 pokemonNameLabel.Text = StringUtils.ToTitleCase(pokemon.Value.Name);
                 Title = "Pokemon Detail";
+                ImageLoaderService.LoadImageFromUrl(pokemon.Value.RegularSpriteUrl)
+                    .Error(ex =>
+                    {
+                        Console.Write(ex);
+                    })
+                    .Into(pokemonImageView);
                 var primaryColor = UIColor.FromName(pokemon.Value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
                 View.BackgroundColor = primaryColor;
                 statsSegmentedControl.SelectedSegmentTintColor = primaryColor;

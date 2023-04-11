@@ -12,18 +12,16 @@ using SharedCode.Services;
 using System.Linq;
 using SharedCode.Helpers;
 using SharedCode.Model.Api;
-using CoreAudioKit;
-using PokeAppiOS.Controllers;
+using FFImageLoading;
 using System.Collections.Generic;
 
 namespace PokeAppiOS.Views.Cells
 {
-
-    public partial class PokemonViewCell : UICollectionViewCell, IPokemonDetailControllerListener
-    {
-        public static readonly NSString Key = new NSString("PokemonViewCell");
-        public static readonly UINib Nib = UINib.FromName("PokemonViewCell", NSBundle.MainBundle);
-        private IPokemonDetailController controller;
+  
+    public partial class PokemonViewCell : UICollectionViewCell
+	{
+		public static readonly NSString Key = new NSString ("PokemonViewCell");
+		public static readonly UINib Nib = UINib.FromName("PokemonViewCell", NSBundle.MainBundle);
 
 
         protected PokemonViewCell(IntPtr handle) : base(handle)
@@ -39,34 +37,17 @@ namespace PokeAppiOS.Views.Cells
                 pokemonNameLabel.Text = value.Name.FormatedName();
                 pokemonNumberLabel.Text = "#" + value.Id.ToString();
                 pokemonRegionLabel.Text = value.Region.FormatedName();
-                controller = IocContainer.GetDependency<IPokemonDetailController>();
-                controller.listener = this;
-                controller.LoadPokemonImage(value.Id);
+                ImageLoaderService.LoadImageFromUrl(value.RegularSpriteUrl)
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
+                .Into(pokemonImageView);
                 pokemonViewBackground.BackgroundColor = UIColor.FromName(value.TypesArray.FirstOrDefault()).ColorWithAlpha(0.8f);
                 pokemonTypesCollectionView.BackgroundColor = UIColor.Clear.ColorWithAlpha(0f);
                 pokemonTypesCollectionView.RegisterNibForCell(TypeCollectionViewCell.Nib, TypeCollectionViewCell.Key);
                 pokemonTypesCollectionView.DataSource = new PokemonViewCellDataSource(this, value.TypesArray.ToList());
                 pokemonTypesCollectionView.Delegate = new PokemonViewFlowLayout(this);
-            }
-        }
-
-        public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
-        {
-        }
-
-        public void updatePokemonImage(Result<byte[]> image)
-        {
-            if (image.Success)
-            {
-                pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
-            }
-        }
-
-        public void updatePokemonInfo(Result<PokemonLocal> pokemon)
-        {
-            if (pokemon.Success)
-            {
-
             }
         }
 

@@ -10,6 +10,7 @@ using SharedCode.Controller;
 using SharedCode.Services;
 using SharedCode.Model.DB;
 using SharedCode.Util;
+using FFImageLoading;
 
 namespace PokeAppiOS.Views.PokemonDetail.Cells
 {
@@ -54,17 +55,25 @@ namespace PokeAppiOS.Views.PokemonDetail.Cells
             loadEvolutionToImage(evolutionChainPairList.LastOrDefault());
         }
 
-        private async void loadEvolutionFromImage(ResultItem specieFrom)
+        private void loadEvolutionFromImage(ResultItem specieFrom)
         {
-            var fromImageResponse = await controller.LoadPokemonImageAsync(specieFrom.GetIdFromUrl());
-            if (fromImageResponse.IsFailure) return;
-            fromImageView.Image = UIImage.LoadFromData(NSData.FromArray(fromImageResponse.Value));
+            string pokemonFromId = specieFrom.GetIdFromUrl().ToString();
+            ImageLoaderService.LoadImageFromUrl(specieFrom.GetPokemonImageURL(pokemonFromId))
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
+                .Into(fromImageView);
         }
 
-        private async void loadEvolutionToImage(ResultItem specieTo) {
-            var toImageResponse = await controller.LoadPokemonImageAsync(specieTo.GetIdFromUrl());
-            if (toImageResponse.IsFailure) return;
-            toImageView.Image = UIImage.LoadFromData(NSData.FromArray(toImageResponse.Value));
+        private void loadEvolutionToImage(ResultItem specieTo) {
+            string pokemonToId = specieTo.GetIdFromUrl().ToString();
+            ImageLoaderService.LoadImageFromUrl(specieTo.GetPokemonImageURL(pokemonToId))
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
+                .Into(toImageView);
         }
     }
 }

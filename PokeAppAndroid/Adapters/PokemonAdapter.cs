@@ -13,8 +13,8 @@ using SharedCode.Model;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
-using Square.Picasso;
 using SharedCode.Helpers;
+using FFImageLoading;
 using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.Adapters
@@ -46,9 +46,11 @@ namespace PokeAppAndroid.Adapters
             viewHolder.TvRegion.Text = value.Region.FormatedName();
             viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
-
-            Picasso.Get()
-                .Load(value.RegularSpriteUrl)
+            ImageLoaderService.LoadImageFromUrl(value.RegularSpriteUrl)
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
                 .Into(viewHolder.IvPokemonImage);
 
             if (_context == null) return;

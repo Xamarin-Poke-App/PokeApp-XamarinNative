@@ -117,8 +117,6 @@
             <Visible>false</Visible>
         </ImageAsset>
         <ImageAsset Include="Assets.xcassets\Contents.json" />
-        <ImageAsset Include="Assets.xcassets\Pokeball.imageset\Contents.json" />
-        <ImageAsset Include="Assets.xcassets\Pokeball.imageset\Pokeball.svg" />
         <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Bulbasaur.svg" />
         <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\TypeColors\Contents.json" />
@@ -140,6 +138,8 @@
         <ImageAsset Include="Assets.xcassets\TypeColors\water.colorset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\TypeColors\rock.colorset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\TypeColors\steel.colorset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\PokeballSVG.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\PokeballSVG.imageset\Pokeball.svg" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="CommonView\" />

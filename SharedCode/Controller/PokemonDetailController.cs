@@ -10,16 +10,12 @@ namespace SharedCode.Controller
     public interface IPokemonDetailController
     {
         IPokemonDetailControllerListener listener { get; set; }
-        void LoadPokemonImage(int pokeId);
         void LoadPokemonInfo(int pokeId);
         void GetEvolutionChainByPokemonId(int id);
-        Task<Result<byte[]>> LoadPokemonImageAsync(int pokeId);
-        Task<Result<byte[]>> LoadPokemonShinyImageAsync(int pokeId);
     }
 
     public interface IPokemonDetailControllerListener
     {
-        void updatePokemonImage(Result<byte[]> image);
         void updatePokemonInfo(Result<PokemonLocal> pokemon);
         void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain);
     }
@@ -33,12 +29,6 @@ namespace SharedCode.Controller
 
         public IPokemonDetailControllerListener listener { get => viewListener; set => viewListener = value; }
 
-        public async void LoadPokemonImage(int pokeId)
-        {
-            var image = await Repository.GetPokemonImage(pokeId);
-            viewListener.updatePokemonImage(image);
-        }
-
         public async void LoadPokemonInfo(int pokeId)
         {
             var data = await Repository.UpdateOrGetPokemonByIdLocalAsync(pokeId);
@@ -49,17 +39,6 @@ namespace SharedCode.Controller
         {
             var data = await Repository.UpdateOrGetEvolutionChainByPokemonId(id);
             viewListener.updateEvoutionChain(data);
-        }
-
-        public async Task<Result<byte[]>> LoadPokemonImageAsync(int pokeId)
-        {
-            return await Repository.GetPokemonImage(pokeId);
-        }
-
-
-        public async Task<Result<byte[]>> LoadPokemonShinyImageAsync(int pokeId)
-        {
-            return await Repository.GetPokemonShinyImage(pokeId);
         }
     }
 }

@@ -13,7 +13,8 @@ using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
-using Square.Picasso;
+using FFImageLoading;
+using static Android.Renderscripts.Sampler;
 using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.View
@@ -110,9 +111,11 @@ namespace PokeAppAndroid.View
             pokemonHabitadLabel.SetTextColor(_primaryColor);
             pokemonBaseHappinessLabel.SetTextColor(_primaryColor);
             pokemonRegionLabel.SetTextColor(_primaryColor);
-
-            Picasso.Get()
-                .Load(_pokemon.ShinySprite)
+            ImageLoaderService.LoadImageFromUrl(_pokemon.ShinySprite)
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
                 .Into(secondaryPokemonSprite);
         }
     }

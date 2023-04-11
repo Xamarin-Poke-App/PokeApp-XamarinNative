@@ -6,9 +6,11 @@ using SharedCode.Model.Api;
 using Android.Views;
 using Android.Widget;
 using AndroidX.ConstraintLayout.Widget;
-using Square.Picasso;
 using System.Linq;
 using Android.Graphics;
+using SharedCode.Services;
+using SharedCode.Util;
+using FFImageLoading;
 
 namespace PokeAppAndroid.Adapters
 {
@@ -33,8 +35,11 @@ namespace PokeAppAndroid.Adapters
             ResultItem pokemonFrom = item.FirstOrDefault();
             int pokemonFromId = pokemonFrom.GetIdFromUrl();
 
-            Picasso.Get()
-                .Load(pokemonFrom.GetPokemonImageURL(pokemonFromId.ToString()))
+            ImageLoaderService.LoadImageFromUrl(pokemonFrom.GetPokemonImageURL(pokemonFromId.ToString()))
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
                 .Into(viewHolder.EvolvesFromImage);
             viewHolder.EvolvesFromLabel.Text = pokemonFrom.FormatedName();
             viewHolder.EvolvesFromLabel.SetTextColor(_primaryColor);
@@ -42,8 +47,11 @@ namespace PokeAppAndroid.Adapters
             ResultItem pokemonTo = item.LastOrDefault();
             int pokemonToId = pokemonTo.GetIdFromUrl();
 
-            Picasso.Get()
-                .Load(pokemonTo.GetPokemonImageURL(pokemonToId.ToString()))
+            ImageLoaderService.LoadImageFromUrl(pokemonTo.GetPokemonImageURL(pokemonFromId.ToString()))
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
                 .Into(viewHolder.EvolvesToImage);
             viewHolder.EvolvesToLabel.Text = pokemonTo.FormatedName();
             viewHolder.EvolvesToLabel.SetTextColor(_primaryColor);

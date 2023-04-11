@@ -35,6 +35,9 @@ namespace PokeAppAndroid
             // Db
             IocContainer.Instance.RegisterType<IDatabaseManager, DatabaseManager>(new ContainerControlledLifetimeManager());
             IocContainer.RegisterType<IPathManager, PathManager>();
+
+            // Image Loader Service
+            ImageLoaderService.CreateImageLoaderService();
         }
     }
 }

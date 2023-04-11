@@ -17,7 +17,7 @@ using SharedCode.Model.Api;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
-using Square.Picasso;
+using FFImageLoading;
 using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.View
@@ -140,8 +140,11 @@ namespace PokeAppAndroid.View
             view.SetBackgroundColor(_primaryColor);
             pokemonNameText.Text = StringUtils.ToTitleCase(pokemonValue.Name);
 
-            Picasso.Get()
-                .Load(pokemonValue.RegularSpriteUrl)
+            ImageLoaderService.LoadImageFromUrl(pokemonValue.RegularSpriteUrl)
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
                 .Into(pokemonImage);
 
             SetButtonStyle(informationButton, true);
