@@ -14,12 +14,13 @@ using SharedCode.Model.Api;
 using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
+using CoreGraphics;
 
 namespace PokeAppiOS.Controllers
 {
 	public partial class PokemonDetailViewController : UIViewController, IPokemonDetailControllerListener
-	{
-		public int PokemonID;
+    {
+        public int PokemonID;
         private IPokemonDetailController controller;
         private UIViewController CurrentViewController;
         private EvolutionChainResponse _evolutionChainResponse = null;
@@ -66,7 +67,7 @@ namespace PokeAppiOS.Controllers
             UpdateView();
 		}
 
-		void SetupView(PokemonLocal pokemon)
+        void SetupView(PokemonLocal pokemon)
         {
             NavigationController.NavigationBar.TintColor = UIColor.White;
             var pokemonTypeViews = new List<PokemonTypeCustomView>();

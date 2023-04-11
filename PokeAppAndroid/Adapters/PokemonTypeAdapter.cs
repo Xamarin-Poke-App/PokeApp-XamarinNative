@@ -27,8 +27,10 @@ namespace PokeAppAndroid.Adapters
         {
             TypesViewHolder typesViewHolder = holder as TypesViewHolder;
             string item = types[position];
-            typesViewHolder.TvTypeName.Text = item;
+            typesViewHolder.TvTypeName.Text = item.ToUpper();
             typesViewHolder.TvTypeName.SetDrawableBackgroundForType(item);
+            typesViewHolder.TvTypeName.SetTextSize(Android.Util.ComplexUnitType.Sp, 10);
+
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
