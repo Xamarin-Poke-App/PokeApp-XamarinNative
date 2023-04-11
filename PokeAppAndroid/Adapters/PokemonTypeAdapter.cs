@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -27,10 +28,12 @@ namespace PokeAppAndroid.Adapters
         {
             TypesViewHolder typesViewHolder = holder as TypesViewHolder;
             string item = types[position];
-            typesViewHolder.TvTypeName.Text = item.ToUpper();
+            typesViewHolder.TvTypeName.Text = item;
             typesViewHolder.TvTypeName.SetDrawableBackgroundForType(item);
-            typesViewHolder.TvTypeName.SetTextSize(Android.Util.ComplexUnitType.Sp, 10);
 
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            typesViewHolder.TvTypeName.Text = textInfo.ToTitleCase(item);
+            typesViewHolder.TvTypeName.SetDrawableBackgroundForType(item);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

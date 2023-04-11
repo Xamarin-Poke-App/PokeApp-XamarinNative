@@ -70,10 +70,15 @@ namespace PokeAppiOS.Controllers
         {
             NavigationController.NavigationBar.TintColor = UIColor.White;
             var pokemonTypeViews = new List<PokemonTypeCustomView>();
-            foreach(var type in pokemon.TypesArray)
+
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+            foreach (var type in pokemon.TypesArray)
             {
+                string capitalizedType = textInfo.ToTitleCase(type);
+
                 var typeViewColor = UIColor.FromName(type);
-                PokemonTypeCustomView typeView = new PokemonTypeCustomView(type, typeViewColor);
+                PokemonTypeCustomView typeView = new PokemonTypeCustomView(capitalizedType, typeViewColor);
                 pokemonTypeViews.Add(typeView);
             }
             
