@@ -76,6 +76,7 @@
     <Compile Include="View\PokemonInfoFragment.cs" />
     <Compile Include="Adapters\PokemonTypeAdapter.cs" />
     <Compile Include="Adapters\SpaceItemDecorator.cs" />
+    <Compile Include="Adapters\EvolutionChainAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -188,6 +189,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\Pokeball.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\evolution_chain_item.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

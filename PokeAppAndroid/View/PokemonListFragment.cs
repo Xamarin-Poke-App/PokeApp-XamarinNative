@@ -80,7 +80,7 @@ namespace PokeAppAndroid.View
             PokemonLocal selectedPokemon = pokemonList[e];
             PokemonDetailFragment pokemonDetailFragment = new PokemonDetailFragment();
             Bundle args = new Bundle();
-            args.PutInt("pokemonId", selectedPokemon.Id);
+            args.PutInt(Constants.PokemonIdArg, selectedPokemon.Id);
             pokemonDetailFragment.Arguments = args;
 
             var appCompatActivity = Platform.CurrentActivity as AppCompatActivity;

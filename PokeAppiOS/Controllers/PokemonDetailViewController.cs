@@ -72,7 +72,7 @@ namespace PokeAppiOS.Controllers
             var pokemonTypeViews = new List<PokemonTypeCustomView>();
             foreach(var type in pokemon.TypesArray)
             {
-                var typeViewColor = UIColor.FromName(type);
+                var typeViewColor = UIColor.White;
                 PokemonTypeCustomView typeView = new PokemonTypeCustomView(type, typeViewColor);
                 pokemonTypeViews.Add(typeView);
             }

@@ -16,7 +16,6 @@
 			android:id="@+id/secondaryPokemonSprite"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-			android:src="@drawable/pikachu"
 		    android:contentDescription="@string/pikachuTitle"
             android:layout_marginHorizontal="120dp"/>
             
@@ -50,6 +49,7 @@
                         android:text="50"/>
 
                      <TextView
+                        android:id="@+id/tvPokemonGenerationLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
@@ -73,6 +73,7 @@
                         android:text="Unknown"/>
 
                      <TextView
+                        android:id="@+id/tvPokemonHabitadLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Habitad"
@@ -104,6 +105,7 @@
                         android:text="V"/>
 
                      <TextView
+                        android:id="@+id/tvPokemonBaseHappinessLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Base Hapiness"   
@@ -127,6 +129,7 @@
                         android:text="Kanto"/>
 
                      <TextView
+                        android:id="@+id/tvPokemonRegionLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
