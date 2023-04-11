@@ -14,6 +14,7 @@
     <string name="informationButton">Information</string>
     <string name="evolutionButton">Evolution</string>    
     <string name="arrow">arrow</string>
+    <string name="progress_bar">Loading data...</string>
     <!-- TODO: this evolution string are been used to test the view, after retrieving the data this should be removed-->
     <string name="firstEvolution">Evolution 1</string>
     <string name="secondEvolution">Evolution 2</string>
