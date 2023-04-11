@@ -21,6 +21,7 @@ using SharedCode.Services;
 using Google.Android.Material.TextField;
 using SharedCode.Model.Api;
 using SharedCode.Model.DB;
+using SharedCode.Interfaces;
 
 namespace PokeAppAndroid.View
 {
@@ -31,6 +32,7 @@ namespace PokeAppAndroid.View
         private List<PokemonLocal> pokemonList;
         private PokemonAdapter adapter;
         private IPokemonController controller;
+        private StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
 
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -47,7 +49,38 @@ namespace PokeAppAndroid.View
                 controller.FilterPokemonListByName(query);
             };
 
+            this.HasOptionsMenu = true;
+
             return view;
+        }
+
+        [Obsolete]
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.menu_app, menu);
+            base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        [Obsolete]
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.Exit:
+                    AppCompatActivity appCompatActivity = Platform.CurrentActivity as AppCompatActivity;
+                    LoginFragment loginFragment = new LoginFragment();
+
+                    var fragmentTransaction = appCompatActivity?.SupportFragmentManager.BeginTransaction();
+                    fragmentTransaction.Hide(this);
+                    fragmentTransaction.Add(Resource.Id.fragmentContainer, loginFragment, "LoginFragment");
+                    fragmentTransaction.Commit();
+
+                    storageUtils.SetIsLoggedIn(false);
+                    break;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+            return base.OnOptionsItemSelected(item);
         }
 
         private void SetupRecyclerView()
