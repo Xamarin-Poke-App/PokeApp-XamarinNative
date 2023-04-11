@@ -27,11 +27,13 @@ namespace PokeAppAndroid.View
         private EvolutionChainResponse _evolutionChain;
         
         private RecyclerView RvEvolutionChain;
+        private TextView TvNoEvolutionChain;
 
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_evolution_detail, container, false);
             RvEvolutionChain = view.FindViewById<RecyclerView>(Resource.Id.RvEvolutionChain);
+            TvNoEvolutionChain = view.FindViewById<TextView>(Resource.Id.TvNoEvolutionChain);
             _pokemonDetailController.listener = this;
             LoadArgs();
             return view;
@@ -68,6 +70,13 @@ namespace PokeAppAndroid.View
             var primaryType = _pokemon.TypesArray.FirstOrDefault();
             var color = ViewExtensions.GetColorForType(RequireContext(), primaryType);
 
+            var count = _evolutionChain?.GetListOfChains().Count ?? 0;
+            if (count == 0)
+            {
+                RvEvolutionChain.Visibility = ViewStates.Gone;
+                TvNoEvolutionChain.Visibility = ViewStates.Visible;
+                return;
+            }
             var adapter = new EvolutionChainAdapter(_evolutionChain.GetListOfChains(), color);
             RvEvolutionChain.SetAdapter(adapter);
         }
