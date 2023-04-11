@@ -25,6 +25,9 @@ namespace PokeAppiOS.Controllers
 		UIKit.UIStackView pokemonTypesStackView { get; set; }
 
 		[Outlet]
+		UIKit.UIActivityIndicatorView progressIndicator { get; set; }
+
+		[Outlet]
 		UIKit.UISegmentedControl statsSegmentedControl { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -44,14 +47,19 @@ namespace PokeAppiOS.Controllers
 				pokemonNameLabel = null;
 			}
 
+			if (pokemonTypesStackView != null) {
+				pokemonTypesStackView.Dispose ();
+				pokemonTypesStackView = null;
+			}
+
 			if (statsSegmentedControl != null) {
 				statsSegmentedControl.Dispose ();
 				statsSegmentedControl = null;
 			}
 
-			if (pokemonTypesStackView != null) {
-				pokemonTypesStackView.Dispose ();
-				pokemonTypesStackView = null;
+			if (progressIndicator != null) {
+				progressIndicator.Dispose ();
+				progressIndicator = null;
 			}
 		}
 	}

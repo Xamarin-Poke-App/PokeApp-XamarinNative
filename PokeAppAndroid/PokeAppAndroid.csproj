@@ -191,6 +191,10 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\progress_bar.xml">
+    <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\evolution_chain_item.xml">
       <SubType></SubType>
       <Generator></Generator>

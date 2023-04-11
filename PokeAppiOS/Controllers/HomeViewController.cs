@@ -39,6 +39,8 @@ namespace PokeAppiOS.Controllers
         public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+            progressIndicator.Hidden = false;
+            progressIndicator.StartAnimating();
             controller = IocContainer.GetDependency<IPokemonController>();
             controller.listener = this;
             controller.GetAllPokemonsSpecies();
@@ -56,13 +58,14 @@ namespace PokeAppiOS.Controllers
 		}
 
 
-
         public void updateView(Result<List<PokemonLocal>> data)
         {
             if (data.Success)
             {
                 Pokemons = data.Value;
                 PokemonCollectionView.ReloadData();
+                progressIndicator.StopAnimating();
+                progressIndicator.Hidden = true;
             }
         }
 
