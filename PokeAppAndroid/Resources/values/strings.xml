@@ -20,5 +20,6 @@
     <string name="firstEvolution">Evolution 1</string>
     <string name="secondEvolution">Evolution 2</string>
     <string name="thirdEvolution">Evolution 3</string>
+    <string name="noEvolutionChain">No Evolution Chain</string>
 </resources>
 
