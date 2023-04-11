@@ -83,7 +83,7 @@ namespace PokeAppiOS.Controllers
             public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
             {
                 PokemonViewCell cell = (PokemonViewCell)collectionView.DequeueReusableCell(PokemonViewCell.Key, indexPath);
-                cell.Layer.CornerRadius = 20;
+                cell.Layer.CornerRadius = 10;
                 var pokemon = viewController.Pokemons[indexPath.Row];
                 cell.Pokemon = pokemon;
                 return cell;
@@ -106,8 +106,8 @@ namespace PokeAppiOS.Controllers
             [Export("collectionView:layout:sizeForItemAtIndexPath:")]
             public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
             {
-                var width = collectionView.Frame.Width * 0.48;
-                var height = collectionView.Frame.Height * 0.15;
+                var width = collectionView.Frame.Width * 0.485;
+                var height = collectionView.Frame.Height * 0.2;
 
                 return new CGSize(width: width, height: height);
             }
