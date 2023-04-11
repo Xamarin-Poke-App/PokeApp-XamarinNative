@@ -33,12 +33,18 @@ namespace PokeAppAndroid.View
         private PokemonAdapter adapter;
         private IPokemonController controller;
         private StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
+        private AndroidX.AppCompat.App.AlertDialog progressDialog;
 
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_pokemon_list, container, false);
             recyclerView = view.FindViewById<RecyclerView>(Resource.Id.rv_pokemonList);
             mLayoutManager = new GridLayoutManager(view.Context, 2);
+            AndroidX.AppCompat.App.AlertDialog.Builder dialogBuilder = new AndroidX.AppCompat.App.AlertDialog.Builder(view.Context);
+            dialogBuilder.SetView(Resource.Layout.progress_bar);
+            progressDialog = dialogBuilder.Create();
+            progressDialog.Show();
+
             controller = IocContainer.GetDependency<IPokemonController>();
             controller.listener = this;
             controller.GetAllPokemonsSpecies();
@@ -89,6 +95,7 @@ namespace PokeAppAndroid.View
             adapter = new PokemonAdapter(pokemonList);
             adapter.ItemClick += GoToDetailItemClick;
             recyclerView.SetAdapter(adapter);
+            progressDialog.Dismiss();
         }
 
         public void updateView(Result<List<PokemonLocal>> data)
@@ -113,7 +120,7 @@ namespace PokeAppAndroid.View
             PokemonLocal selectedPokemon = pokemonList[e];
             PokemonDetailFragment pokemonDetailFragment = new PokemonDetailFragment();
             Bundle args = new Bundle();
-            args.PutInt("pokemonId", selectedPokemon.Id);
+            args.PutInt(Constants.PokemonIdArg, selectedPokemon.Id);
             pokemonDetailFragment.Arguments = args;
 
             var appCompatActivity = Platform.CurrentActivity as AppCompatActivity;

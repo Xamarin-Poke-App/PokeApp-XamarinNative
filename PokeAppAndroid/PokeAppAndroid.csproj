@@ -75,6 +75,7 @@
     <Compile Include="View\PokemonInfoFragment.cs" />
     <Compile Include="Adapters\PokemonTypeAdapter.cs" />
     <Compile Include="Adapters\SpaceItemDecorator.cs" />
+    <Compile Include="Adapters\EvolutionChainAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -195,6 +196,14 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\baseline_logout_24.xml">
+    <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\progress_bar.xml">
+    <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\evolution_chain_item.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

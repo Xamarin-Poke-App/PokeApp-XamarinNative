@@ -17,6 +17,9 @@ namespace PokeAppiOS.Controllers
 
 		[Outlet]
 		UIKit.UISearchBar pokemonSearchBar { get; set; }
+
+		[Outlet]
+		UIKit.UIActivityIndicatorView progressIndicator { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -28,6 +31,11 @@ namespace PokeAppiOS.Controllers
 			if (pokemonSearchBar != null) {
 				pokemonSearchBar.Dispose ();
 				pokemonSearchBar = null;
+			}
+
+			if (progressIndicator != null) {
+				progressIndicator.Dispose ();
+				progressIndicator = null;
 			}
 		}
 	}

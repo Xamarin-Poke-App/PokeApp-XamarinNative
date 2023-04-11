@@ -4,6 +4,9 @@ using AndroidX.ConstraintLayout.Widget;
 using AndroidX.Core.Content;
 using SharedCode.Util;
 using SharedCode.Helpers;
+using Android.Views;
+using Android.Graphics;
+using Android.Content;
 
 namespace PokeAppAndroid.Utils
 {
@@ -29,6 +32,14 @@ namespace PokeAppAndroid.Utils
             background.SetTint(color);
             view.Background = background;
             return view;
+        }
+
+        public static Color GetColorForType(Context context, string type)
+        {
+            var colorID = GetColorForType(type);
+            var color = new Android.Graphics.Color(ContextCompat.GetColor(context, colorID));
+            color.A = (byte)(0.80 * 255);
+            return color;
         }
 
         private static int GetColorForType(string type)

@@ -30,6 +30,8 @@ namespace PokeAppiOS.Views
         {
             base.ViewDidLoad();
             pokemonEvolutionChainTableView.RegisterNibForCellReuse(EvolutionVariantTableViewCell.Nib, "EvolutionVariantTableViewCell");
+            noEvolutionChainLabel.Hidden = true;
+
         }
 
         public void DrawEvolutionChain()
@@ -37,6 +39,13 @@ namespace PokeAppiOS.Views
             if (Pokemon == null) return;
             var primaryType = Pokemon.TypesArray.FirstOrDefault();
             _primaryColor = UIColor.FromName(primaryType);
+            var count = EvolutionChainResponse?.GetListOfChains().Count ?? 0;
+            if (count == 0)
+            {
+                pokemonEvolutionChainTableView.Hidden = true;
+                noEvolutionChainLabel.Hidden = false;
+                return;
+            }
             pokemonEvolutionChainTableView.DataSource = new PokemonEvolutionViewControllerDataSource(this);
             pokemonEvolutionChainTableView.RowHeight = 120;
         }
@@ -49,7 +58,7 @@ namespace PokeAppiOS.Views
             public PokemonEvolutionViewControllerDataSource(PokemonEvolutionViewController viewController)
             {
                 this.viewController = viewController;
-                _evolutionChainPairList = viewController.EvolutionChainResponse.GetListOfChains();
+                _evolutionChainPairList = viewController.EvolutionChainResponse?.GetListOfChains();
             }
 
             public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -67,7 +76,7 @@ namespace PokeAppiOS.Views
 
             public override nint RowsInSection(UITableView tableView, nint section)
             {
-                return _evolutionChainPairList.Count;
+                return _evolutionChainPairList?.Count ?? 0;
             }
         }
     }

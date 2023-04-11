@@ -58,6 +58,11 @@ namespace SharedCode.Model.Api
             return $"{Constants.PokemonArtWorksImagesBaseAddress}{id}.png";
         }
 
+        public string GetPokemonShinyImageURL(string id)
+        {
+            return $"{Constants.PokemonShinyArtWorksImagesBaseAddress}{id}.png";
+        }
+
         public PokemonFixed ToPokemonFixed()
         {
             string ID = GetIdFromUrl().ToString();
