@@ -12,15 +12,15 @@ using SharedCode.Services;
 using System.Linq;
 using SharedCode.Helpers;
 using SharedCode.Model.Api;
+using FFImageLoading;
 
 namespace PokeAppiOS.Views.Cells
 {
   
-    public partial class PokemonViewCell : UICollectionViewCell, IPokemonDetailControllerListener
+    public partial class PokemonViewCell : UICollectionViewCell
 	{
 		public static readonly NSString Key = new NSString ("PokemonViewCell");
 		public static readonly UINib Nib = UINib.FromName("PokemonViewCell", NSBundle.MainBundle);
-        private IPokemonDetailController controller;
 
 
         protected PokemonViewCell(IntPtr handle) : base(handle)
@@ -37,9 +37,12 @@ namespace PokeAppiOS.Views.Cells
                 pokemonRegionLabel.Text = value.Region.FormatedName();
                 pokemonFirstTypeView.Layer.CornerRadius = 10;
                 pokemonSecondTypeView.Layer.CornerRadius = 10;
-                controller = IocContainer.GetDependency<IPokemonDetailController>();
-                controller.listener = this;
-                controller.LoadPokemonImage(value.Id);
+                ImageLoaderService.LoadImageFromUrl(value.RegularSpriteUrl)
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
+                .Into(pokemonImageView);
                 // Pokemons will only have as max two types of pokemon
                 if (value.TypesArray.Count() == 1)
                 {
@@ -57,22 +60,6 @@ namespace PokeAppiOS.Views.Cells
                     pokemonSecondTypeView.BackgroundColor = UIColor.FromName(value.TypesArray.Last());
                     pokemonSecondTypeLabel.Text = value.TypesArray.Last();
                 }
-            }
-        }
-
-        public void updatePokemonImage(Result<byte[]> image)
-        {
-            if (image.Success)
-            {
-                pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
-            }
-        }
-
-        public void updatePokemonInfo(Result<PokemonLocal> pokemon)
-        {
-            if (pokemon.Success)
-            {
-                
             }
         }
     }

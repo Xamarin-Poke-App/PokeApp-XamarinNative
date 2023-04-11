@@ -15,6 +15,7 @@ using SharedCode.Services;
 using SharedCode.Util;
 using Square.Picasso;
 using SharedCode.Helpers;
+using FFImageLoading;
 using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.Adapters
@@ -55,8 +56,11 @@ namespace PokeAppAndroid.Adapters
             viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
             Console.WriteLine(value.RegularSpriteUrl);
-            Picasso.Get()
-                .Load(value.RegularSpriteUrl)
+            ImageLoaderService.LoadImageFromUrl(value.RegularSpriteUrl)
+                .Error(ex =>
+                {
+                    Console.Write(ex);
+                })
                 .Into(viewHolder.IvPokemonImage);
         }
 

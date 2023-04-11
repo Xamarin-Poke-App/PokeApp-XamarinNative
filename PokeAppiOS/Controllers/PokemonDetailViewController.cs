@@ -5,6 +5,7 @@ using SharedCode.Model;
 using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
+using FFImageLoading;
 using UIKit;
 
 namespace PokeAppiOS.Controllers
@@ -22,9 +23,8 @@ namespace PokeAppiOS.Controllers
 			base.ViewDidLoad ();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-			controller.LoadPokemonImage(PokemonID);
 			controller.LoadPokemonInfo(PokemonID);
-		}
+        }
 
 		public override void DidReceiveMemoryWarning ()
 		{
@@ -32,20 +32,18 @@ namespace PokeAppiOS.Controllers
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-        public void updatePokemonImage(Result<byte[]> image)
-        {
-            if (image.Success)
-			{
-				pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
-			}
-        }
-
         public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.Success)
 			{
                 pokemonNameLabel.Text = pokemon.Value.Name;
                 Title = pokemon.Value.Name;
+                ImageLoaderService.LoadImageFromUrl(pokemon.Value.RegularSpriteUrl)
+                    .Error(ex =>
+                    {
+                        Console.Write(ex);
+                    })
+                    .Into(pokemonImageView);
             }
         }
     }
