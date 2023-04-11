@@ -46,7 +46,7 @@ namespace PokeAppAndroid.Adapters
             viewHolder.TvRegion.Text = value.Region.FormatedName();
             viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
-            Console.WriteLine(value.RegularSpriteUrl);
+
             Picasso.Get()
                 .Load(value.RegularSpriteUrl)
                 .Into(viewHolder.IvPokemonImage);
