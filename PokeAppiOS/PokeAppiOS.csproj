@@ -146,6 +146,8 @@
         <Folder Include="Utils\" />
         <Folder Include="Views\Cells\" />
         <Folder Include="Resources\" />
+        <Folder Include="Views\PokemonDetail\" />
+        <Folder Include="Views\PokemonDetail\Cells\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -153,6 +155,8 @@
         <InterfaceDefinition Include="Views\Login.storyboard" />
         <InterfaceDefinition Include="Views\Home.storyboard" />
         <InterfaceDefinition Include="Views\Cells\PokemonViewCell.xib" />
+        <InterfaceDefinition Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.xib" />
+        <InterfaceDefinition Include="Views\Cells\TypeCollectionViewCell.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -183,7 +187,24 @@
         <Compile Include="Utils\PathManager.cs" />
         <Compile Include="Utils\BottomLine.cs" />
         <Compile Include="Utils\UIViewExtension.cs" />
+        <Compile Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.cs" />
+        <Compile Include="Views\PokemonDetail\Cells\EvolutionVariantTableViewCell.designer.cs">
+          <DependentUpon>EvolutionVariantTableViewCell.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\PokemonBaseInfoViewController.cs" />
+        <Compile Include="Views\PokemonBaseInfoViewController.designer.cs">
+          <DependentUpon>PokemonBaseInfoViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\PokemonEvolutionViewController.cs" />
+        <Compile Include="Views\PokemonEvolutionViewController.designer.cs">
+          <DependentUpon>PokemonEvolutionViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="CommonView\PokemonTypeCustomView.cs" />
         <Compile Include="Utils\Storage.cs" />
+        <Compile Include="Views\Cells\TypeCollectionViewCell.cs" />
+        <Compile Include="Views\Cells\TypeCollectionViewCell.designer.cs">
+          <DependentUpon>TypeCollectionViewCell.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SharedCode\SharedCode.csproj">
