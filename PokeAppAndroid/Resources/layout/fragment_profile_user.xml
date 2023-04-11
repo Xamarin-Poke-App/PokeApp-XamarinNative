@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
     <TextView
-        android:id="@+id/tvTextView"
+        android:id="@+id/tvUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Replace this view by the pokemon list."/>
+        android:text=""/>
 
     <Button
-        android:id="@+id/LogoutButton"
-        android:text="Logout"
+        android:id="@+id/btnLogout"
+        android:text="@string/logout"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
+
 </LinearLayout>
 
