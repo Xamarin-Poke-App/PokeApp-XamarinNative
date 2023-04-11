@@ -5,6 +5,7 @@
     <string name="search_pokemon">Search by pokemon name</string>
     <string name="pokemon_detail_title">Pokemon Detail</string>
     <string name="login_title">Login</string>
+    <string name="logout">Logout</string>
     <string name="pikachuImage">Pikachu</string>
     <string name="pikachuTitle">Pokémon</string>
     <string name="usernameText">Username:</string>
