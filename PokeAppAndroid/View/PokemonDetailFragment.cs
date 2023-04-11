@@ -33,6 +33,7 @@ namespace PokeAppAndroid.View
         private Button informationButton;
         private Button evolutionButton;
         private IPokemonDetailController controller = IocContainer.GetDependency<IPokemonDetailController>();
+        private AndroidX.AppCompat.App.AlertDialog progressDialog;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -60,6 +61,15 @@ namespace PokeAppAndroid.View
             args.PutInt(Constants.PokemonIdArg, _pokemonId);
             pokemonInfoFragment.Arguments = args;
             ReplaceFragment(pokemonInfoFragment);
+
+            AndroidX.AppCompat.App.AlertDialog.Builder dialogBuilder = new AndroidX.AppCompat.App.AlertDialog.Builder(view.Context);
+            dialogBuilder.SetView(Resource.Layout.progress_bar);
+            progressDialog = dialogBuilder.Create();
+            progressDialog.Show();
+
+            controller = IocContainer.GetDependency<IPokemonDetailController>();
+            controller.listener = this;
+            controller.LoadPokemonInfo(_pokemonId);
 
             return view;
         }
@@ -121,6 +131,7 @@ namespace PokeAppAndroid.View
 
         public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
+            progressDialog.Dismiss();
             if (pokemon.IsFailure) return;
             var pokemonValue = pokemon.Value;
             var primaryType = pokemonValue.TypesArray.FirstOrDefault();

@@ -31,12 +31,18 @@ namespace PokeAppAndroid.View
         private List<PokemonLocal> pokemonList;
         private PokemonAdapter adapter;
         private IPokemonController controller;
+        private AndroidX.AppCompat.App.AlertDialog progressDialog;
 
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_pokemon_list, container, false);
             recyclerView = view.FindViewById<RecyclerView>(Resource.Id.rv_pokemonList);
             mLayoutManager = new GridLayoutManager(view.Context, 2);
+            AndroidX.AppCompat.App.AlertDialog.Builder dialogBuilder = new AndroidX.AppCompat.App.AlertDialog.Builder(view.Context);
+            dialogBuilder.SetView(Resource.Layout.progress_bar);
+            progressDialog = dialogBuilder.Create();
+            progressDialog.Show();
+
             controller = IocContainer.GetDependency<IPokemonController>();
             controller.listener = this;
             controller.GetAllPokemonsSpecies();
@@ -56,6 +62,7 @@ namespace PokeAppAndroid.View
             adapter = new PokemonAdapter(pokemonList);
             adapter.ItemClick += GoToDetailItemClick;
             recyclerView.SetAdapter(adapter);
+            progressDialog.Dismiss();
         }
 
         public void updateView(Result<List<PokemonLocal>> data)

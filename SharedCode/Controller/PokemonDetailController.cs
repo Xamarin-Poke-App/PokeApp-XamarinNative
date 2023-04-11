@@ -1,10 +1,5 @@
-﻿using System;
-using SharedCode.Model;
-using SharedCode.Util;
-using System.Net;
-using SharedCode.Repository;
+﻿using SharedCode.Util;
 using Unity;
-using SharedCode.Repository.Interfaces;
 using SharedCode.Model.DB;
 using SharedCode.Model.Api;
 using SharedCode.Interfaces;

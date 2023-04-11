@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
 	android:paddingHorizontal="30dp">
@@ -46,7 +47,7 @@
                         android:id="@+id/tvPokemonGeneration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="50"/>
+                        tools:text="50"/>
 
                      <TextView
                         android:id="@+id/tvPokemonGenerationLabel"
@@ -70,7 +71,7 @@
                         android:id="@+id/tvPokemonHabitad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Unknown"/>
+                        tools:text="Unknown"/>
 
                      <TextView
                         android:id="@+id/tvPokemonHabitadLabel"
@@ -102,7 +103,7 @@
                         android:id="@+id/tvPokemonBaseHappiness"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="V"/>
+                        tools:text="V"/>
 
                      <TextView
                         android:id="@+id/tvPokemonBaseHappinessLabel"
@@ -126,7 +127,7 @@
                         android:id="@+id/tvPokemonRegion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kanto"/>
+                        tools:text="Kanto"/>
 
                      <TextView
                         android:id="@+id/tvPokemonRegionLabel"
@@ -143,7 +144,7 @@
             android:id="@+id/tvPokemonDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description of the pokemon. This pokemon is a water pokemon that attacks every time is hungry."
+            tools:text="Description of the pokemon. This pokemon is a water pokemon that attacks every time is hungry."
             android:paddingHorizontal="20dp"
             android:gravity="center_horizontal"
             android:layout_marginTop="10dp"/>

@@ -58,6 +58,10 @@
                                     <outlet property="delegate" destination="pZQ-Yh-lma" id="Mb7-yl-qiU"/>
                                 </connections>
                             </searchBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="j6i-gu-ORb">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                <color key="color" systemColor="labelColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -66,15 +70,18 @@
                             <constraint firstAttribute="trailing" secondItem="xEe-DI-ZKj" secondAttribute="trailing" constant="20" id="9g7-WP-lCm"/>
                             <constraint firstAttribute="bottom" secondItem="VZa-QB-daY" secondAttribute="bottom" id="DfN-Aa-ddZ"/>
                             <constraint firstItem="VZa-QB-daY" firstAttribute="top" secondItem="xEe-DI-ZKj" secondAttribute="bottom" constant="20" id="Diq-75-I2J"/>
+                            <constraint firstItem="j6i-gu-ORb" firstAttribute="centerX" secondItem="TVI-hB-LPC" secondAttribute="centerX" id="Iqc-8X-M6h"/>
                             <constraint firstAttribute="bottom" secondItem="VZa-QB-daY" secondAttribute="bottom" id="jp9-4X-sdv"/>
                             <constraint firstItem="xEe-DI-ZKj" firstAttribute="top" secondItem="LDv-T7-hCj" secondAttribute="bottom" id="l7x-Ns-6gb"/>
                             <constraint firstItem="xEe-DI-ZKj" firstAttribute="leading" secondItem="TVI-hB-LPC" secondAttribute="leading" constant="20" id="tNz-0A-80Q"/>
+                            <constraint firstItem="j6i-gu-ORb" firstAttribute="centerY" secondItem="TVI-hB-LPC" secondAttribute="centerY" id="uLt-ps-Y1R"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UR9-Wp-Lj9"/>
                     <connections>
                         <outlet property="PokemonCollectionView" destination="VZa-QB-daY" id="g0t-ep-gK8"/>
                         <outlet property="pokemonSearchBar" destination="xEe-DI-ZKj" id="aDx-vm-tdU"/>
+                        <outlet property="progressIndicator" destination="j6i-gu-ORb" id="YWL-iy-zN5"/>
                         <segue destination="bZo-97-d2O" kind="show" identifier="ToDetailSegue" id="CEj-vY-cJE"/>
                     </connections>
                 </viewController>
@@ -144,16 +151,22 @@
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udM-Yt-wWs">
                                 <rect key="frame" x="26" y="192" width="341" height="110"/>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="gmx-6p-Smo">
+                                <rect key="frame" x="186" y="416" width="20" height="20"/>
+                                <color key="color" systemColor="labelColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstItem="j4f-Bs-mWs" firstAttribute="bottom" secondItem="Al5-pi-3pZ" secondAttribute="bottomMargin" id="03x-NF-Get"/>
+                            <constraint firstItem="gmx-6p-Smo" firstAttribute="centerY" secondItem="Al5-pi-3pZ" secondAttribute="centerY" id="1j0-KE-nYQ"/>
                             <constraint firstItem="Uo6-de-PgP" firstAttribute="centerX" secondItem="Al5-pi-3pZ" secondAttribute="centerX" id="8ao-DA-U4a"/>
                             <constraint firstItem="m9R-Dy-hyW" firstAttribute="top" secondItem="jTb-fa-Vl4" secondAttribute="bottom" constant="10" id="Ge5-nT-Kfs"/>
                             <constraint firstItem="m9R-Dy-hyW" firstAttribute="leading" secondItem="Al5-pi-3pZ" secondAttribute="leadingMargin" constant="10" id="Kus-6W-jVL"/>
                             <constraint firstItem="j4f-Bs-mWs" firstAttribute="right" secondItem="Al5-pi-3pZ" secondAttribute="right" id="LM3-c7-UXz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="m9R-Dy-hyW" secondAttribute="trailing" constant="10" id="c0W-fA-C1D"/>
                             <constraint firstItem="j4f-Bs-mWs" firstAttribute="top" secondItem="Uo6-de-PgP" secondAttribute="bottom" constant="-50" id="geO-xp-EyT"/>
+                            <constraint firstItem="gmx-6p-Smo" firstAttribute="centerX" secondItem="Al5-pi-3pZ" secondAttribute="centerX" id="i0B-gg-6Dd"/>
                             <constraint firstItem="udM-Yt-wWs" firstAttribute="top" secondItem="m9R-Dy-hyW" secondAttribute="bottom" constant="10" id="iZL-zd-fyI"/>
                             <constraint firstAttribute="trailing" secondItem="kmX-oS-DOI" secondAttribute="trailing" constant="-25" id="kEV-zU-pea"/>
                             <constraint firstItem="j4f-Bs-mWs" firstAttribute="top" secondItem="kmX-oS-DOI" secondAttribute="bottom" constant="-25" id="kmg-4Y-fiY"/>
@@ -168,6 +181,7 @@
                         <outlet property="pokemonImageView" destination="Uo6-de-PgP" id="4su-MV-K2a"/>
                         <outlet property="pokemonNameLabel" destination="m9R-Dy-hyW" id="Bib-HL-VC9"/>
                         <outlet property="pokemonTypesStackView" destination="udM-Yt-wWs" id="0bD-qX-elZ"/>
+                        <outlet property="progressIndicator" destination="gmx-6p-Smo" id="TC7-5D-cCC"/>
                         <outlet property="statsSegmentedControl" destination="IwC-ul-pcw" id="6Yt-GQ-ZCx"/>
                     </connections>
                 </viewController>
@@ -389,16 +403,31 @@
                                 <rect key="frame" x="16" y="59" width="361" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="M2k-3r-am0">
+                                <rect key="frame" x="141.66666666666666" y="326" width="110" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="No Evolution Chain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ffj-Ws-G4C">
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dJg-Jg-qJo" firstAttribute="top" secondItem="9Zw-Kh-P5I" secondAttribute="bottom" id="MQF-dg-peA"/>
+                            <constraint firstItem="M2k-3r-am0" firstAttribute="centerY" secondItem="jgX-u3-4Oc" secondAttribute="centerY" id="MZb-b8-fOu"/>
+                            <constraint firstItem="M2k-3r-am0" firstAttribute="centerX" secondItem="jgX-u3-4Oc" secondAttribute="centerX" id="Tj4-W9-va4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9Zw-Kh-P5I" secondAttribute="trailing" id="Vad-Lf-dKo"/>
                             <constraint firstItem="9Zw-Kh-P5I" firstAttribute="leading" secondItem="jgX-u3-4Oc" secondAttribute="leadingMargin" id="XWt-le-Afq"/>
                             <constraint firstItem="9Zw-Kh-P5I" firstAttribute="top" secondItem="YXW-Hi-B4c" secondAttribute="bottom" id="dgR-Z1-RB3"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noEvolutionChainLabel" destination="ffj-Ws-G4C" id="nh7-Jp-LDK"/>
                         <outlet property="pokemonEvolutionChainTableView" destination="9Zw-Kh-P5I" id="KTK-gy-i7T"/>
                     </connections>
                 </viewController>

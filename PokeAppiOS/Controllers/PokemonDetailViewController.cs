@@ -57,6 +57,8 @@ namespace PokeAppiOS.Controllers
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+            progressIndicator.Hidden = false;
+            progressIndicator.StartAnimating();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
 			controller.LoadPokemonInfo(PokemonID);
@@ -70,10 +72,16 @@ namespace PokeAppiOS.Controllers
         {
             NavigationController.NavigationBar.TintColor = UIColor.White;
             var pokemonTypeViews = new List<PokemonTypeCustomView>();
-            foreach(var type in pokemon.TypesArray)
+
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+            foreach (var type in pokemon.TypesArray)
             {
-                var typeViewColor = UIColor.White;
-                PokemonTypeCustomView typeView = new PokemonTypeCustomView(type, typeViewColor);
+
+                string capitalizedType = textInfo.ToTitleCase(type);
+
+                var typeViewColor = UIColor.FromName(type);
+                PokemonTypeCustomView typeView = new PokemonTypeCustomView(capitalizedType, typeViewColor);
                 pokemonTypeViews.Add(typeView);
             }
             
@@ -180,12 +188,16 @@ namespace PokeAppiOS.Controllers
                 SetupView(pokemon.Value);
                 controller.GetEvolutionChainByPokemonId(pokemon.Value.EvolutionChainId);
                 UpdateView();
+                progressIndicator.StopAnimating();
+                progressIndicator.Hidden = true;
             }
         }
 
         public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
         {
+            var test = evolutionChain.Value;
             if (evolutionChain.IsFailure) return;
+            if (evolutionChain.Value == null) return;
             _evolutionChainResponse = evolutionChain.Value;
         }
     }
