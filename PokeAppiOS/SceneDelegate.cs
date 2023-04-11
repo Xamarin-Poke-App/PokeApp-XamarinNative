@@ -11,7 +11,10 @@ namespace PokeAppiOS {
 	[Register ("SceneDelegate")]
 	public class SceneDelegate : UIResponder, IUIWindowSceneDelegate {
 
-		[Export ("window")]
+        StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
+
+
+        [Export ("window")]
 		public UIWindow Window { get; set; }
 
         public static SceneDelegate Current { get; private set; }
@@ -67,7 +70,6 @@ namespace PokeAppiOS {
 
 		private void LoadInitialViewController()
 		{
-            StorageUtils storageUtils = IocContainer.GetDependency<StorageUtils>();
 
             bool isLoggedIn = storageUtils.GetIsLoggedIn();
             if (isLoggedIn)
@@ -96,7 +98,7 @@ namespace PokeAppiOS {
 
 		public void Logout()
 		{
-			// clean storage
+			storageUtils.SetIsLoggedIn(false);
 			SegueToLogin();
 		}
 	}
