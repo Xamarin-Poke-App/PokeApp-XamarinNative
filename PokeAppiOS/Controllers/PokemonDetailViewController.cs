@@ -17,9 +17,9 @@ using System.Globalization;
 
 namespace PokeAppiOS.Controllers
 {
-    public partial class PokemonDetailViewController : UIViewController, IPokemonDetailControllerListener
-    {
-        public int PokemonID;
+	public partial class PokemonDetailViewController : UIViewController, IPokemonDetailControllerListener
+	{
+		public int PokemonID;
         private IPokemonDetailController controller;
         private UIViewController CurrentViewController;
         private EvolutionChainResponse _evolutionChainResponse = null;
@@ -27,7 +27,7 @@ namespace PokeAppiOS.Controllers
 
         public PokemonDetailViewController(IntPtr handle) : base(handle)
         {
-        }
+		}
 
         Lazy<PokemonBaseInfoViewController> pokemonBaseInfoViewController = new Lazy<PokemonBaseInfoViewController>(() =>
         {
@@ -35,8 +35,7 @@ namespace PokeAppiOS.Controllers
             {
                 var viewController = UIStoryboard.FromName("Home", null).InstantiateViewController("PokemonBaseInfoViewController") as PokemonBaseInfoViewController;
                 return viewController;
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
                 throw e;
             }
@@ -48,41 +47,40 @@ namespace PokeAppiOS.Controllers
             {
                 var viewController = UIStoryboard.FromName("Home", null).InstantiateViewController("PokemonEvolutionViewController") as PokemonEvolutionViewController;
                 return viewController;
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
                 throw e;
             }
         });
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-            controller.LoadPokemonImage(PokemonID);
-            controller.LoadPokemonInfo(PokemonID);
+			controller.LoadPokemonImage(PokemonID);
+			controller.LoadPokemonInfo(PokemonID);
             // SegmentedControl
             statsSegmentedControl.SelectedSegment = 0;
             CurrentViewController = pokemonBaseInfoViewController.Value;
             UpdateView();
-        }
+		}
 
-        void SetupView(PokemonLocal pokemon)
+		void SetupView(PokemonLocal pokemon)
         {
             NavigationController.NavigationBar.TintColor = UIColor.White;
             var pokemonTypeViews = new List<PokemonTypeCustomView>();
-            foreach (var type in pokemon.TypesArray)
+            foreach(var type in pokemon.TypesArray)
             {
                 var typeViewColor = UIColor.FromName(type);
                 PokemonTypeCustomView typeView = new PokemonTypeCustomView(type, typeViewColor);
                 pokemonTypeViews.Add(typeView);
             }
-
+            
             pokemonTypesStackView.Spacing = 5;
             pokemonTypesStackView.Distribution = UIStackViewDistribution.FillProportionally;
 
-            foreach (var typeView in pokemonTypeViews)
+            foreach(var typeView in pokemonTypeViews)
             {
                 pokemonTypesStackView.AddArrangedSubview(typeView);
             }
@@ -123,8 +121,7 @@ namespace PokeAppiOS.Controllers
                 pokemonBaseInfoViewController.Value.UpdateInfo();
                 RemoveViewControllerAsChild(pokemonEvolutionViewController.Value);
                 AddViewControllerAsChild(pokemonBaseInfoViewController.Value);
-            }
-            else
+            } else
             {
                 CurrentViewController.RemoveFromParentViewController();
                 CurrentViewController = pokemonEvolutionViewController.Value;
@@ -167,15 +164,15 @@ namespace PokeAppiOS.Controllers
         public void updatePokemonImage(Result<byte[]> image)
         {
             if (image.Success)
-            {
-                pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
-            }
+			{
+				pokemonImageView.Image = UIImage.LoadFromData(NSData.FromArray(image.Value));
+			}
         }
 
         public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
             if (pokemon.Success)
-            {
+			{
                 _selectedPokemon = pokemon.Value;
                 pokemonNameLabel.Text = StringUtils.ToTitleCase(pokemon.Value.Name);
                 Title = "Pokemon Detail";
