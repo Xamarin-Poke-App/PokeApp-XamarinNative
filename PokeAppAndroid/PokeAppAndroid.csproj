@@ -72,6 +72,7 @@
     <Compile Include="View\PokemonDetailFragment.cs" />
     <Compile Include="Utils\ViewExtensions.cs" />
     <Compile Include="Utils\Storage.cs" />
+    <Compile Include="View\Custom\PokemonBackgroundView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -171,6 +172,10 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\values\PokemonBackgroundView.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -178,6 +183,7 @@
     <Folder Include="Utils\" />
     <Folder Include="Adapters\" />
     <Folder Include="Resources\values-sw600dp\" />
+    <Folder Include="View\Custom\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1" />

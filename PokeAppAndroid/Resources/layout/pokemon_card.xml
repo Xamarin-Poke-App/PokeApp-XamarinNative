@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
+<PokeAppAndroid.View.Custom.PokemonBackgroundView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@drawable/rounded_background">
+    android:padding="5dp"
+    tools:background="@drawable/rounded_background"
+    app:SetForType="false"
+    android:layout_margin="5dp">
 
     <ImageView
 		android:id="@+id/Pokeball"
@@ -55,7 +55,6 @@
         android:id="@+id/TvPokemonNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:text="Region"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -67,7 +66,6 @@
         android:id="@+id/TvRegion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:text="Region"
         android:textSize="16sp"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_pokemonName"
@@ -95,6 +93,6 @@
         android:visibility="gone"
         tools:visibility="visible"
         layout="@layout/type_card"/>
-</androidx.constraintlayout.widget.ConstraintLayout >
+</PokeAppAndroid.View.Custom.PokemonBackgroundView >
 
   

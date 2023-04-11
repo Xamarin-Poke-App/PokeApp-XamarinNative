@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <declare-styleable name="PokemonBackgroundView">
+        <attr name="SetForType" format="boolean"/>
+        <attr name="UsingAlpha" format="boolean"/>
+        <attr name="AlphaValue" format="float"/>
+    </declare-styleable>
+</resources>
