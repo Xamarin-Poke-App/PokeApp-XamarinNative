@@ -29,7 +29,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDv-L0-kJy">
                                 <rect key="frame" x="152" y="41" width="90" height="90"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeball" translatesAutoresizingMaskIntoConstraints="NO" id="lLV-Wd-5W5">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pokeball" translatesAutoresizingMaskIntoConstraints="NO" id="lLV-Wd-5W5">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="SaC-Ee-hUS"/>
@@ -125,7 +125,7 @@
     </objects>
     <resources>
         <image name="Bulbasaur" width="200" height="200"/>
-        <image name="pokeball" width="48" height="48"/>
+        <image name="Pokeball" width="206" height="208"/>
         <namedColor name="grass">
             <color red="0.45490196078431372" green="0.79607843137254897" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
