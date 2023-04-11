@@ -65,9 +65,6 @@ namespace PokeAppAndroid.View
             var mLayoutManager = new LinearLayoutManager(RequireContext());
             RvEvolutionChain.SetLayoutManager(mLayoutManager);
 
-            //if (viewHolder.RvTypes.ItemDecorationCount < 1)
-            //    viewHolder.RvTypes.AddItemDecoration(new SpaceItemDecorator(15, 0));
-
             var primaryType = _pokemon.TypesArray.FirstOrDefault();
             var color = ViewExtensions.GetColorForType(RequireContext(), primaryType);
 
