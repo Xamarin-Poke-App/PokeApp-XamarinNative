@@ -49,9 +49,19 @@ namespace PokeAppiOS.Controllers
             PokemonCollectionView.DataSource = new HomeViewControllerDataSource(this);
             PokemonCollectionView.Delegate = new UICollectionViewFlowDelegate(this);
             pokemonSearchBar.Delegate = new HomeViewControllerSearchBarDelegate(this);
+
+            UIBarButtonItem btn = new UIBarButtonItem();
+            btn.Image = UIImage.GetSystemImage("rectangle.portrait.and.arrow.forward");
+            btn.Clicked += Btn_Clicked;
+            NavigationItem.RightBarButtonItem = btn;
         }
 
-		public override void DidReceiveMemoryWarning ()
+        private void Btn_Clicked(object sender, EventArgs e)
+        {
+            SceneDelegate.Current.Logout();
+        }
+
+        public override void DidReceiveMemoryWarning ()
 		{
 			base.DidReceiveMemoryWarning ();
 			// Release any cached data, images, etc that aren't in use.

@@ -191,6 +191,14 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\menu\menu_app.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\baseline_logout_24.xml">
+    <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\progress_bar.xml">
     <SubType></SubType>
       <Generator></Generator>
@@ -206,6 +214,7 @@
     <Folder Include="Utils\" />
     <Folder Include="Adapters\" />
     <Folder Include="Resources\values-sw600dp\" />
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1" />
