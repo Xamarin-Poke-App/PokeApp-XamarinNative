@@ -16,6 +16,7 @@ using SharedCode.Util;
 using Square.Picasso;
 using SharedCode.Helpers;
 using static AndroidX.RecyclerView.Widget.RecyclerView;
+using PokeAppAndroid.View.Custom;
 
 namespace PokeAppAndroid.Adapters
 {
@@ -42,7 +43,7 @@ namespace PokeAppAndroid.Adapters
             var value = pokemomList[position];
             string pokemonID = value.Id.ToString();
 
-            viewHolder.Container.SetDrawableBackgroundForType(value.TypesArray.First());
+            viewHolder.Container.Type = value.TypesArray.FirstOrDefault();
             viewHolder.TvRegion.Text = value.Region.FormatedName();
             viewHolder.TvPokemonName.Text = value.Name.FormatedName();
             viewHolder.TvPokemonNumber.Text = "#" + pokemonID;
@@ -75,7 +76,7 @@ namespace PokeAppAndroid.Adapters
             public TextView TvPokemonName { get; set; }
             public ImageView IvPokemonImage { get; set; }
             public TextView TvPokemonNumber { get; set; }
-            public ConstraintLayout Container { get; set; }
+            public PokemonBackgroundView Container { get; set; }
             public RecyclerView RvTypes;
             public TextView TvRegion { get; set; }
 
@@ -84,7 +85,7 @@ namespace PokeAppAndroid.Adapters
                 TvPokemonName = card.FindViewById<TextView>(Resource.Id.tv_pokemonName);
                 IvPokemonImage = card.FindViewById<ImageView>(Resource.Id.PokemonImage);
                 TvPokemonNumber = card.FindViewById<TextView>(Resource.Id.TvPokemonNumber);
-                Container = card.FindViewById<ConstraintLayout>(Resource.Id.Container);
+                Container = card.FindViewById<PokemonBackgroundView>(Resource.Id.Container);
                 RvTypes = card.FindViewById<RecyclerView>(Resource.Id.RvTypes);
                 TvRegion = card.FindViewById<TextView>(Resource.Id.TvRegion);
                 card.Click += (sender, e) => listener(base.AbsoluteAdapterPosition);

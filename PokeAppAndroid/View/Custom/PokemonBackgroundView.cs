@@ -15,36 +15,37 @@ namespace PokeAppAndroid.View.Custom
         private float? alphaValue;
         private bool usingAlpha;
         private bool setForType = false;
-        private string mType;
+        public string Type;
 
+        public PokemonBackgroundView(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+        {
+        }
 
         public PokemonBackgroundView(Context context) : base(context)
         {
-            Initialize(context, "");
+            Initialize(context);
         }
 
         public PokemonBackgroundView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            Initialize(context, "", attrs);
+            Initialize(context, attrs);
         }
 
-        protected PokemonBackgroundView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-        }
 
-        private void Initialize(Context context, string type, IAttributeSet attrs = null)
+        private void Initialize(Context context, IAttributeSet attrs = null)
         {
-            mType = type;
-
+            if (Type == null)
+                throw new ArgumentNullException("Required type for pokemon");
             if (attrs != null)
             {
+
                 var array = context.ObtainStyledAttributes(attrs, Resource.Styleable.PokemonBackgroundView, 0, 0);
 
                 usingAlpha = array.GetBoolean(Resource.Styleable.PokemonBackgroundView_UsingAlpha, false);
                 alphaValue = array.GetFloat(Resource.Styleable.PokemonBackgroundView_AlphaValue, 1);
                 setForType = array.GetBoolean(Resource.Styleable.PokemonBackgroundView_SetForType, false);
 
-                var colorForType = new Color(ContextCompat.GetColor(context, GetColorForType(mType)));
+                var colorForType = new Color(ContextCompat.GetColor(context, GetColorForType(Type)));
 
                 if (usingAlpha)
                     colorForType.A = (byte)(alphaValue * 255);

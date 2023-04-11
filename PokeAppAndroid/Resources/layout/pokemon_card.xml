@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<PokeAppAndroid.View.Custom.PokemonBackgroundView
+<pokeappandroid.view.custom.PokemonBackgroundView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:pokemonview="http://schemas.android.com/apk/res-auto" 
     android:id="@+id/Container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
     tools:background="@drawable/rounded_background"
-    app:SetForType="false"
+    pokemonview:SetForType="false"
     android:layout_margin="5dp">
 
     <ImageView
@@ -81,6 +82,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/TvRegion"/>
 
-</PokeAppAndroid.View.Custom.PokemonBackgroundView >
+</pokeappandroid.view.custom.PokemonBackgroundView>
 
   
