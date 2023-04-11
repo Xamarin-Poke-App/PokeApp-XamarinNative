@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -28,6 +29,10 @@ namespace PokeAppAndroid.Adapters
             TypesViewHolder typesViewHolder = holder as TypesViewHolder;
             string item = types[position];
             typesViewHolder.TvTypeName.Text = item;
+            typesViewHolder.TvTypeName.SetDrawableBackgroundForType(item);
+
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            typesViewHolder.TvTypeName.Text = textInfo.ToTitleCase(item);
             typesViewHolder.TvTypeName.SetDrawableBackgroundForType(item);
         }
 
