@@ -117,8 +117,8 @@
             <Visible>false</Visible>
         </ImageAsset>
         <ImageAsset Include="Assets.xcassets\Contents.json" />
-        <ImageAsset Include="Assets.xcassets\pokeball.imageset\Contents.json" />
-        <ImageAsset Include="Assets.xcassets\pokeball.imageset\pokeball.svg" />
+        <ImageAsset Include="Assets.xcassets\Pokeball.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\Pokeball.imageset\Pokeball.svg" />
         <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Bulbasaur.svg" />
         <ImageAsset Include="Assets.xcassets\Bulbasaur.imageset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\TypeColors\Contents.json" />

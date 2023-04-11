@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using PokeAppAndroid.Utils;
 using SharedCode.Controller;
 using SharedCode.Model;
 using SharedCode.Model.Api;
@@ -17,32 +18,33 @@ using SharedCode.Model.DB;
 using SharedCode.Services;
 using SharedCode.Util;
 using Square.Picasso;
+using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace PokeAppAndroid.View
 {
     public class PokemonDetailFragment : AndroidX.Fragment.App.Fragment, IPokemonDetailControllerListener
     {
-        private int pokemonId;
-        private PokemonSpecie pokemonInfo;
+        private int _pokemonId;
+        private Android.Graphics.Color _primaryColor;
+
+        private Android.Views.View view;
         private ImageView pokemonImage;
         private TextView pokemonNameText;
         private Button informationButton;
         private Button evolutionButton;
-        private IPokemonDetailController controller;
+        private IPokemonDetailController controller = IocContainer.GetDependency<IPokemonDetailController>();
+        private AndroidX.AppCompat.App.AlertDialog progressDialog;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            checkArgs();
-
-            controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
-            controller.LoadPokemonInfo(pokemonId);
+            checkArgs();
         }
 
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            Android.Views.View view = inflater.Inflate(Resource.Layout.fragment_pokemon_detail, container, false);
+            view = inflater.Inflate(Resource.Layout.fragment_pokemon_detail, container, false);
             pokemonImage = view.FindViewById<ImageView>(Resource.Id.pokemonImageView);
             pokemonNameText = view.FindViewById<TextView>(Resource.Id.pokemonNameTextView);
             informationButton = view.FindViewById<Button>(Resource.Id.informationButton);
@@ -54,24 +56,37 @@ namespace PokeAppAndroid.View
             SetButtonStyle(informationButton, true);
             SetButtonStyle(evolutionButton, false);
 
-            ReplaceFragment(new PokemonInfoFragment());
+            PokemonInfoFragment pokemonInfoFragment = new PokemonInfoFragment();
+            Bundle args = new Bundle();
+            args.PutInt(Constants.PokemonIdArg, _pokemonId);
+            pokemonInfoFragment.Arguments = args;
+            ReplaceFragment(pokemonInfoFragment);
+
+            AndroidX.AppCompat.App.AlertDialog.Builder dialogBuilder = new AndroidX.AppCompat.App.AlertDialog.Builder(view.Context);
+            dialogBuilder.SetView(Resource.Layout.progress_bar);
+            progressDialog = dialogBuilder.Create();
+            progressDialog.Show();
+
+            controller = IocContainer.GetDependency<IPokemonDetailController>();
+            controller.listener = this;
+            controller.LoadPokemonInfo(_pokemonId);
 
             return view;
         }
 
-
         private void SetButtonStyle(Button button, bool isActive)
         {
-            if (isActive)
-            {
-                button.SetBackgroundColor(Android.Graphics.Color.LightGray);
-                button.SetTextColor(Android.Graphics.Color.White);
-            }
-            else
+            if (!isActive)
             {
                 button.SetBackgroundColor(Android.Graphics.Color.White);
                 button.SetTextColor(Android.Graphics.Color.LightGray);
+                return;
             }
+            button.SetBackgroundColor(Android.Graphics.Color.LightGray);
+            button.SetTextColor(Android.Graphics.Color.White);
+
+            if (_primaryColor == null) return;
+            button.SetBackgroundColor(_primaryColor);
         }
 
         private void InformationButton_Click(object sender, EventArgs e)
@@ -81,6 +96,7 @@ namespace PokeAppAndroid.View
 
             PokemonInfoFragment pokemonInfoFragment = new PokemonInfoFragment();
             Bundle args = new Bundle();
+            args.PutInt(Constants.PokemonIdArg, _pokemonId);
             pokemonInfoFragment.Arguments = args;
 
             ReplaceFragment(pokemonInfoFragment);
@@ -91,20 +107,19 @@ namespace PokeAppAndroid.View
             evolutionButton = (Button)sender;
             SetButtonStyle(informationButton, false);
             SetButtonStyle(evolutionButton, true);
-            ReplaceFragment(new PokemonEvolutionFragment());
+            var pokemonEvolutionFragment = new PokemonEvolutionFragment();
+            Bundle args = new Bundle();
+            args.PutInt(Constants.PokemonIdArg, _pokemonId);
+            pokemonEvolutionFragment.Arguments = args;
+            ReplaceFragment(pokemonEvolutionFragment);
         }
 
         public void updateEvoutionChain(Result<EvolutionChainResponse> evolutionChain)
         {
-
         }
 
         public void updatePokemonImage(Result<byte[]> image)
         {
-            if (image.IsFailure) return;
-            byte[] imageByte = image.Value;
-            Bitmap bitmap = BitmapFactory.DecodeByteArray(imageByte, 0, imageByte.Length);
-            pokemonImage.SetImageBitmap(bitmap);
         }
 
         private void ReplaceFragment(AndroidX.Fragment.App.Fragment fragment)
@@ -116,15 +131,28 @@ namespace PokeAppAndroid.View
 
         public void updatePokemonInfo(Result<PokemonLocal> pokemon)
         {
+            progressDialog.Dismiss();
             if (pokemon.IsFailure) return;
-            pokemonNameText.Text = pokemon.Value.Name;
-            controller.LoadPokemonImage(pokemon.Value.Id);
+            var pokemonValue = pokemon.Value;
+            var primaryType = pokemonValue.TypesArray.FirstOrDefault();
+            _primaryColor = ViewExtensions.GetColorForType(RequireContext(), primaryType);
+
+            view.SetBackgroundColor(_primaryColor);
+            pokemonNameText.Text = StringUtils.ToTitleCase(pokemonValue.Name);
+
+            Picasso.Get()
+                .Load(pokemonValue.RegularSpriteUrl)
+                .Into(pokemonImage);
+
+            SetButtonStyle(informationButton, true);
+            SetButtonStyle(evolutionButton, false);
         }
 
         private void checkArgs()
         {
             if (Arguments == null) return;
-            pokemonId = Arguments.GetInt("pokemonId");
+            _pokemonId = Arguments.GetInt(Constants.PokemonIdArg);
+            controller.LoadPokemonInfo(_pokemonId);
         }
     }
 }
