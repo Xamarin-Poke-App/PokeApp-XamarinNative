@@ -56,6 +56,8 @@ namespace PokeAppiOS.Controllers
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+            progressIndicator.Hidden = false;
+            progressIndicator.StartAnimating();
             controller = IocContainer.GetDependency<IPokemonDetailController>();
             controller.listener = this;
 			controller.LoadPokemonImage(PokemonID);
@@ -182,6 +184,8 @@ namespace PokeAppiOS.Controllers
                 SetupView(pokemon.Value);
                 controller.GetEvolutionChainByPokemonId(pokemon.Value.EvolutionChainId);
                 UpdateView();
+                progressIndicator.StopAnimating();
+                progressIndicator.Hidden = true;
             }
         }
 
