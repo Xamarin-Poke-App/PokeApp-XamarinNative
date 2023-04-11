@@ -21,8 +21,6 @@ namespace PokeAppiOS
 		public void UpdateCell()
 		{
             if (TypeName == null) return;
-            typeLabel.Text = TypeName.ToUpper();
-
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
             typeLabel.Text = textInfo.ToTitleCase(TypeName);
             containerBackgroundView.BackgroundColor = UIColor.FromName(TypeName);
